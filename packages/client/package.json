@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "echo \"no test for client\" & exit 0"
   },
   "dependencies": {
     "react": "^17.0.0",

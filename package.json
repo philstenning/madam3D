@@ -1,6 +1,17 @@
 {
-  "name": "root",
-  "private": true,
+  "name": "packages",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "lerna run test --scope={client,server}",
+    "dev": "lerna run dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "packages\\*"
+  ],
   "devDependencies": {
     "lerna": "^4.0.0"
   }
