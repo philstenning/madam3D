@@ -1,11 +1,12 @@
 {
   "name": "packages",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "type": "module",
   "scripts": {
     "test": "lerna run test --scope={client,server}",
-    "dev": "lerna run dev"
+    "dev": "lerna run dev",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "packages\\*"
   ],
   "devDependencies": {
+    "husky": "^7.0.2",
     "lerna": "^4.0.0"
   }
 }
