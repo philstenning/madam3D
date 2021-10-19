@@ -1,45 +1,69 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useState, useRef } from "react";
+
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState("x");
+  const pickerOpts: OpenFilePickerOptions = {
+    types: [
+      {
+        description: "3D image file",
+        accept: {
+          "other/*": [".stl"],
+        },
+      },
+    ],
+    excludeAcceptAllOption: true,
+    multiple: false,
+  };
+
+  async function getTheFile() {
+    // open the picker
+    const [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+
+    if (fileHandle.kind === "file") {
+      console.log("you got a file");
+    }
+    const file = await fileHandle.getFile();
+    // const dat = await file.text()
+    // const fileContent =  file.size;
+    // setData(dat.toString());
+
+    // console.log(dat)
+
+    // const fileData = await fileHandle.getFile();
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      {/* <button onClick={getTheFile}>open</button> */}
+      <p>{data}</p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
+
+// function App() {
+//   const [fileName, setFileName] = useState<string>("");
+//   const inputFile = useRef<HTMLInputElement | null>(null);
+//   const handleClick = (e) => {
+//     if (inputFile.current?.files?.length) {
+//       const file = inputFile.current?.files[0];
+//       console.log(file.name);
+//       setFileName(file.name);
+//     }
+//   };
+//   return (
+//     <div className="App">
+//       <input
+//         type="file"
+//         ref={inputFile}
+//         onChange={(e) => handleClick(e)}
+//       ></input>
+//       {fileName && <h3>{fileName}</h3>}
+//     </div>
+//   );
+// }
+
+// export default App;
