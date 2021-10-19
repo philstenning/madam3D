@@ -1,6 +1,6 @@
-# Dameez3D
+# Madam3D
 
-Dameez3D is a project to view and manage/organize and share your .stl and .obj 3d printer files. 
+Madam3D is a project to view and manage/organize and share your .stl and .obj 3d printer files. 
 
 ###  Client
 
@@ -23,11 +23,11 @@ This project uses npm workspaces and lerna for organizing the packages and publi
 
 Folder/App structure is as follows: 
 ```
-root
- - packages
-   -  client
-      server
-      desktop
+root/
+ |── packages/
+ |   └──  client/
+ |   └── server/
+ |   └──  desktop/
 ```
 
 ## Getting started
