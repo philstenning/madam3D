@@ -13,6 +13,6 @@ code {
 }
 
 canvas {
-  height: 400px;
+  height: 80vh;
   /* border: solid 1px grey; */
 }
