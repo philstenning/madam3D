@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 
 import "./App.css";
+import Box from './Box2'
 
 function App() {
-  const [data, setData] = useState("x");
+  const [fileUrl, setFileUrl] = useState("http://localhost:3002/src/images/mm.stl");
   const pickerOpts: OpenFilePickerOptions = {
     types: [
       {
@@ -24,8 +25,10 @@ function App() {
     if (fileHandle.kind === "file") {
       console.log("you got a file");
     }
-    const file = await fileHandle.getFile();
-    // const dat = await file.text()
+    const result = await fileHandle.getFile();
+    const stlUrl = URL.createObjectURL(result);
+    console.log(stlUrl)
+    setFileUrl(stlUrl)
     // const fileContent =  file.size;
     // setData(dat.toString());
 
@@ -36,8 +39,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button onClick={getTheFile}>open</button> */}
-      <p>{data}</p>
+      <button onClick={getTheFile}>get File</button>
+      <Box fileUrl={fileUrl} />
     </div>
   );
 }

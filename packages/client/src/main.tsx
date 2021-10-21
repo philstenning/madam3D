@@ -5,11 +5,13 @@ import './index.css'
 
 // import App from './App'
 import Box from './Box'
+import App from './App'
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Box/>
+    {/* <Box /> */}
+   <App/>
   </React.StrictMode>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);
