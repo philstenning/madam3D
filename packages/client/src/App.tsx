@@ -1,10 +1,18 @@
 import { useState, useRef } from "react";
 
 import "./App.css";
-import Box from './Box2'
+import Box from "./Box2";
+import Folder from './Folder'
+import Folder2 from './Folder2'
 
 function App() {
-  const [fileUrl, setFileUrl] = useState("http://localhost:3002/src/images/mm.stl");
+  // use a default file so we can see that it is working.
+  const [fileUrl, setFileUrl] = useState(
+    "http://localhost:3000/src/images/mm.stl"
+  );
+
+  // for more options see link
+  //  https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
   const pickerOpts: OpenFilePickerOptions = {
     types: [
       {
@@ -19,7 +27,7 @@ function App() {
   };
 
   async function getTheFile() {
-    // open the picker
+    // open the picker. This file handle will be needed for any interaction with the file.
     const [fileHandle] = await window.showOpenFilePicker(pickerOpts);
 
     if (fileHandle.kind === "file") {
@@ -27,46 +35,19 @@ function App() {
     }
     const result = await fileHandle.getFile();
     const stlUrl = URL.createObjectURL(result);
-    console.log(stlUrl)
-    setFileUrl(stlUrl)
+    console.log(stlUrl);
+    setFileUrl(stlUrl);
     // const fileContent =  file.size;
-    // setData(dat.toString());
-
-    // console.log(dat)
-
-    // const fileData = await fileHandle.getFile();
   }
 
   return (
     <div className="App">
       <button onClick={getTheFile}>get File</button>
-      <Box fileUrl={fileUrl} />
+      {/* <Box fileUrl={fileUrl} /> */}
+      {/* <Folder/> */}
+      <Folder2/>
     </div>
   );
 }
 
 export default App;
-
-// function App() {
-//   const [fileName, setFileName] = useState<string>("");
-//   const inputFile = useRef<HTMLInputElement | null>(null);
-//   const handleClick = (e) => {
-//     if (inputFile.current?.files?.length) {
-//       const file = inputFile.current?.files[0];
-//       console.log(file.name);
-//       setFileName(file.name);
-//     }
-//   };
-//   return (
-//     <div className="App">
-//       <input
-//         type="file"
-//         ref={inputFile}
-//         onChange={(e) => handleClick(e)}
-//       ></input>
-//       {fileName && <h3>{fileName}</h3>}
-//     </div>
-//   );
-// }
-
-// export default App;
