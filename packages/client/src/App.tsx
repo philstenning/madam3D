@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
 
 import "./App.css";
-import Box from "./Box2";
-import Folder from './Folder'
+import Box from "./obsolete/Box2";
+import Folder from './obsolete/Folder'
 import Folder2 from './Folder2'
-
+import Scene from "./Obj";
+import Basic from './basic'
 function App() {
   // use a default file so we can see that it is working.
   const [fileUrl, setFileUrl] = useState(
@@ -46,6 +47,8 @@ function App() {
       {/* <Box fileUrl={fileUrl} /> */}
       {/* <Folder/> */}
       <Folder2/>
+      {/* <Basic/> */}
+      {/* <Scene fileUrl={fileUrl}/> */}
     </div>
   );
 }

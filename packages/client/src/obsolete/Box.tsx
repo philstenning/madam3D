@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from "react";
 import { OrbitControls, Sky } from "@react-three/drei";
 import { useLoader, Canvas } from "@react-three/fiber";
-import { Stl } from "./stl";
+import { Stl } from "../stl";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 const pickerOpts: OpenFilePickerOptions = {
   types: [

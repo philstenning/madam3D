@@ -4,7 +4,7 @@ import './index.css'
 
 
 // import App from './App'
-import Box from './Box'
+import Box from './obsolete/Box'
 import App from './App'
 
 ReactDOM.render(

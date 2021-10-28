@@ -5,7 +5,7 @@ import {
   supported,
   FileWithDirectoryHandle,
 } from "browser-fs-access";
-import Box from "./Box2";
+import Basic from './basic'
 
 const Folder2 = () => {
   const [currentDirHandle, setCurrentDirHandle] = useState<
@@ -50,7 +50,8 @@ const Folder2 = () => {
 
       <button onClick={(e) => handleClick(e)}>Open Directory</button>
       <h3>{currentDirHandle.length}</h3>
-      <Box fileUrl={fileUrl} />
+      {/* <Box fileUrl={fileUrl} /> */}
+      <Basic fileUrl={fileUrl} />
       <ul>
         {currentDirHandle.map((file) => (
           <li key={file.name}>
