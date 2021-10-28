@@ -47,9 +47,9 @@ const FolderExplorer = () => {
       {/* {supported && <div>Using File System access API</div>}
       {!supported && <div>Using the Fallback File system Access Api</div>} */}
 
-      <button onClick={(e) => handleClick(e)}>Open Directory</button>
+      <button onClick={(e) => handleClick(e)}>Open Folder</button>
       <h3>{currentDirHandle.length}</h3>
-      <StlViewer fileUrl={fileUrl} />
+      {/* <StlViewer fileUrl={fileUrl} /> */}
       <ul>
         {currentDirHandle.map((file) => (
           <li key={file.name}>
