@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {
-  fileOpen,
-  directoryOpen,
-  supported,
-  FileWithDirectoryHandle,
-} from "browser-fs-access";
-import Basic from './basic'
+import { directoryOpen, FileWithDirectoryHandle } from "browser-fs-access";
+import StlViewer from './StlViewer'
 
-const Folder2 = () => {
+const FolderExplorer = () => {
   const [currentDirHandle, setCurrentDirHandle] = useState<
     FileWithDirectoryHandle[]
   >([]);
@@ -20,15 +15,19 @@ const Folder2 = () => {
   ) => {
     e.preventDefault();
     const dirHandle = await directoryOpen({
+      // TODO this should be an option.
       recursive: true,
     });
     // if user canceled or error  we have no dirHandle
     if (!dirHandle) {
       return;
     }
+    /*
+     we only want stl files
+     TODO need to add .obj .3mf .ply files.
+     */
     const filtered = dirHandle.filter((i) => i.name.includes(".stl"));
     setCurrentDirHandle(filtered);
-    
   };
 
   const selectFile = (
@@ -36,22 +35,21 @@ const Folder2 = () => {
     fileName: string
   ) => {
     e.preventDefault();
-    const file = currentDirHandle.find(item=>item.name===fileName)
-    if(file){
-        const stlUrl = URL.createObjectURL(file);
-        setFileUrl(stlUrl);
-        
+    const file = currentDirHandle.find((item) => item.name === fileName);
+    if (file) {
+      const stlUrl = URL.createObjectURL(file);
+      setFileUrl(stlUrl);
     }
   };
   return (
     <div>
-      {supported && <div>using File System access API</div>}
-      {!supported && <div>Using the Fallback File system Access Api</div>}
+      {/* use in development to check different browser compatibility */}
+      {/* {supported && <div>Using File System access API</div>}
+      {!supported && <div>Using the Fallback File system Access Api</div>} */}
 
       <button onClick={(e) => handleClick(e)}>Open Directory</button>
       <h3>{currentDirHandle.length}</h3>
-      {/* <Box fileUrl={fileUrl} /> */}
-      <Basic fileUrl={fileUrl} />
+      <StlViewer fileUrl={fileUrl} />
       <ul>
         {currentDirHandle.map((file) => (
           <li key={file.name}>
@@ -65,4 +63,4 @@ const Folder2 = () => {
   );
 };
 
-export default Folder2;
+export default FolderExplorer;

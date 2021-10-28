@@ -36,7 +36,9 @@ const STLViewer2 = ({
   //   const modelHeight = f?.max.y | 0;
   console.log(`boundingBox ${boundingBox?.max.y}`);
   const mesh = useRef();
-  useHelper(mesh, BoxHelper, "cyan");
+
+  // show the bounding box for dev.
+  // useHelper(mesh, BoxHelper, "cyan");
   return (
     // <Center alignTop>
     <mesh
@@ -75,7 +77,10 @@ const STLViewer = ({
   const scaleFactor = 40 / bSpear;
   // console.log(`bSpear ${bSpear} factor: ${scaleFactor}`);
   const mesh = useRef();
-  useHelper(mesh, BoxHelper, "cyan");
+
+  // show the bounding box for dev.
+  // useHelper(mesh, BoxHelper, "cyan");
+
   return (
     <Center alignTop>
       <mesh geometry={stl} ref={mesh} scale={scaleFactor}>
@@ -97,7 +102,7 @@ const Basic = ({
     <Canvas camera={{ position: [1, 70, 100], fov: 50, near: 10, far: 200 }}>
       <pointLight position={[100, 100, 100]} />
       <pointLight position={[-100, -100, -100]} />
-      <gridHelper args={[100, 100 / 10, "magenta", "cyan"]} />
+      <gridHelper args={[80, 12, "magenta", "cyan"]} />
       <Suspense fallback={<Loader />}>
         <STLViewer fileUrl={fileUrl} />
         <OrbitControls />
