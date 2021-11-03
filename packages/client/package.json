@@ -10,15 +10,20 @@
   "dependencies": {
     "@react-three/drei": "^7.16.8",
     "@react-three/fiber": "^7.0.17",
+    "@types/react-router-dom": "^5.3.2",
     "@types/three": "^0.133.1",
     "@types/wicg-file-system-access": "^2020.9.4",
     "browser-fs-access": "^0.20.5",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-router-dom": "^5.3.0",
     "three": "^0.133.1",
-    "three-stdlib": "^2.5.4"
+    "three-stdlib": "^2.5.4",
+    "unplugin-icons": "^0.12.17"
   },
   "devDependencies": {
+    "@iconify/json": "^1.1.423",
+    "@svgr/core": "^5.5.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react": "^1.0.0",

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { directoryOpen, FileWithDirectoryHandle } from "browser-fs-access";
-import StlViewer from './StlViewer'
+import StlViewer from '../stlViewer/StlViewer'
 
 const FolderExplorer = () => {
   const [currentDirHandle, setCurrentDirHandle] = useState<

@@ -1,15 +1,3 @@
-.App {
-  text-align: center;
-}
-
-main {
-  /* padding: 0 1em; */
-  /* border: 1px solid #ccc; */
-  /* margin: 1em auto; */
-}
-li{
-  list-style: none;
-}
 header nav{
   display: flex;
   justify-content: space-between;

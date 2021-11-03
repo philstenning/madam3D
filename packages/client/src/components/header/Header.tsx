@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
+import './header.css'
 
-import FolderExplorer from "./FolderExplorer";
-import { MainContext } from "./state/mainContext";
+// import FolderExplorer from "../FolderExplorer";
+import { MainContext } from "../../state/mainContext";
 const Header = () => {
   const { state, dispatch } = useContext(MainContext);
 
