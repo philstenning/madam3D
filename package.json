@@ -14,7 +14,13 @@
     "packages\\*"
   ],
   "devDependencies": {
+    "@types/wicg-file-system-access": "^2020.9.4",
+    "client": "file:packages/client",
     "husky": "^7.0.2",
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "native-file-system-adapter": "^2.0.1",
+    "vite-remark-html": "^1.1.1"
   }
 }

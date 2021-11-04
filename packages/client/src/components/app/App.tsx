@@ -2,11 +2,11 @@
 import "./app.css";
 // import FolderExplorer from '../folderExplorer/FolderExplorer'
 // import Header from "../header/Header";
-
 import { MainProvider } from "../../state/mainContext";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import IconAccessibility from "~icons/tabler/folders";
-import IconHelp from "~icons/ic/outline-live-help";
+import Help from "../help/Help";
+import Folders from "../folders/Folders";
+
 function App() {
   return (
     <>
@@ -82,52 +82,8 @@ function Projects() {
   );
 }
 
-function Folders() {
-  return (
-    <>
-      <div className="details">
-        <h3>folders</h3>
-        <ul>
-          <li>
-            <Link to="/folder/foo">folder 1</Link>
-          </li>
-          <li>
-            <Link to="/folder/foo">folder 2</Link>
-          </li>
-          <li>
-            <Link to="/folder/foo">folder 3</Link>
-          </li>
-        </ul>
-      </div>
-      {/* <div className="details">details</div> */}
-      <div>
-        <h2>Folders</h2>
-        <div>
-          {/* <IconAccessibility /> */}
-          <p>
-            <a href="https://github.com/antfu/unplugin-icons">
-              icons https://github.com/antfu/unplugin-icons
-            </a>
-            <br />
-            <a href="https://icon-sets.iconify.design/?query=remove">
-              info https://icon-sets.iconify.design/?query=remove
-            </a>
-          </p>
-          <IconHelp style={{ fontSize: "2rem", color: "green" }} />
-          <IconAccessibility />
-        </div>
-      </div>
-    </>
-  );
-}
-function Help() {
-  return (
-    <>
-      {/* <div className="details">details</div> */}
-      <h2>Help</h2>
-    </>
-  );
-}
+
+
 
 export default App;
 

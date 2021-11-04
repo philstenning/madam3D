@@ -10,5 +10,7 @@
       "path": "."
     }
   ],
-  "settings": {}
+  "settings": {
+    "cSpell.words": ["iconify", "stdlib", "svgr", "unplugin", "wicg"]
+  }
 }
