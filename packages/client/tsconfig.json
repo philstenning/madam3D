@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": [ "unplugin-icons/types/react","vite-remark-html/client"]
+    "types": ["unplugin-icons/types/react", "vite-remark-html/client"]
   },
   "include": ["./src"]
 }

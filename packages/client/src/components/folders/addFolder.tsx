@@ -1,32 +1,35 @@
+
+// import type  "@type/wicg-file-system-access";
 import React, { useState } from "react";
-import { directoryOpen, FileWithDirectoryHandle } from "browser-fs-access";
+// import { directoryOpen, FileWithDirectoryHandle } from "browser-fs-access";
 // import { showDirectoryPicker } from "native-file-system-adapter";
 
 const AddFolder = () => {
-  const [currentDirHandle, setCurrentDirHandle] = useState<
-    FileWithDirectoryHandle[]
-  >([]);
+  // const [currentDirHandle, setCurrentDirHandle] = useState<
+  //   FileWithDirectoryHandle[]
+  // >([]);
 
   const handleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
 
-    const filehandle = await directoryOpen();
-    if (!filehandle) {return}
+    
+    
+    // if (!filehandle) {return}
 
-    console.log(filehandle[0].directoryHandle);
-    const dirHandle = filehandle[0].directoryHandle;
-    // const info = await currentDirHandle.;
-    console.log(dirHandle);
+    // console.log(filehandle[0].directoryHandle);
+    // const dirHandle = filehandle[0].directoryHandle;
+    // // const info = await currentDirHandle.;
+    // console.log(dirHandle);
   };
 
   return (
     <div>
-      {currentDirHandle[0] && (
+      {/* {currentDirHandle[0] && (
         //  currentDirHandle[0].webkitRelativePath.toString()
-        <pre>{JSON.stringify(currentDirHandle[0], null, 4)}</pre>
-      )}
+        // <pre>{JSON.stringify(currentDirHandle[0], null, 4)}</pre>
+      )} */}
       <button onClick={(e) => handleClick(e)}>Add Folder</button>
     </div>
   );
