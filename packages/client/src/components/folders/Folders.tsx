@@ -1,20 +1,11 @@
-import React from "react";
-import FolderExplorer from "../folderExplorer/FolderExplorer";
-import AddFolder from './addFolder'
-const Folders = () => {
-  return (
-    <>
-      <div className="details"><h2>Folders</h2>
-        <AddFolder />
-     
-      
-      </div>
-      <div>
-        <h1>Folder</h1>
-        <FolderExplorer />
-      </div>
-    </>
-  );
-};
+import React from 'react'
 
-export default Folders;
+const Folders = () => {
+    return (
+        <div>
+            <h2>folders</h2>
+        </div>
+    )
+}
+
+export default Folders

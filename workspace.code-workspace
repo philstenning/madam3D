@@ -11,5 +11,7 @@
       "path": "packages\\client"
     }
   ],
-  "settings": {}
+  "settings": {
+    "cSpell.words": ["iconify", "stdlib", "svgr", "unplugin"]
+  }
 }

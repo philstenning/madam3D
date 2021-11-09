@@ -4,31 +4,29 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview",
-    "test": "echo \"no test for client\" & exit 0"
+    "serve": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^7.16.8",
-    "@react-three/fiber": "^7.0.17",
-    "@types/react-router-dom": "^5.3.2",
-    "@types/three": "^0.133.1",
+    "@react-three/drei": "^7.20.1",
+    "@react-three/fiber": "^7.0.18",
     "@types/wicg-file-system-access": "^2020.9.4",
-    "browser-fs-access": "^0.20.5",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "react-router-dom": "^5.3.0",
-    "three": "^0.133.1",
-    "three-stdlib": "^2.5.4",
-    "unplugin-icons": "^0.12.17",
-    "vite-remark-html": "^1.1.1"
+    "react-router-dom": "^6.0.1",
+    "three": "^0.134.0",
+    "three-stdlib": "^2.5.5",
+    "unplugin-icons": "^0.12.18"
   },
   "devDependencies": {
-    "@iconify/json": "^1.1.423",
+    "@iconify/json": "^1.1.425",
     "@svgr/core": "^5.5.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/three": "^0.133.1",
     "@vitejs/plugin-react": "^1.0.0",
     "typescript": "^4.3.2",
-    "vite": "^2.6.4"
+    "vite": "^2.6.4",
+    "vite-remark-html": "^1.1.1"
   }
 }

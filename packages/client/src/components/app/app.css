@@ -1,58 +1,42 @@
-.main-layout {
-  display: grid;
-  grid-template-columns: 80px minmax(6rem, 300px) auto;
-  background: #ccc;
-  height: 100vh;
+.App {
+  text-align: center;
 }
 
-nav {
-  background: #2b2c39;
-  color: #f8f8f2;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  padding-top: 1rem;
-  /* border: 2px solid #ccc; */
-}
-.main-layout .details {
-  padding: 1rem;
-  color: rgb(248, 248, 242);
-  background: rgb(25, 26, 33);
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-/* .main-layout .nav-menu__item a:visited {
- color: var(--color-text-link);
-} */
-
-.nav-menu__item {
-  /* border-radius: 50%; */
-  display: block;
-  height: 2rem;
-  /* padding: 0.5rem; */
-  margin: 0.5rem;
-  /* border: 1px solid #ccc; */
+.App-link {
+  color: #61dafb;
 }
 
-main {
-  background: var(--gray-100);
-  /* background: #282a36; */
-  /* padding: 0.5rem; */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
-  padding: 2rem;
-  /* border: 2px solid #ccc; */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-main div {
-  background: #eee;
-  padding:1rem;
-  background: #ccc;
-  border: 1px solid black;
-  /* margin: 1rem; */
+
+button {
+  font-size: calc(10px + 2vmin);
 }
