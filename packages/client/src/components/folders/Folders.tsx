@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './folders.css'
 const Folders = () => {
     return (
         <div>

@@ -1,0 +1,36 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: var(--default-padding);
+  /* height: 100%; */
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: var(--font-size-l);
+   /* height: 100%; */
+}
+/* .header__logo:hover{
+    background: var(--gray-80);
+    color: red;
+} */
+
+
+.header__search {
+    
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__profile {
+    padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ font-size: var(--font-size-xxl);
+}
+
