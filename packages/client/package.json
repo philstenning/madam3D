@@ -13,6 +13,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^6.0.1",
+    "react-use-measure": "^2.0.4",
     "three": "^0.134.0",
     "three-stdlib": "^2.5.5"
   },

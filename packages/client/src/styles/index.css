@@ -69,6 +69,7 @@ body {
   --blue-100: hsla(198, 100%, 100%, 1);
 
   /* pink */
+  --pink-0: hsla(313, 100%, 3%, 1);
   --pink-10: hsla(313, 100%, 10%, 1);
   --pink-20: hsla(313, 100%, 20%, 1);
   --pink-30: hsla(313, 100%, 30%, 1);
@@ -82,7 +83,7 @@ body {
   /* utilities  */
   --default-padding: 0.4rem;
 
-  --border-radius-s:5px;
+  --border-radius-s: 5px;
   --border-radius-m: 10px;
   --border-radius-l: 15px;
 
@@ -114,10 +115,7 @@ code {
     monospace;
 }
 
-canvas {
-  height: 40vh;
-  /* border: solid 1px grey; */
-}
+
 h1,
 h2,
 h3,
@@ -128,7 +126,7 @@ h6 {
   padding: 0;
   margin: 0;
 }
-form{
+form {
   height: 100%;
 }
 

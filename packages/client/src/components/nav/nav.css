@@ -1,5 +1,6 @@
 .menu {
   height: auto;
+   max-height: calc(100vh - 3rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -55,5 +56,5 @@
 main {
   background: var(--gray-15);
   border-radius: var(--border-radius-m);
-  padding: 1rem;
+  /* padding: 2rem; */
 }

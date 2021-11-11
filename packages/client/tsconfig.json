@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["unplugin-icons/types/react"],
+    "types": ["unplugin-icons/types/react", "wicg-file-system-access"],
 
   },
   "include": ["./src"]
