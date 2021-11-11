@@ -12,6 +12,6 @@
     }
   ],
   "settings": {
-    "cSpell.words": ["iconify", "stdlib", "svgr", "unplugin"]
+    "cSpell.words": ["gcode", "iconify", "keyval", "stdlib", "svgr", "unplugin"]
   }
 }
