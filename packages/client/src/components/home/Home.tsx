@@ -29,22 +29,27 @@ const Home = () => {
     useState<FileSystemDirectoryHandle | null>(null);
   const [dirFiles, setDirFiles] = useState<FileSystemHandle[] | null>(null);
   // temp for dev
-  const [string, setString] = useState("");
+  // const [string, setString] = useState("");
+
 
   const handleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+try{
+
 
     const dirHandle = await window.showDirectoryPicker({});
-    console.log(dirHandle);
     if (dirHandle.kind === "directory") {
       // save the name for updating the ui
-      setString(dirHandle.name);
+      // setString(dirHandle.name);
       // add it to the list of known directories.
       setDirHandles((currentHandles) => [...currentHandles, dirHandle]);
-    
+      setSelectedDir(dirHandle)
+      
       set(dirHandle.name, dirHandle);
+    }}catch(err){
+      console.error(`Error: ${err}`)
     }
   };
 
@@ -75,7 +80,7 @@ const Home = () => {
       <h1>home</h1>
       <button onClick={(e) => handleClick(e)}>Add Folder</button>
       <button onClick={()=>clear()}>clear</button>
-      {string && <h2>you opened: {string}</h2>}
+      {/* {string && <h2>you opened: {string}</h2>} */}
       <ul>
         {dirHandles.map((handle) => (
           <li key={handle.name} onClick={() => selectDirectory(handle)}>
