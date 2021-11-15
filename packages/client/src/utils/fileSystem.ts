@@ -36,14 +36,13 @@ async function loadData():Promise<FileSystemDirectoryHandle[] | null > {
   }
 
 async function getDirectoryHandle (){
-
-
+  try{
     const dirHandle = await window.showDirectoryPicker({});
-    // console.log(dirHandle);
     if (dirHandle.kind === "directory") {
-      // save the name for updating the ui
      return dirHandle
     }
+  }catch(err){
+  }
     return null
   };
 
