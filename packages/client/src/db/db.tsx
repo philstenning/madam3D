@@ -29,11 +29,13 @@ export interface IFile {
   name: string;
   handle: FileSystemFileHandle;
   size: number;
-  type: FileTypes
+  type: FileTypes;
   created: Date;
   updated: Date;
+  printed: boolean;
   // optional
-  projectId?: number;
+  description?: string;
+  projectId?: number[];
   osFilePath?: string;
   imageUrl?: string;
 }

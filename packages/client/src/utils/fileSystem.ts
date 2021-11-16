@@ -1,18 +1,16 @@
-import { get, set, entries, values, clear } from "idb-keyval";
-function printSomething() {
-  return "working on it";
-}
+// import { values} from "idb-keyval";
+import {db, IFolder} from '../db/db'
 
-async function loadData():Promise<FileSystemDirectoryHandle[] | null > {
+
+async function loadData(): Promise<IFolder[] | null> {
   try {
     // load dirHandles stored in indexedDB
-    const data: FileSystemDirectoryHandle[] = await values();
-   return data
-    
+    const data: IFolder[] = await db.folders.toArray();
+    return data;
   } catch (error) {
     console.log("error", error);
   }
-  return null
+  return null;
 }
 
   /**
@@ -24,29 +22,16 @@ async function loadData():Promise<FileSystemDirectoryHandle[] | null > {
     dirHandle: FileSystemDirectoryHandle
   ): Promise<boolean> {
     let permissionState = await dirHandle.queryPermission();
+    console.log(permissionState)
+    if(permissionState==='prompt'){
+      permissionState=await dirHandle.requestPermission()
+      
+    }
     if (permissionState === "granted") {
       return true;
     }
-    permissionState = await dirHandle.requestPermission();
-    if (permissionState === "granted") {
-      return true;
-    }
-
     return false;
   }
-
-async function getDirectoryHandle (){
-  try{
-    const dirHandle = await window.showDirectoryPicker({});
-    if (dirHandle.kind === "directory") {
-     return dirHandle
-    }
-  }catch(err){
-  }
-    return null
-  };
-
-
 
    /**
    * @param dirHandle
@@ -62,16 +47,18 @@ async function getDirectoryHandle (){
 
     for await (const entry of dirHandle.entries()) {
       try {
-        const fileHandle = await dirHandle.getFileHandle(entry[0]);
-        if (fileHandle.kind === "file") {
-          fileHandles = [...fileHandles, fileHandle];
+        /** we only want the files
+         * it will throw an error if it is a Directory.
+         */
+        if (entry[1].kind === "file") {
+          fileHandles = [...fileHandles, entry[1]];
         }
       } catch (error) {
-        console.error(`Error: getting folder files`, error);
+        console.error(`Error: getting files in the folder ${dirHandle.name}`, error);
       }
     }
 
     return fileHandles;
   };
 
-export { printSomething , loadData , haveFolderPermission , getFileEntries, getDirectoryHandle};
+export { loadData , haveFolderPermission , getFileEntries};

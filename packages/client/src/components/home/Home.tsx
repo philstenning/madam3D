@@ -1,137 +1,84 @@
 import React, { useState, useEffect } from "react";
-import { get, set, entries, values, clear } from "idb-keyval";
+import { db, IFolder } from "../../db/db";
+// import { get, set, entries, values, clear } from "idb-keyval";
 /*
 https://web.dev/file-system-access/
 https://web.dev/browser-fs-access/
-
-https://www.npmjs.com/package/idb-keyval
 */
-import {loadData, getFileEntries} from '../../utils/fileSystem'
-/*  
-TODO:
-When a folder is opened it's handle is stored in a 
-useState array so we have access to it at a later stage.
-
-TODO:
-When we click on a folder link/name we can view all the
-files in that folder, that we can view with the app.
-
-TODO:
-add a filter to the window to view only files that
-we want to see eg: stl/obj/gcode etc.
-
-
-*/
+import { loadData, getFileEntries } from "../../utils/fileSystem";
+import DirFileViewer from "../dirFileViewer/DirFileViewer";
 const Home = () => {
   // used to store all known folder handles
-  const [dirHandles, setDirHandles] = useState<FileSystemDirectoryHandle[]>([]);
-  const [selectedDir, setSelectedDir] =
-    useState<FileSystemDirectoryHandle | null>(null);
-  const [dirFiles, setDirFiles] = useState<FileSystemHandle[] | null>(null);
-  // temp for dev
-  // const [string, setString] = useState("");
+  const [knownFolders, setKnownFolders] = useState<IFolder[]>([]);
+  const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
 
+  // const [dirFiles, setDirFiles] = useState<FileSystemHandle[] | null>(null);
 
-  const handleClick = async (
+  const openFolderPicker = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-try{
-
-
-    const dirHandle = await window.showDirectoryPicker({});
-    if (dirHandle.kind === "directory") {
-      // save the name for updating the ui
-      // setString(dirHandle.name);
-      // add it to the list of known directories.
-      setDirHandles((currentHandles) => [...currentHandles, dirHandle]);
-      setSelectedDir(dirHandle)
+    try {
+      const dirHandle = await window.showDirectoryPicker({});
+      if (dirHandle.kind === "directory") {
+        // add it to the list of known directories.
+        const createdAt = new Date();
+        const folder: IFolder = {
+          handle: dirHandle,
+          created: createdAt,
+          updated: createdAt,
+          name: dirHandle.name,
+        };
       
-      set(dirHandle.name, dirHandle);
-    }}catch(err){
-      console.error(`Error: ${err}`)
+
+        try {
+          const result = await db.folders.add(folder)
+          console.log(result)
+          setKnownFolders((currentHandles) => [...currentHandles, folder]);
+          // this folder should now be the current folder
+          setSelectedFolder(folder);
+        } catch (error) {
+          console.log(`Error saving folder: ${error}`)
+        }
+      }
+    } catch (err) {
+      console.error(`Error: ${err}`);
     }
   };
 
-  
-  
+  const removeFolder = async () => {
+    //TODO remove selected folder from db.
+  };
+  const removeAllFolders = async () => {
+    //TODO remove All folder from db.
+  };
+
   useEffect(() => {
     async function init() {
       const data = await loadData();
-      if(data){
-        setDirHandles(data)
-      }}
-      init()
-  }, []);
- 
-
-  const selectDirectory = async (dirHandle: FileSystemDirectoryHandle) => {
-    setSelectedDir(dirHandle);
-
-    let files = await getFileEntries(dirHandle);
-    if(files){
-      files = files.filter((file) => file.name.endsWith(".stl"));
-       setDirFiles(files)
+      if (data) {
+        setKnownFolders(data);
+      }
     }
-  };
+    init();
+  }, []);
 
   return (
     <div>
       <h1>home</h1>
-      <button onClick={(e) => handleClick(e)}>Add Folder</button>
-      <button onClick={()=>clear()}>clear</button>
-      {/* {string && <h2>you opened: {string}</h2>} */}
+      <button onClick={(e) => openFolderPicker(e)}>Add Folder</button>
+      <button onClick={() => console.log("TODO")}>clear</button>
+
       <ul>
-        {dirHandles.map((handle) => (
-          <li key={handle.name} onClick={() => selectDirectory(handle)}>
-            {handle.name} {}
+        {knownFolders.map((folder) => (
+          <li key={folder.name} onClick={() => setSelectedFolder(folder)}>
+            {folder.name} {folder.updated.toLocaleDateString()}
           </li>
         ))}
       </ul>
-      <p>total: {dirFiles?.length||0}</p>
-      <ul>
-        {selectedDir &&
-          dirFiles?.map((file) => <li key={file.name}>{file.name}</li>)}
-      </ul>
+      {selectedFolder && <DirFileViewer selectedFolder={selectedFolder} />}
     </div>
   );
 };
 
 export default Home;
-
-
-
-
-
-
- /**
-   * Get all the FileSystemHandles for the files/directories in the supplied folderHandle.
-   * @param FileSystemDirectoryHandle
-   * @returns Promise FileSystemHandle[]
-   */
-
-  /**
-   * open the second dir that was saved
-   * @param dirHandle
-   * @returns
-   */
-  // const openSecondDir = async (
-  //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  // ) => {
-
-  //   e.stopPropagation();
-  //   const dir = dirHandles[1];
-  //   const permissionState = await dir.queryPermission();
-  //   console.log(`permission state: ${permissionState}`);
-  //   if (await dir.requestPermission({ mode: "read" })) {
-  //     console.log("true");
-  //   } else {
-  //     console.log("false");
-  //     return;
-  //   }
-  //   console.log("started working on: ", dir.name);
-  //   if (dir) {
-  //     console.log("doing");
-  //     const a = getFileEntries(dir);
-  //   }
-  // };
