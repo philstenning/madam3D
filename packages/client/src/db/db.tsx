@@ -68,3 +68,28 @@ export let db: AppDatabase;
 export function createDatabase() {
   db = new AppDatabase();
 }
+
+export const createProject = async (name: string = "", items: number[] = []) => {
+  const createdAt = new Date();
+  const project: IProject = {
+    created: createdAt,
+    updated: createdAt,
+    name,
+    itemIds: [],
+  };
+
+  // save to db and get the Id number for later use
+  const id = await db.projects.add(project);
+  if (id > 0) {
+    project.id = id;
+  }
+  // we don't want blank projects names
+  // so create a default one:- 'Project 123'
+  if (project.name === "") {
+    project.name = `Project ${id}`;
+    await db.projects.update(id, { name: `Project ${id}` });
+    return project;
+  }
+
+  return project;
+};

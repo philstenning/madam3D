@@ -1,10 +1,12 @@
 .project-page {
   display: grid;
   grid-template-columns: 15rem 1fr;
-  grid-template-rows: 14rem 1fr ;
+  grid-template-rows: 5rem 1fr;
   /* grid-template-rows: 7rem calc(100vh - 10rem) 3rem; */
-  height: 100%;
-  width: 100%;
+  /* height: 100%; */
+  height: calc(100vh - 4.5rem);
+  /* background-color: aqua; */
+  border-radius: var(--border-radius-m);
 }
 .project-page__header {
   padding: 1rem;
@@ -13,56 +15,94 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  ;
 }
-.project-page__footer{
-      grid-row: 3 / 4;
+.project-page__footer {
+  grid-row: 3 / 4;
   grid-column: 1 / 2;
-/* background-color: aquamarine; */
+  /* background-color: aquamarine; */
 }
 
 /* 
-    Project List
+Project List
 */
 
 .projects-list {
-  grid-row: 2 / 2;
+  grid-row: 2 / 3;
   grid-column: 1 / 2;
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
-  padding: 1rem;
+  margin: 3px 0;
+  padding: 0 1rem;
   gap: 1rem;
-  height: calc(100vh - 19rem);
-  /* height: 100%; */
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
-.projects-list_footer {
+ .projects-list  .active {
+  border: solid 4px var(--pink-30);
+
 }
+
 
 /* 
      Project Card
 */
 .project-card {
+  position: relative;
   font-size: var(--font-size-s);
   border-radius: var(--border-radius-m);
   padding: 0;
+  margin-top: 2px;
   width: 100%;
   /* min-height: 6rem; */
   border: solid 4px var(--gray-15);
   background: var(--gray-20);
-  cursor: pointer;
+  /* cursor: pointer; */
   transition: all 0.6s ease-in-out;
   color: var(--gray-80);
 }
 .project-card:hover {
-    /* color: var(--gray-20); */
-    background: var(--gray-30);
-    border: solid 4px var(--pink-40);
-    transform: translate(0px, -3px);
+  /* color: var(--gray-20); */
+  background: var(--gray-20);
+  border: solid 4px var(--pink-40);
+  transform: translate(-0rem, -3px);
 }
+
+
+.project-card__overlay {
+  position: absolute;
+  /* border: solid 2px sienna; */
+  right: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  color: var(--gray-20);
+  transition: color 0.5s ease-in-out;
+}
+
+.project-card__overlay:hover {
+  color: var(--gray-70);
+}
+
+/*  this is the bin and edit buttons on the Card. */
+.project-card__action {
+  margin: 0.2rem 0.2rem;
+  padding: 0.4rem 0.2rem 0.2rem 0.2rem;
+  background: inherit;
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  color: inherit;
+  border: none;
+  height: fit-content;
+  border-radius: var(--border-radius-xs);
+}
+.project-card__action:hover {
+  background-color: var(--gray-50);
+  color: var(--pink-40);
+}
+
 .project-card__header {
   /* text-align: center; */
   padding: 1rem;
@@ -73,8 +113,9 @@
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
 }
 .project-card__list-item {
   list-style: none;
+  /* padding-top: .2em; */
 }
