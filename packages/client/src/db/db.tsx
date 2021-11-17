@@ -15,7 +15,7 @@ export interface IProject {
   name: string;
   created: Date;
   updated: Date;
-  itemId: [number];
+  itemIds: number[];
   // optional
   description?: string;
   createdBy?: string;
