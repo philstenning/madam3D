@@ -1,6 +1,8 @@
 *,
 :root {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pink-40) var(--gray-50);
 }
 body {
   /* default colors */
@@ -83,6 +85,7 @@ body {
   /* utilities  */
   --default-padding: 0.4rem;
 
+  --border-radius-xs: 3px;
   --border-radius-s: 5px;
   --border-radius-m: 10px;
   --border-radius-l: 15px;
@@ -97,6 +100,8 @@ body {
   --font-size-xl: 1.5rem;
   --font-size-xxl: 1.86rem;
 
+ 
+
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -110,11 +115,24 @@ body {
 ::selection {
   background: var(--pink-30);
 }
+
+.font-size--xs{
+  font-size :var(--font-size-xs)}
+.font-size--s{
+  font-size :var(--font-size-s)}
+.font-size--m{
+  font-size :var(--font-size-m)}
+.font-size--l{
+  font-size :var(--font-size-l)}
+.font-size--xl{
+  font-size :var(--font-size-xl)}
+.font-size--xl{
+  font-size :var(--font-size-xxl)}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 h1,
 h2,
@@ -137,24 +155,48 @@ a:visited {
 }
 
 
+/* style the scrollbar. */
 /* width */
 ::-webkit-scrollbar {
-  width: .5rem;
+  width: 0.5rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--pink-40); 
+  background: var(--pink-40);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--pink-30); 
+  background: var(--pink-30);
 }
+
+.btn{
+  border: .2rem solid var(--gray-15);
+  border-radius: var(--border-radius-s);
+  padding: .1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:var(--gray-90);
+  transition: all  .3s ease-in-out;
+  
+}
+.btn:hover{
+  cursor: pointer;
+  background:var(--gray-80);
+  border: .2rem solid var(--gray-40);
+  /* transform: scale(102%); */
+}
+.btn:active{
+  background:var(--pink-40);
+}
+
+
