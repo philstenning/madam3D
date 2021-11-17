@@ -1,7 +1,8 @@
-import { Link, Route, Routes , NavLink} from "react-router-dom";
+import { Link, Route, Routes, NavLink } from "react-router-dom";
 import Help from "../help/Help";
 import Folders from "../folders/Folders";
 import Projects from "../projects/Projects";
+import Project from "../projects/Project";
 import Settings from "../settings/Settings";
 import Home from "../home/Home";
 import IconFolder from "~icons/fluent/folder-16-regular";
@@ -16,7 +17,7 @@ const Nav = () => {
       <nav className="menu">
         <ul className="menu__list">
           <li className="menu__item">
-            <NavLink className="menu__link"  to="/">
+            <NavLink className="menu__link" to="/">
               <IconHome className="menu__svg" />
               Home
             </NavLink>
@@ -53,7 +54,9 @@ const Nav = () => {
         <Routes>
           <Route path="/help" element={<Help />} />
           <Route path="/folders" element={<Folders />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects" element={<Projects />}>
+            <Route path=":projectId" element={<Project/>}/>
+          </Route>
           <Route path="/settings" element={<Settings />} />
           <Route path="/" element={<Home />} />
         </Routes>

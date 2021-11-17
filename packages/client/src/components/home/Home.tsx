@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, IFolder } from "../../db/db";
-// import { get, set, entries, values, clear } from "idb-keyval";
+import { useLiveQuery } from "dexie-react-hooks";
 /*
 https://web.dev/file-system-access/
 https://web.dev/browser-fs-access/
@@ -12,6 +12,9 @@ const Home = () => {
   const [knownFolders, setKnownFolders] = useState<IFolder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
 
+  const allFolders = useLiveQuery(() =>
+    db.folders.orderBy("created").reverse().toArray()
+  );
   // const [dirFiles, setDirFiles] = useState<FileSystemHandle[] | null>(null);
 
   const openFolderPicker = async (
@@ -20,8 +23,9 @@ const Home = () => {
     e.preventDefault();
     try {
       const dirHandle = await window.showDirectoryPicker({});
+
       if (dirHandle.kind === "directory") {
-        // add it to the list of known directories.
+        // create the Folder object to be saved in db.
         const createdAt = new Date();
         const folder: IFolder = {
           handle: dirHandle,
@@ -29,16 +33,15 @@ const Home = () => {
           updated: createdAt,
           name: dirHandle.name,
         };
-      
 
         try {
-          const result = await db.folders.add(folder)
-          console.log(result)
-          setKnownFolders((currentHandles) => [...currentHandles, folder]);
-          // this folder should now be the current folder
+          // add folder to local database.
+          await db.folders.add(folder);
+
+          // this folder should set to the current folder
           setSelectedFolder(folder);
         } catch (error) {
-          console.log(`Error saving folder: ${error}`)
+          console.log(`Error saving folder: ${error}`);
         }
       }
     } catch (err) {
@@ -53,15 +56,15 @@ const Home = () => {
     //TODO remove All folder from db.
   };
 
-  useEffect(() => {
-    async function init() {
-      const data = await loadData();
-      if (data) {
-        setKnownFolders(data);
-      }
-    }
-    init();
-  }, []);
+  // useEffect(() => {
+  //   async function init() {
+  //     const data = await loadData();
+  //     if (data) {
+  //       setKnownFolders(data);
+  //     }
+  //   }
+  //   init();
+  // }, []);
 
   return (
     <div>
@@ -70,11 +73,12 @@ const Home = () => {
       <button onClick={() => console.log("TODO")}>clear</button>
 
       <ul>
-        {knownFolders.map((folder) => (
-          <li key={folder.name} onClick={() => setSelectedFolder(folder)}>
-            {folder.name} {folder.updated.toLocaleDateString()}
-          </li>
-        ))}
+        {allFolders &&
+          allFolders.map((folder) => (
+            <li key={folder.name} onClick={() => setSelectedFolder(folder)}>
+              {folder.name} {folder.updated.toLocaleDateString()}
+            </li>
+          ))}
       </ul>
       {selectedFolder && <DirFileViewer selectedFolder={selectedFolder} />}
     </div>
