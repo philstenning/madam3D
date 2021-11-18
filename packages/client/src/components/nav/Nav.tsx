@@ -10,6 +10,7 @@ import IconProjects from "~icons/fluent/briefcase-24-regular";
 import IconHome from "~icons/fluent/home-16-regular";
 import IconSettings from "~icons/fluent/settings-24-regular";
 import IconQuestion from "~icons/fluent/question-circle-24-regular";
+import ModelList from '../modelList/ModelList'
 import "./nav.css";
 const Nav = () => {
   return (
@@ -53,9 +54,11 @@ const Nav = () => {
       <main>
         <Routes>
           <Route path="/help" element={<Help />} />
-          <Route path="/folders" element={<Folders />} />
+          <Route path="/folders" element={<Folders />}>
+            <Route path=":folderId" element={<ModelList/>} />
+          </Route>
           <Route path="/projects" element={<Projects />}>
-            <Route path=":projectId" element={<Project/>}/>
+            <Route path=":projectId" element={<Project />} />
           </Route>
           <Route path="/settings" element={<Settings />} />
           <Route path="/" element={<Home />} />

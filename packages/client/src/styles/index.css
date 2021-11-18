@@ -100,8 +100,6 @@ body {
   --font-size-xl: 1.5rem;
   --font-size-xxl: 1.86rem;
 
- 
-
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -116,18 +114,24 @@ body {
   background: var(--pink-30);
 }
 
-.font-size--xs{
-  font-size :var(--font-size-xs)}
-.font-size--s{
-  font-size :var(--font-size-s)}
-.font-size--m{
-  font-size :var(--font-size-m)}
-.font-size--l{
-  font-size :var(--font-size-l)}
-.font-size--xl{
-  font-size :var(--font-size-xl)}
-.font-size--xl{
-  font-size :var(--font-size-xxl)}
+.font-size--xs {
+  font-size: var(--font-size-xs);
+}
+.font-size--s {
+  font-size: var(--font-size-s);
+}
+.font-size--m {
+  font-size: var(--font-size-m);
+}
+.font-size--l {
+  font-size: var(--font-size-l);
+}
+.font-size--xl {
+  font-size: var(--font-size-xl);
+}
+.font-size--xl {
+  font-size: var(--font-size-xxl);
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -154,7 +158,9 @@ a:visited {
   text-decoration: none;
 }
 
-
+li {
+  list-style: none;
+}
 /* style the scrollbar. */
 /* width */
 ::-webkit-scrollbar {
@@ -169,34 +175,31 @@ a:visited {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--pink-40);
+  background: var(--pink-30);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--pink-30);
+  background: var(--pink-40);
 }
 
-.btn{
-  border: .2rem solid var(--gray-15);
+.btn {
+  border: 0.2rem solid var(--gray-15);
   border-radius: var(--border-radius-s);
-  padding: .1rem;
+  padding: 0.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background:var(--gray-90);
-  transition: all  .3s ease-in-out;
-  
+  background: var(--gray-90);
+  transition: all 0.3s ease-in-out;
 }
-.btn:hover{
+.btn:hover {
   cursor: pointer;
-  background:var(--gray-80);
-  border: .2rem solid var(--gray-40);
+  background: var(--gray-80);
+  border: 0.2rem solid var(--gray-40);
   /* transform: scale(102%); */
 }
-.btn:active{
-  background:var(--pink-40);
+.btn:active {
+  background: var(--pink-40);
 }
-
-

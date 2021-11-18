@@ -5,11 +5,11 @@ import { useLiveQuery } from "dexie-react-hooks";
 https://web.dev/file-system-access/
 https://web.dev/browser-fs-access/
 */
-import { loadData, getFileEntries } from "../../utils/fileSystem";
+// import { loadData, getFileEntries } from "../../utils/fileSystem";
 import DirFileViewer from "../dirFileViewer/DirFileViewer";
 const Home = () => {
   // used to store all known folder handles
-  const [knownFolders, setKnownFolders] = useState<IFolder[]>([]);
+  // const [knownFolders, setKnownFolders] = useState<IFolder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
 
   const allFolders = useLiveQuery(() =>

@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-type Params = {
-    string:{
-       projectId: string | undefined; 
-    }
+// type Params = {
+//     string:{
+//        projectId: string | undefined; 
+//     }
   
-};
+// };
 
 const Project = () => {
   let params = useParams();
