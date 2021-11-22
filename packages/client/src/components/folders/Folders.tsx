@@ -134,7 +134,7 @@ const FolderListItem = ({ folder, click }: Props) => {
         to={`/folders/${folder.id}`}
       >
         {folder.name}
-        {permission}
+       
       </NavLink>
     </li>
   );

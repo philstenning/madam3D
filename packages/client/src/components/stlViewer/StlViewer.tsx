@@ -68,7 +68,7 @@ const Basic = ({
   fileUrl = "http://localhost:3000/src/images/arm_joiner_double.stl",
 }: Props) => {
   return (
-    <Canvas style={{width:'100%'}}  camera={{ position: [1, 70, 100], fov: 50, near: 10, far: 200 }}>
+    <Canvas style={{}}  camera={{ position: [1, 70, 100], fov: 50, near: 10, far: 200 }}>
       <pointLight position={[100, 100, 100]} />
       <pointLight position={[-100, -100, -100]} />
       <gridHelper args={[80, 12, "magenta", "cyan"]} />
