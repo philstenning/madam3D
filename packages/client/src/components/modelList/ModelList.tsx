@@ -3,6 +3,8 @@ import StlCard from "../stlCard/StlCard";
 import { IFolder, IFile, FileTypes } from "../../db/db";
 import './modelList.css'
 import useMeasure from 'react-use-measure'
+
+
 type Props = {
   folder: IFolder | null;
 };
@@ -13,6 +15,7 @@ const ModelList = ({ folder }: Props) => {
   const [currentPageFiles, setCurrentPageFiles] = useState<IFile[]>([]);
   const [cursor, setCursor] = useState(0);
   const [limit, setLimit] = useState(4);
+
   const [ref, bounds] = useMeasure();
 
   // console.log("folder name", folder?.name);
@@ -125,6 +128,7 @@ const ModelList = ({ folder }: Props) => {
         currentPage={cursor + 1}
         totalPages={Math.ceil(allFiles.length / (limit ))}
       />} 
+   
       <div className="model-list" ref={ref}>
         {currentPageFiles?.map((file) => (
           <StlCard key={file.imageUrl} fileUrl={file.imageUrl} />

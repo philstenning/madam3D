@@ -7,9 +7,12 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { Outlet, NavLink } from "react-router-dom";
 import ModelList from "../modelList/ModelList";
 import { haveFolderPermission } from "../../utils/fileSystem";
+import Dialog from "../dialog/dialog";
+
 
 const Folders = () => {
   const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
+    const [dialog, setDialog] = useState(true);
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()
   );
@@ -62,6 +65,7 @@ const Folders = () => {
   return (
     <div className="page">
       <header className="aside__header">
+        {dialog && <Dialog />}
         <button className="btn" onClick={(e) => openFolderPicker(e)}>
           <RiAddLine className="font-size--l" />
           <span className="font-size--m"> Add Folder</span>
