@@ -6,7 +6,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 // import useMeasure from "react-use-measure";
 import { Outlet, NavLink } from "react-router-dom";
 import ModelList from "../modelList/ModelList";
-
+import { haveFolderPermission } from "../../utils/fileSystem";
 
 const Folders = () => {
   const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
@@ -36,8 +36,6 @@ const Folders = () => {
 
           // this folder should set to the current folder
           setSelectedFolder(folder);
-
-          
         } catch (error) {
           console.log(`Error saving folder: ${error}`);
         }
@@ -58,6 +56,7 @@ const Folders = () => {
   };
   const removeAllFolders = async () => {
     //TODO remove All folder from db.
+    // this can be done in dev tools/application atm.
   };
 
   return (
@@ -82,10 +81,11 @@ const Folders = () => {
         </ul>
         <div className="aside__details">
           <ul>
-            <li>{selectedFolder?.filePath || selectedFolder?.handle.keys.length}</li>
+            <li>
+              {selectedFolder?.filePath || selectedFolder?.handle.keys.length}
+            </li>
             <li>{selectedFolder?.id}</li>
             <li>{selectedFolder?.created.toLocaleDateString()}</li>
-            {/* <li>fff {selectedFolder?getFolderPermissions(selectedFolder):'null'}</li> */}
           </ul>
         </div>
       </div>
@@ -109,12 +109,28 @@ const FolderListItem = ({ folder, click }: Props) => {
   const [permission, setPermission] = useState<string>();
 
   useEffect(() => {
+    // get the permissions for the folder.
+    // and set it in the state.
+    // it is used for the css class query.
     folder.handle.queryPermission().then((res) => setPermission(res));
   }, [folder]);
+
+  const handleClick = async () => {
+    // if we don't have permission to read the folder,
+    // we need to show the permission dialog and get permission.
+    const permState = await haveFolderPermission(folder.handle);
+    // if we have permission, we can set the folder as the current folder.
+    if (permState) {
+      click(folder);
+      // update state
+      setPermission("granted");
+    }
+  };
+
   return (
-    <li className="folder__item" onClick={() => click(folder)}>
+    <li className="folder__item" onClick={handleClick}>
       <NavLink
-        className={`folder__link permission--${permission}`}
+        className={`folder__link folder__item--${permission}`}
         to={`/folders/${folder.id}`}
       >
         {folder.name}

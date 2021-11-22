@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { db, IFolder } from "../../db/db";
 import { useLiveQuery } from "dexie-react-hooks";
 /*
@@ -56,15 +56,6 @@ const Home = () => {
     //TODO remove All folder from db.
   };
 
-  // useEffect(() => {
-  //   async function init() {
-  //     const data = await loadData();
-  //     if (data) {
-  //       setKnownFolders(data);
-  //     }
-  //   }
-  //   init();
-  // }, []);
 
   return (
     <div>
