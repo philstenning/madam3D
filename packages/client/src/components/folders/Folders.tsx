@@ -7,12 +7,13 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { Outlet, NavLink } from "react-router-dom";
 import ModelList from "../modelList/ModelList";
 import { haveFolderPermission } from "../../utils/fileSystem";
-import Dialog from "../dialog/dialog";
-
+import Dialog from "../dialog/Dialog";
+import FolderDetails from "./FolderDetails";
+import { FolderProvider } from "../../state/folderContext";
 
 const Folders = () => {
   const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
-    const [dialog, setDialog] = useState(true);
+  const [dialog, setDialog] = useState(true);
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()
   );
@@ -48,56 +49,66 @@ const Folders = () => {
     }
   };
 
-  const removeFolder = async (folder: IFolder) => {
-    try {
-      if (folder.id) {
-        await db.folders.delete(folder.id);
-      }
-    } catch (error) {
-      console.log(`Error deleting Known folder: ${folder.name}`);
-    }
+  // const removeFolder = async (folder: IFolder) => {
+  //   try {
+  //     if (folder.id) {
+  //       await db.folders.delete(folder.id);
+  //     }
+  //   } catch (error) {
+  //     console.log(`Error deleting Known folder: ${folder.name}`);
+  //   }
+  // };
+  // const removeAllFolders = async () => {
+  //   //TODO remove All folder from db.
+  //   // this can be done in dev tools/application atm.
+  // };
+  const handleDialogResults = () => {
+    setDialog(false);
   };
-  const removeAllFolders = async () => {
-    //TODO remove All folder from db.
-    // this can be done in dev tools/application atm.
-  };
-
   return (
-    <div className="page">
-      <header className="aside__header">
-        {dialog && <Dialog />}
-        <button className="btn" onClick={(e) => openFolderPicker(e)}>
-          <RiAddLine className="font-size--l" />
-          <span className="font-size--m"> Add Folder</span>
-        </button>
-      </header>
-      {/* this is section with the folder list */}
-      <div className="aside aside--small">
-        <ul className="aside__list folder__list">
-          {allFolders &&
-            allFolders.map((folder) => (
-              <FolderListItem
-                key={folder.id}
-                folder={folder}
-                click={setSelectedFolder}
-              />
-            ))}
-        </ul>
-        <div className="aside__details">
-          <ul>
-            <li>
-              {selectedFolder?.filePath || selectedFolder?.handle.keys.length}
-            </li>
-            <li>{selectedFolder?.id}</li>
-            <li>{selectedFolder?.created.toLocaleDateString()}</li>
+    <FolderProvider>
+      <div className="page">
+        <header className="aside__header">
+          {/* Dialog */}
+          <Dialog title="dialog box" show={dialog}>
+            <p>This is the content for the dialog🤬😜</p>
+            <div className="dialog__buttons">
+              <button className="btn dialog__btn">close</button>
+              <button
+                className="btn dialog__btn"
+                onClick={(e) => setDialog(false)}
+              >
+                ok
+              </button>
+            </div>
+          </Dialog>
+          {/*   */}
+          <button className="btn" onClick={(e) => openFolderPicker(e)}>
+            <RiAddLine className="font-size--l" />
+            <span className="font-size--m"> Add Folder</span>
+          </button>
+        </header>
+        {/* this is section with the folder list */}
+        <div className="aside aside--small">
+          <ul className="aside__list folder__list">
+            {allFolders &&
+              allFolders.map((folder) => (
+                <FolderListItem
+                  key={folder.id}
+                  folder={folder}
+                  click={setSelectedFolder}
+                />
+              ))}
           </ul>
-        </div>
-      </div>
 
-      {/* display the results of the project selected. */}
-      {/* <Outlet /> */}
-      <ModelList folder={selectedFolder} />
-    </div>
+          <FolderDetails folder={selectedFolder} />
+        </div>
+
+        {/* display the results of the project selected. */}
+        {/* <Outlet /> */}
+        <ModelList folder={selectedFolder} />
+      </div>
+    </FolderProvider>
   );
 };
 
@@ -138,7 +149,6 @@ const FolderListItem = ({ folder, click }: Props) => {
         to={`/folders/${folder.id}`}
       >
         {folder.name}
-       
       </NavLink>
     </li>
   );

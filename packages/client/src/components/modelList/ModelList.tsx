@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import StlCard from "../stlCard/StlCard";
 import { IFolder, IFile, FileTypes } from "../../db/db";
-import './modelList.css'
-import useMeasure from 'react-use-measure'
-
+import "./modelList.css";
+// import useMeasure from 'react-use-measure'
 
 type Props = {
   folder: IFolder | null;
@@ -16,10 +15,8 @@ const ModelList = ({ folder }: Props) => {
   const [cursor, setCursor] = useState(0);
   const [limit, setLimit] = useState(4);
 
-  const [ref, bounds] = useMeasure();
+  // const [ref, bounds] = useMeasure();
 
-  // console.log("folder name", folder?.name);
-//  console.log('ddddddddddddddddddddddddddd',bounds.width, bounds.height);
   const filterFiles = async () => {
     if (!folder) return;
     let filteredFiles = [];
@@ -43,12 +40,11 @@ const ModelList = ({ folder }: Props) => {
           imageUrl: url,
           projectId: [folder.id || 0],
         };
-        // setAllFiles((old) => [...old, newFile]);
+
         filteredFiles.push(newFile);
       }
     }
     setAllFiles(filteredFiles);
-    // console.log("all files filtered...", "total files:", filteredFiles.length);
     return filteredFiles;
   };
 
@@ -71,13 +67,7 @@ const ModelList = ({ folder }: Props) => {
     // otherwise allFiles will be empty
     filesToPaginate: IFile[] = allFiles,
     page: number = cursor + offset
-    // limit: number = 4
-    // sort: SortBy = SortBy.ASC
-    // filters: any
   ) => {
-    // // limit can't be zero
-    // limit <= 0 ? (limit = 1) : limit;
-
     // cursor can't be less than zero
     if (page + offset < 0) {
       setCursor(0);
@@ -103,7 +93,7 @@ const ModelList = ({ folder }: Props) => {
     );
 
     const pageFiles = filesToPaginate.slice(page * limit, (page + 1) * limit);
-    // console.log(JSON.stringify(pageFiles));
+
     setCurrentPageFiles(pageFiles);
     setCursor(page);
   };
@@ -123,13 +113,15 @@ const ModelList = ({ folder }: Props) => {
 
   return (
     <>
-     {folder && <Pagination
-        paginate={pagination}
-        currentPage={cursor + 1}
-        totalPages={Math.ceil(allFiles.length / (limit ))}
-      />} 
-   
-      <div className="model-list" ref={ref}>
+      {folder && (
+        <Pagination
+          paginate={pagination}
+          currentPage={cursor + 1}
+          totalPages={Math.ceil(allFiles.length / limit)}
+        />
+      )}
+
+      <div className="model-list" >
         {currentPageFiles?.map((file) => (
           <StlCard key={file.imageUrl} fileUrl={file.imageUrl} />
         ))}
@@ -139,7 +131,6 @@ const ModelList = ({ folder }: Props) => {
 };
 
 type PaginationProps = {
-  // allFiles: IFile[];
   currentPage: number;
   totalPages: number;
   paginate: (offset: number) => void;

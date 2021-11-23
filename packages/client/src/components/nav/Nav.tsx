@@ -55,7 +55,7 @@ const Nav = () => {
         <Routes>
           <Route path="/help" element={<Help />} />
           <Route path="/folders" element={<Folders />}>
-            <Route path=":folderId" element={<ModelList/>} />
+            <Route path=":folderId"  />
           </Route>
           <Route path="/projects" element={<Projects />}>
             <Route path=":projectId" element={<Project />} />
