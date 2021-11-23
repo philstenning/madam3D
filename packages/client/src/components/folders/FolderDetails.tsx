@@ -6,12 +6,14 @@ interface IFolderDetailsProps {
 }
 
 const FolderDetails = ({ folder }: IFolderDetailsProps) => {
+  // console.log("eeeeeeeeeeeeeee", folder?.id);
+  if (typeof folder === "undefined") return null;
   return (
     <div className="aside__details">
       <div>
         <button>delete</button>
       </div>
-    
+
       <ul>
         <li>{folder?.filePath || folder?.handle.keys.length}</li>
         <li>{folder?.id} one</li>

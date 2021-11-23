@@ -1,18 +1,19 @@
-import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./folders.css";
 import { RiAddLine } from "react-icons/ri";
 import { db, IFolder } from "../../db/db";
 import { useLiveQuery } from "dexie-react-hooks";
-// import useMeasure from "react-use-measure";
-import { Outlet, NavLink } from "react-router-dom";
+
 import ModelList from "../modelList/ModelList";
-import { haveFolderPermission } from "../../utils/fileSystem";
-import Dialog from "../dialog/Dialog";
 import FolderDetails from "./FolderDetails";
 import { FolderProvider } from "../../state/folderContext";
+import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
+import FolderListItem from "./FolderListItem";
+import { FolderContext } from "../../state/folderContext";
 
 const Folders = () => {
-  const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
+  const { state, dispatch } = useContext(FolderContext);
+  // const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
   const [dialog, setDialog] = useState(true);
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()
@@ -39,7 +40,7 @@ const Folders = () => {
           await db.folders.add(folder);
 
           // this folder should set to the current folder
-          setSelectedFolder(folder);
+          dispatch({ type: "SET_CURRENT_FOLDER", payload: folder });
         } catch (error) {
           console.log(`Error saving folder: ${error}`);
         }
@@ -49,40 +50,13 @@ const Folders = () => {
     }
   };
 
-  // const removeFolder = async (folder: IFolder) => {
-  //   try {
-  //     if (folder.id) {
-  //       await db.folders.delete(folder.id);
-  //     }
-  //   } catch (error) {
-  //     console.log(`Error deleting Known folder: ${folder.name}`);
-  //   }
-  // };
-  // const removeAllFolders = async () => {
-  //   //TODO remove All folder from db.
-  //   // this can be done in dev tools/application atm.
-  // };
-  const handleDialogResults = () => {
-    setDialog(false);
-  };
   return (
     <FolderProvider>
       <div className="page">
+        {/* Dialog */}
+        <ConfirmDeleteFolderDialog />
+        {/*   */}
         <header className="aside__header">
-          {/* Dialog */}
-          <Dialog title="dialog box" show={dialog}>
-            <p>This is the content for the dialog🤬😜</p>
-            <div className="dialog__buttons">
-              <button className="btn dialog__btn">close</button>
-              <button
-                className="btn dialog__btn"
-                onClick={(e) => setDialog(false)}
-              >
-                ok
-              </button>
-            </div>
-          </Dialog>
-          {/*   */}
           <button className="btn" onClick={(e) => openFolderPicker(e)}>
             <RiAddLine className="font-size--l" />
             <span className="font-size--m"> Add Folder</span>
@@ -96,17 +70,19 @@ const Folders = () => {
                 <FolderListItem
                   key={folder.id}
                   folder={folder}
-                  click={setSelectedFolder}
+                  // click={setSelectedFolder}
                 />
               ))}
           </ul>
 
-          <FolderDetails folder={selectedFolder} />
+        <p>ok {state.selectedFolder?.name|| 'ddd'}</p>
+            {/* <FolderDetails folder={state.selectedFolder} /> */}
+          
         </div>
 
         {/* display the results of the project selected. */}
         {/* <Outlet /> */}
-        <ModelList folder={selectedFolder} />
+        {state.selectedFolder && (<ModelList folder={state.selectedFolder} />)}
       </div>
     </FolderProvider>
   );
@@ -114,42 +90,4 @@ const Folders = () => {
 
 export default Folders;
 
-type Props = {
-  folder: IFolder;
-  // Todo: not good! any...
-  click: Dispatch<SetStateAction<IFolder | null>>;
-};
 
-const FolderListItem = ({ folder, click }: Props) => {
-  const [permission, setPermission] = useState<string>();
-
-  useEffect(() => {
-    // get the permissions for the folder.
-    // and set it in the state.
-    // it is used for the css class query.
-    folder.handle.queryPermission().then((res) => setPermission(res));
-  }, [folder]);
-
-  const handleClick = async () => {
-    // if we don't have permission to read the folder,
-    // we need to show the permission dialog and get permission.
-    const permState = await haveFolderPermission(folder.handle);
-    // if we have permission, we can set the folder as the current folder.
-    if (permState) {
-      click(folder);
-      // update state
-      setPermission("granted");
-    }
-  };
-
-  return (
-    <li className="folder__item" onClick={handleClick}>
-      <NavLink
-        className={`folder__link folder__item--${permission}`}
-        to={`/folders/${folder.id}`}
-      >
-        {folder.name}
-      </NavLink>
-    </li>
-  );
-};
