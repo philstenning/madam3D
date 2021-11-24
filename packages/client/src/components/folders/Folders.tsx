@@ -6,15 +6,18 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 import ModelList from "../modelList/ModelList";
 import FolderDetails from "./FolderDetails";
-import { FolderProvider } from "../../state/folderContext";
+
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import FolderListItem from "./FolderListItem";
-import { FolderContext } from "../../state/folderContext";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const Folders = () => {
-  const { state, dispatch } = useContext(FolderContext);
+  const currentFolder = useAppSelector(
+    (state) => state.folderReducer.currentFolder
+  );
+  // const { state, dispatch } = useContext(FolderContext);
   // const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
-  const [dialog, setDialog] = useState(true);
+  // const [dialog, setDialog] = useState(true);
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()
   );
@@ -40,7 +43,7 @@ const Folders = () => {
           await db.folders.add(folder);
 
           // this folder should set to the current folder
-          dispatch({ type: "SET_CURRENT_FOLDER", payload: folder });
+          // dispatch({ type: "SET_CURRENT_FOLDER", payload: folder });
         } catch (error) {
           console.log(`Error saving folder: ${error}`);
         }
@@ -51,43 +54,38 @@ const Folders = () => {
   };
 
   return (
-    <FolderProvider>
-      <div className="page">
-        {/* Dialog */}
-        <ConfirmDeleteFolderDialog />
-        {/*   */}
-        <header className="aside__header">
-          <button className="btn" onClick={(e) => openFolderPicker(e)}>
-            <RiAddLine className="font-size--l" />
-            <span className="font-size--m"> Add Folder</span>
-          </button>
-        </header>
-        {/* this is section with the folder list */}
-        <div className="aside aside--small">
-          <ul className="aside__list folder__list">
-            {allFolders &&
-              allFolders.map((folder) => (
-                <FolderListItem
-                  key={folder.id}
-                  folder={folder}
-                  // click={setSelectedFolder}
-                />
-              ))}
-          </ul>
+    <div className="page">
+      {/* Dialog */}
+      <ConfirmDeleteFolderDialog folder={currentFolder} />
+      {/*   */}
+      <header className="aside__header">
+        <button className="btn" onClick={(e) => openFolderPicker(e)}>
+          <RiAddLine className="font-size--l" />
+          <span className="font-size--m"> Add Folder</span>
+        </button>
+      </header>
+      {/* this is section with the folder list */}
+      <div className="aside aside--small">
+        <ul className="aside__list folder__list">
+          {allFolders &&
+            allFolders.map((folder) => (
+              <FolderListItem
+                key={folder.id}
+                folder={folder}
+                // click={setSelectedFolder}
+              />
+            ))}
+        </ul>
 
-        <p>ok {state.selectedFolder?.name|| 'ddd'}</p>
-            {/* <FolderDetails folder={state.selectedFolder} /> */}
-          
-        </div>
-
-        {/* display the results of the project selected. */}
-        {/* <Outlet /> */}
-        {state.selectedFolder && (<ModelList folder={state.selectedFolder} />)}
+        {/* <p>ok {currentFolder ? currentFolder.name : "no current folder."}</p> */}
+        <FolderDetails folder={currentFolder} />
       </div>
-    </FolderProvider>
+
+      {/* display the results of the project selected. */}
+      {/* <Outlet /> */}
+      {currentFolder && <ModelList folder={currentFolder} />}
+    </div>
   );
 };
 
 export default Folders;
-
-

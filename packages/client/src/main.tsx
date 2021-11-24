@@ -5,10 +5,14 @@ import "./styles/index.css";
 import App from './components/app/App'
 // import { render, events } from "@react-three/fiber";
 import { createDatabase } from "./db/db";
+import {Provider} from 'react-redux'
+import {store} from './app/store'
 createDatabase();
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

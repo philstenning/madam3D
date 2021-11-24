@@ -1,26 +1,36 @@
-import {useContext} from 'react'
-import { FolderContext } from '../../state/folderContext';
+import {useAppSelector, useAppDispatch} from '../../app/hooks'
+import { hideDeleteFolderDialog } from "../../features/folderSlice";
 import Dialog from '../dialog/Dialog';
+import { IFolder } from "../../db/db";
+import {
+  deleteFolderAsync,
+  
+} from "../../features/folderSlice";
+interface IFolderDialogProps {
+  folder: IFolder | null;
+}
 
-export  function ConfirmDeleteFolderDialog() {
-  const { state, dispatch } = useContext(FolderContext);
-
+export  function ConfirmDeleteFolderDialog({folder}:IFolderDialogProps) {
+  const data = useAppSelector(state=>state.folderReducer)
+  const dispatch = useAppDispatch()
+ const handleDelete = () => {
+   if (folder?.id) dispatch(deleteFolderAsync(folder.id));
+ };
   return (
-    <Dialog title="Delete Folder" show={state.showDialog}>
+    <Dialog title="Delete Folder" show={data.showDialog}>
       <p>Are you sure you want to delete the folder:</p>
-      <p>{state.selectedFolder?.name}</p>
+      <p>{data.currentFolder?.name}</p>
       <div className="dialog__buttons">
         <button
           className="btn dialog__btn"
-          onClick={() => dispatch({ type: "HIDE_DIALOG" })}
+          onClick={() => dispatch(hideDeleteFolderDialog())}
         >
           no
         </button>
         <button
           className="btn dialog__btn"
-          onClick={() =>
-            dispatch({ type: "DELETE_FOLDER", payload: state.selectedFolder})
-          }
+          // TODO: add delete button function.
+          onClick={ handleDelete}
         >
           Yes
         </button>
