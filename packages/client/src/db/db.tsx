@@ -1,13 +1,29 @@
 import Dexie from "dexie";
 
-export interface IFolder {
-  id?: number;
+
+interface IFolderBase {
+  id?: number; // created by db.
   name: string;
   created: Date;
   updated: Date;
-  handle: FileSystemDirectoryHandle;
   // optional
   filePath?: string;
+}
+export interface ICurrentFolder {
+  id: number;
+  name: string;
+  created: string;
+  updated: string;
+  // optional
+  filePath?: string;
+}
+export interface IFolderCreate extends IFolderBase {
+  handle: FileSystemDirectoryHandle;
+}
+
+export interface IFolder extends IFolderCreate {
+  id: number;
+  readonly created: Date;
 }
 
 export interface IProject {
@@ -69,7 +85,10 @@ export function createDatabase() {
   db = new AppDatabase();
 }
 
-export const createProject = async (name: string = "", items: number[] = []) => {
+export const createProject = async (
+  name: string = "",
+  items: number[] = []
+) => {
   const createdAt = new Date();
   const project: IProject = {
     created: createdAt,

@@ -1,13 +1,13 @@
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import { hideDeleteFolderDialog } from "../../features/folderSlice";
 import Dialog from '../dialog/Dialog';
-import { IFolder } from "../../db/db";
+import { ICurrentFolder } from "../../db/db";
 import {
   deleteFolderAsync,
   
 } from "../../features/folderSlice";
 interface IFolderDialogProps {
-  folder: IFolder | null;
+  folder: ICurrentFolder | null;
 }
 
 export  function ConfirmDeleteFolderDialog({folder}:IFolderDialogProps) {

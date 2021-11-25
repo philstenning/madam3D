@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { IFolder, db } from "../db/db";
+import {  db, ICurrentFolder } from "../db/db";
 
 interface IFolderState {
-  currentFolder: IFolder | null;
+  currentFolder: ICurrentFolder | null;
   showDialog: boolean;
-  folders: IFolder[];
+  cursor:number
+  // folders: IFolder[];
 }
 
 const initialState: IFolderState = {
   currentFolder: null,
   showDialog: false,
-  folders: [],
+  cursor:0
 };
 const getKnownFoldersAsync = createAsyncThunk(
   "getKnownFoldersAsync",
@@ -45,19 +46,22 @@ const folderSlice = createSlice({
     showDeleteFolderDialog(state) {
       state.showDialog = true;
     },
-    setCurrentFolder(state, action: PayloadAction<IFolder>) {
+    setCurrentFolder(state, action: PayloadAction<ICurrentFolder>) {
       state.currentFolder = action.payload;
     },
     deleteFolder(state) {},
+    setCursor(state,action:PayloadAction<number>){
+      state.cursor = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
       .addCase(deleteFolderAsync.fulfilled, (state, action) => {
-        state.folders.filter((folder) => folder.id !== action.payload);
+        // state.folders.filter((folder) => folder.id !== action.payload);
         state.showDialog=false
       })
       .addCase(getKnownFoldersAsync.fulfilled,(state,action)=>{
-          state.folders = action.payload
+          // state.folders = action.payload
       });
 
   },
@@ -67,6 +71,7 @@ export const {
   hideDeleteFolderDialog,
   showDeleteFolderDialog,
   setCurrentFolder,
+  setCursor,
 } = folderSlice.actions;
 
 export { deleteFolderAsync, getKnownFoldersAsync };

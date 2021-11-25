@@ -10,9 +10,14 @@ import IconProjects from "~icons/fluent/briefcase-24-regular";
 import IconHome from "~icons/fluent/home-16-regular";
 import IconSettings from "~icons/fluent/settings-24-regular";
 import IconQuestion from "~icons/fluent/question-circle-24-regular";
-import ModelList from '../modelList/ModelList'
+import { useLiveQuery } from "dexie-react-hooks";
+import {db} from '../../db/db'
+
 import "./nav.css";
 const Nav = () => {
+    const allFolders = useLiveQuery(() =>
+      db.folders.orderBy("created").reverse().toArray()
+    );
   return (
     <>
       <nav className="menu">
@@ -54,7 +59,7 @@ const Nav = () => {
       <main>
         <Routes>
           <Route path="/help" element={<Help />} />
-          <Route path="/folders" element={<Folders />}>
+          <Route path="/folders" element={<Folders allFolders={allFolders} />}>
             <Route path=":folderId" element={<div>ok</div>} />
           </Route>
           <Route path="/projects" element={<Projects />}>

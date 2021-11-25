@@ -1,12 +1,9 @@
-import React from "react";
-import { IFolder } from "../../db/db";
+// import React from "react";
+import { ICurrentFolder } from "../../db/db";
 import { useAppDispatch } from "../../app/hooks";
-import {
-  deleteFolderAsync,
-  showDeleteFolderDialog,
-} from "../../features/folderSlice";
+import { showDeleteFolderDialog } from "../../features/folderSlice";
 interface IFolderDetailsProps {
-  folder: IFolder | null;
+  folder: ICurrentFolder | null;
 }
 
 const FolderDetails = ({ folder }: IFolderDetailsProps) => {
@@ -24,7 +21,7 @@ const FolderDetails = ({ folder }: IFolderDetailsProps) => {
       <ul>
         <li>{folder?.filePath || folder?.name}</li>
         <li>{folder?.id} one</li>
-        <li>{folder?.created.toLocaleDateString()}</li>
+        <li>{folder?.created}</li>
       </ul>
     </div>
   );

@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./folders.css";
 import { RiAddLine } from "react-icons/ri";
-import { db, IFolder } from "../../db/db";
+import { db, IFolder, IFolderCreate } from "../../db/db";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import ModelList from "../modelList/ModelList";
@@ -11,16 +11,29 @@ import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import FolderListItem from "./FolderListItem";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
-const Folders = () => {
-  const currentFolder = useAppSelector(
+interface IProps{
+  allFolders:IFolder[]|undefined
+}
+
+
+const Folders = ({allFolders}:IProps) => {
+  const [currentFolder, setCurrentFolder] = useState<IFolder | null>(null);
+  const storeCurrentFolder = useAppSelector(
     (state) => state.folderReducer.currentFolder
   );
-  // const { state, dispatch } = useContext(FolderContext);
-  // const [selectedFolder, setSelectedFolder] = useState<IFolder | null>(null);
-  // const [dialog, setDialog] = useState(true);
-  const allFolders = useLiveQuery(() =>
-    db.folders.orderBy("created").reverse().toArray()
-  );
+  // const allFolders = useLiveQuery(() =>
+  //   db.folders.orderBy("created").reverse().toArray()
+  // );
+  console.log("storeCurrentFolder", storeCurrentFolder?.id);
+
+
+  useEffect(() => {
+ 
+    const res = allFolders?.find((d) => d.id === storeCurrentFolder?.id);
+    if (res) {
+      setCurrentFolder(res);
+    }
+  }, [storeCurrentFolder]);
 
   const openFolderPicker = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -32,7 +45,7 @@ const Folders = () => {
       if (dirHandle.kind === "directory") {
         // create the Folder object to be saved in db.
         const createdAt = new Date();
-        const folder: IFolder = {
+        const folder: IFolderCreate = {
           handle: dirHandle,
           created: createdAt,
           updated: createdAt,
@@ -40,7 +53,7 @@ const Folders = () => {
         };
         try {
           // add folder to local database.
-          await db.folders.add(folder);
+          await db.folders.add(folder as IFolder);
 
           // this folder should set to the current folder
           // dispatch({ type: "SET_CURRENT_FOLDER", payload: folder });
@@ -56,7 +69,7 @@ const Folders = () => {
   return (
     <div className="page">
       {/* Dialog */}
-      <ConfirmDeleteFolderDialog folder={currentFolder} />
+      <ConfirmDeleteFolderDialog folder={storeCurrentFolder} />
       {/*   */}
       <header className="aside__header">
         <button className="btn" onClick={(e) => openFolderPicker(e)}>
@@ -78,7 +91,7 @@ const Folders = () => {
         </ul>
 
         {/* <p>ok {currentFolder ? currentFolder.name : "no current folder."}</p> */}
-        <FolderDetails folder={currentFolder} />
+        <FolderDetails folder={storeCurrentFolder} />
       </div>
 
       {/* display the results of the project selected. */}
