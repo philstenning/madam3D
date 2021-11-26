@@ -67,8 +67,6 @@ const ModelList = ({ folder }: Props) => {
     }
   };
 
-
-
   const pagination = (
     // positive offset is for next page/pages
     // negative offset is for previous page/pages
@@ -99,30 +97,30 @@ const ModelList = ({ folder }: Props) => {
     setCurrentPageFiles(pageFiles);
     dispatch(setCursor(page));
   };
-  console.log("page molellist", cursor);
-
+  console.log("page modelList", cursor);
 
   useEffect(() => {
     console.log("effect gggg");
-    
+
     (async () => {
-      // onMount clear array
-      setAllFiles([]);
-      
       // const f= async()=>{
 
       const filteredFiles = await filterFiles();
       // if we have a fileList calculate the
       // number of pages for pagination
       if (filteredFiles) {
-        console.log("effect vvvvvvvvvvvvv", filterFiles.length, ' ' ,allFiles.length);
+        console.log(
+          "effect vvvvvvvvvvvvv",
+          filterFiles.length,
+          " ",
+          allFiles.length
+        );
         setAllFiles(filteredFiles);
-        pagination(0,0);
+        pagination(0, 0, filteredFiles);
+      } else {
+        // onMount clear array
+        setAllFiles([]);
       }
-    // }
-      // f();
-
-      // filteredFiles ? pagination(0, filteredFiles, 0) : null;
     })();
   }, [folder]);
 
@@ -131,7 +129,7 @@ const ModelList = ({ folder }: Props) => {
       {folder && (
         <Pagination
           paginate={pagination}
-          currentPage={cursor }
+          currentPage={cursor}
           totalPages={Math.ceil(allFiles.length / limit)}
         />
       )}
