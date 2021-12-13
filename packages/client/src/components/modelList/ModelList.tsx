@@ -1,26 +1,37 @@
 import { useState, useEffect } from "react";
 import StlCard from "../stlCard/StlCard";
-import { IFolder, IFile, FileTypes } from "../../db/db";
+import { IFolder, IFile, FileTypes, db } from "../../db/db";
 import "./modelList.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCursor } from "../../features/folderSlice";
+import { v4 as uuidv4 } from "uuid";
+// import { useLiveQuery } from "dexie-react-hooks";
+
 
 type Props = {
-  folder: IFolder | null;
+  folderId: number;
 };
 
-const ModelList = ({ folder }: Props) => {
-  if (!folder) return <></>;
+const ModelList = ({ folderId }: Props) => {
+  // console.log('folderId',folderId);
+  // if (folderId > 0) return <></>;
+  const [folder,setFolder] = useState<IFolder | null>(null)
+
   const cursor = useAppSelector((state) => state.folderReducer.cursor);
   const dispatch = useAppDispatch();
   const [allFiles, setAllFiles] = useState<IFile[]>([]);
   const [currentPageFiles, setCurrentPageFiles] = useState<IFile[]>([]);
+  // const folder = useLiveQuery(() =>
+  //   db.folders.where({id:folderId}).first()
+  // );
 
+ 
   const [limit, setLimit] = useState(4);
 
   // const [ref, bounds] = useMeasure();
 
-  const filterFiles = async () => {
+  const filterFiles = async (folder:IFolder) => {
+    
     if (!folder) return;
     // create a new array to hold the files from the for loop.
     let filteredFiles = [];
@@ -52,6 +63,7 @@ const ModelList = ({ folder }: Props) => {
       url: string
     ): IFile {
       return {
+        id: uuidv4(),
         created: new Date(file.lastModified),
         folderId: 0,
         handle: fileHandle,
@@ -62,7 +74,7 @@ const ModelList = ({ folder }: Props) => {
         updated: new Date(file.lastModified),
         description: "",
         imageUrl: url,
-        projectId: [folder?.id || 0],
+        projectId: [folderId ],
       };
     }
   };
@@ -97,24 +109,25 @@ const ModelList = ({ folder }: Props) => {
     setCurrentPageFiles(pageFiles);
     dispatch(setCursor(page));
   };
-  console.log("page modelList", cursor);
+  console.log("page modelList cursor", cursor);
 
   useEffect(() => {
-    console.log("effect gggg");
+    
 
     (async () => {
       // const f= async()=>{
-
-      const filteredFiles = await filterFiles();
+      const c_folder = await db.folders.where({id:folderId}).first()
+      if(!c_folder)return
+      const filteredFiles = await filterFiles(c_folder);
       // if we have a fileList calculate the
       // number of pages for pagination
       if (filteredFiles) {
-        console.log(
-          "effect vvvvvvvvvvvvv",
-          filterFiles.length,
-          " ",
-          allFiles.length
-        );
+        // console.log(
+        //   "effect vvvvvvvvvvvvv",
+        //   filteredFiles.length,
+        //   " ",
+        //   allFiles.length
+        // );
         setAllFiles(filteredFiles);
         pagination(0, 0, filteredFiles);
       } else {
@@ -122,11 +135,11 @@ const ModelList = ({ folder }: Props) => {
         setAllFiles([]);
       }
     })();
-  }, [folder]);
+  }, [folderId]);
 
   return (
     <>
-      {folder && (
+      {folderId && (
         <Pagination
           paginate={pagination}
           currentPage={cursor}
@@ -136,7 +149,7 @@ const ModelList = ({ folder }: Props) => {
 
       <div className="model-list">
         {currentPageFiles?.map((file) => (
-          <StlCard key={file.imageUrl} fileUrl={file.imageUrl} />
+          <StlCard key={file.imageUrl} file={file} />
         ))}
       </div>
     </>
@@ -150,6 +163,8 @@ type PaginationProps = {
 };
 
 export default ModelList;
+
+
 
 const Pagination = ({ currentPage, paginate, totalPages }: PaginationProps) => {
   return (

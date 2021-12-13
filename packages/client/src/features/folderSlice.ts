@@ -58,6 +58,7 @@ const folderSlice = createSlice({
     builder
       .addCase(deleteFolderAsync.fulfilled, (state, action) => {
         // state.folders.filter((folder) => folder.id !== action.payload);
+        // if(state.)
         state.showDialog=false
       })
       .addCase(getKnownFoldersAsync.fulfilled,(state,action)=>{

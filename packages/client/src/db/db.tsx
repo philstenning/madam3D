@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-
+import {} from 'uuid'
 
 interface IFolderBase {
   id?: number; // created by db.
@@ -40,7 +40,7 @@ export interface IProject {
 }
 
 export interface IFile {
-  id?: number;
+  id: string;
   folderId: number;
   name: string;
   handle: FileSystemFileHandle;
@@ -71,7 +71,7 @@ export class AppDatabase extends Dexie {
     this.version(1).stores({
       folders: "++id, name, filePath,created",
       projects: "++id, name, created, updated",
-      files: "++id,name, folderId, type, size, created",
+      files: "id,name, folderId, type, size, created",
     });
     this.folders = this.table("folders");
     this.projects = this.table("projects");

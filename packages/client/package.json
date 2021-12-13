@@ -10,6 +10,7 @@
     "@react-three/drei": "^7.20.1",
     "@react-three/fiber": "^7.0.18",
     "@reduxjs/toolkit": "^1.6.2",
+    "@types/uuid": "^8.3.3",
     "@types/wicg-file-system-access": "^2020.9.4",
     "dexie": "^3.2.0-rc.3",
     "dexie-react-hooks": "^1.0.7",
@@ -20,7 +21,8 @@
     "react-router-dom": "^6.0.1",
     "react-use-measure": "^2.0.4",
     "three": "^0.134.0",
-    "three-stdlib": "^2.5.5"
+    "three-stdlib": "^2.5.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@iconify/json": "^1.1.425",

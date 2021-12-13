@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./folders.css";
 import { RiAddLine } from "react-icons/ri";
-import { db, IFolder, IFolderCreate } from "../../db/db";
-import { useLiveQuery } from "dexie-react-hooks";
+import { db, ICurrentFolder, IFolder, IFolderCreate } from "../../db/db";
+// import { useLiveQuery } from "dexie-react-hooks";
 
 import ModelList from "../modelList/ModelList";
 import FolderDetails from "./FolderDetails";
@@ -10,6 +10,7 @@ import FolderDetails from "./FolderDetails";
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import FolderListItem from "./FolderListItem";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setCurrentFolder } from "../../features/folderSlice";
 
 interface IProps{
   allFolders:IFolder[]|undefined
@@ -17,23 +18,24 @@ interface IProps{
 
 
 const Folders = ({allFolders}:IProps) => {
-  const [currentFolder, setCurrentFolder] = useState<IFolder | null>(null);
+  // const [currentFolder, setCurrentFolder] = useState<IFolder | null>(null);
   const storeCurrentFolder = useAppSelector(
     (state) => state.folderReducer.currentFolder
   );
+  const dispatch = useAppDispatch();
   // const allFolders = useLiveQuery(() =>
   //   db.folders.orderBy("created").reverse().toArray()
   // );
   console.log("storeCurrentFolder", storeCurrentFolder?.id);
 
 
-  useEffect(() => {
+  // useEffect(() => {
  
-    const res = allFolders?.find((d) => d.id === storeCurrentFolder?.id);
-    if (res) {
-      setCurrentFolder(res);
-    }
-  }, [storeCurrentFolder]);
+  //   const res = allFolders?.find((d) => d.id === storeCurrentFolder?.id);
+  //   if (res) {
+  //     setCurrentFolder(res);
+  //   }
+  // }, [storeCurrentFolder]);
 
   const openFolderPicker = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -45,6 +47,8 @@ const Folders = ({allFolders}:IProps) => {
       if (dirHandle.kind === "directory") {
         // create the Folder object to be saved in db.
         const createdAt = new Date();
+
+        // 
         const folder: IFolderCreate = {
           handle: dirHandle,
           created: createdAt,
@@ -53,10 +57,23 @@ const Folders = ({allFolders}:IProps) => {
         };
         try {
           // add folder to local database.
-          await db.folders.add(folder as IFolder);
-
+         const folderId= await db.folders.add(folder as IFolder);
+          //  dispatch()
           // this folder should set to the current folder
-          // dispatch({ type: "SET_CURRENT_FOLDER", payload: folder });
+          if(folderId>0){
+            // we need a object to create the currently selected folder.
+            const createCurrentFolder:ICurrentFolder = {
+              id: folderId,
+              name: dirHandle.name,
+              created: createdAt.toLocaleString(),
+              updated: createdAt.toLocaleString(),
+              
+          }
+          dispatch(setCurrentFolder(createCurrentFolder));
+
+          }
+
+          // dispatch({ type: "SET_CURRENT_FOLDER", payload: folderId });
         } catch (error) {
           console.log(`Error saving folder: ${error}`);
         }
@@ -96,7 +113,7 @@ const Folders = ({allFolders}:IProps) => {
 
       {/* display the results of the project selected. */}
       {/* <Outlet /> */}
-      {currentFolder && <ModelList folder={currentFolder} />}
+      {storeCurrentFolder && <ModelList folderId={storeCurrentFolder.id} />}
     </div>
   );
 };

@@ -7,7 +7,7 @@ canvas {
 }
 
 
-.stl-card {
+.card {
   width: 100%;
   min-height: calc(200px);
   height: 100%;
@@ -16,6 +16,22 @@ canvas {
   border: 1px var(--gray-60) solid;
   border-radius: var(--border-radius-s);
   overflow: hidden;
+  position: relative;
+}
+
+.card-overlay{
+position: absolute;
+display: flex;
+justify-content: center;
+flex-direction: column;
+bottom: 0;
+font-size: .7rem;
+padding: 0 0 .5rem 1rem;
+/* background: var(--gray-90); */
+width: 100%;
+}
+.card-filename::selection{
+  background: transparent;
 }
 
 
