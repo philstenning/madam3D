@@ -4,8 +4,8 @@ import { IFolder, IFile, FileTypes, db } from "../../db/db";
 import "./modelList.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCursor } from "../../features/folderSlice";
-import { v4 as uuidv4 } from "uuid";
-// import { useLiveQuery } from "dexie-react-hooks";
+import md5 from 'md5'
+
 
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 const ModelList = ({ folderId }: Props) => {
   // console.log('folderId',folderId);
   // if (folderId > 0) return <></>;
-  const [folder,setFolder] = useState<IFolder | null>(null)
+  // const [folder,setFolder] = useState<IFolder | null>(null)
 
   const cursor = useAppSelector((state) => state.folderReducer.cursor);
   const dispatch = useAppDispatch();
@@ -36,14 +36,14 @@ const ModelList = ({ folderId }: Props) => {
     // create a new array to hold the files from the for loop.
     let filteredFiles = [];
     for await (const entry of folder.handle.values()) {
-      //
+      // filter dir we only need stl at the moment
       if (entry.kind === "file" && entry.name.endsWith(".stl")) {
         const fileHandle = await folder.handle.getFileHandle(entry.name);
 
         const file = await fileHandle.getFile();
         const url = URL.createObjectURL(file);
         // console.log(entry.name, url);
-        const newFile: IFile = createFile(file, fileHandle, url);
+        const newFile: IFile = createFile(file, fileHandle, url,folder.id);
 
         filteredFiles.push(newFile);
       }
@@ -60,12 +60,16 @@ const ModelList = ({ folderId }: Props) => {
     function createFile(
       file: File,
       fileHandle: FileSystemFileHandle,
-      url: string
+      url: string,
+      folderId: number
     ): IFile {
+      // md5 hash the file name and folder id together,
+      // when we return to the folder it will 
+      //always give the same value uuid will not work.
       return {
-        id: uuidv4(),
+        id: md5(`${file.name}${folderId}`),
         created: new Date(file.lastModified),
-        folderId: 0,
+        folderId: folderId,
         handle: fileHandle,
         name: file.name,
         printed: false,
