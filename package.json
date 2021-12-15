@@ -7,6 +7,7 @@
     "preinstall": "npx only-allow pnpm",
     "test": "echo test",
     "clean": "pnpm -r exec -- rm -rf node_modules",
+    "clean-build": "pnpm -r exec -- rm -rf dist",
     "dev": "pnpm -r dev",
     "p-build": "pnpm -r build",
     "prepare": "husky install",
@@ -16,13 +17,12 @@
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "packages\\*"
+    "packages/*"
   ],
   "devDependencies": {
     "husky": "^7.0.2",
-    "turbo": "^1.0.9"
+    "turbo": "^1.0.11"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=16",
     "pnpm": ">=6"
@@ -35,7 +35,6 @@
           "^build"
         ],
         "outputs": [
-          ".next/**"
         ]
       },
       "test": {
