@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "build": "turbo run build ",
     "t-graph": "turbo run build --graph",
-    "deploy": "gh-pages -d packages/client/dist "
+    "deploy": "gh-pages -d packages/client/dist ",
+    "serve": "pnpm  serve --filter=client"
   },
   "author": "",
   "license": "ISC",
