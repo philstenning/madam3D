@@ -12,7 +12,8 @@
     "p-build": "pnpm -r build",
     "prepare": "husky install",
     "build": "turbo run build ",
-    "t-graph": "turbo run build --graph"
+    "t-graph": "turbo run build --graph",
+    "deploy": "gh-pages -d packages/client/dist "
   },
   "author": "",
   "license": "ISC",
@@ -34,8 +35,7 @@
         "dependsOn": [
           "^build"
         ],
-        "outputs": [
-        ]
+        "outputs": []
       },
       "test": {
         "dependsOn": [
@@ -50,5 +50,8 @@
         "cache": false
       }
     }
+  },
+  "dependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
