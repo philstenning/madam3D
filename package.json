@@ -4,9 +4,14 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "test": "echo test",
-    "dev": "echo run local projects",
-    "prepare": "husky install"
+    "clean": "pnpm -r exec -- rm -rf node_modules",
+    "dev": "pnpm -r dev",
+    "p-build": "pnpm -r build",
+    "prepare": "husky install",
+    "build": "turbo run build ",
+    "t-graph": "turbo run build --graph"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +19,37 @@
     "packages\\*"
   ],
   "devDependencies": {
-    "husky": "^7.0.2"
+    "husky": "^7.0.2",
+    "turbo": "^1.0.9"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=6"
+  },
+  "turbo": {
+    "baseBranch": "origin/main",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          ".next/**"
+        ]
+      },
+      "test": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": []
+      },
+      "lint": {
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  }
 }

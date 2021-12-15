@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db, IFolder } from "../../db/db";
+import { db, IFolder, IFolderCreate } from "../../db/db";
 import { useLiveQuery } from "dexie-react-hooks";
 /*
 https://web.dev/file-system-access/
@@ -27,7 +27,7 @@ const Home = () => {
       if (dirHandle.kind === "directory") {
         // create the Folder object to be saved in db.
         const createdAt = new Date();
-        const folder: IFolder = {
+        const folder: IFolderCreate = {
           handle: dirHandle,
           created: createdAt,
           updated: createdAt,
@@ -36,10 +36,10 @@ const Home = () => {
 
         try {
           // add folder to local database.
-          await db.folders.add(folder);
-
+         let res= await db.folders.add(folder as IFolder);
+   
           // this folder should set to the current folder
-          setSelectedFolder(folder);
+          setSelectedFolder(folder as IFolder);
         } catch (error) {
           console.log(`Error saving folder: ${error}`);
         }
