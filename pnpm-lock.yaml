@@ -21,6 +21,7 @@ importers:
       '@reduxjs/toolkit': ^1.6.2
       '@svgr/core': ^5.5.0
       '@types/md5': ^2.3.1
+      '@types/project-name-generator': ^2.1.1
       '@types/react': ^17.0.0
       '@types/react-dom': ^17.0.0
       '@types/react-router-dom': ^5.3.2
@@ -31,6 +32,7 @@ importers:
       dexie: ^3.2.0-rc.3
       dexie-react-hooks: ^1.0.7
       md5: ^2.3.0
+      project-name-generator: ^2.1.9
       react: ^17.0.0
       react-dom: ^17.0.0
       react-icons: ^4.3.1
@@ -54,6 +56,7 @@ importers:
       dexie: 3.2.0
       dexie-react-hooks: 1.0.7_2095d32efb90058d1d339005805576f6
       md5: 2.3.0
+      project-name-generator: 2.1.9
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-icons: 4.3.1_react@17.0.2
@@ -66,6 +69,7 @@ importers:
     devDependencies:
       '@iconify/json': 1.1.443
       '@svgr/core': 5.5.0
+      '@types/project-name-generator': 2.1.1
       '@types/react': 17.0.37
       '@types/react-dom': 17.0.11
       '@types/react-router-dom': 5.3.2
@@ -676,6 +680,10 @@ packages:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: true
 
+  /@types/project-name-generator/2.1.1:
+    resolution: {integrity: sha512-VLd5FEVTJs8hNa/WF4pZRcFvv0OAcIGeTyki4RDcaID0TUhTc5/Xe/btYM2XIHwVCb67ila8wUJYKJNa5dVABw==}
+    dev: true
+
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
 
@@ -1044,6 +1052,11 @@ packages:
 
   /commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+    dev: false
+
+  /commander/6.2.1:
+    resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==}
+    engines: {node: '>= 6'}
     dev: false
 
   /commondir/1.0.1:
@@ -2627,6 +2640,14 @@ packages:
 
   /potpack/1.0.2:
     resolution: {integrity: sha512-choctRBIV9EMT9WGAZHn3V7t0Z2pMQyl0EZE6pFc/6ml3ssw7Dlf/oAOvFwjm1HVsqfQN8GfeFyJ+d8tRzqueQ==}
+    dev: false
+
+  /project-name-generator/2.1.9:
+    resolution: {integrity: sha512-QmLHqz2C4VHmAyDEAFlVfnuWAHr4vwZhK2bbm4IrwuHNzNKOdG9b4U+NmQbsm1uOoV4kGWv7+FVLsu7Bb/ieYQ==}
+    hasBin: true
+    dependencies:
+      commander: 6.2.1
+      lodash: 4.17.21
     dev: false
 
   /promise.allsettled/1.0.5:

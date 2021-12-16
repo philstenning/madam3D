@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import StlCard from "../stlCard/StlCard";
-import { IFolder, IFile, FileTypes, db } from "../../db/db";
+import { IFolder, IFile, FileTypes, db } from "../../db";
 import "./modelList.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCursor } from "../../features/folderSlice";
@@ -9,22 +9,14 @@ import md5 from 'md5'
 
 
 type Props = {
-  folderId: number;
+  folderId: string;
 };
-
 const ModelList = ({ folderId }: Props) => {
-  // console.log('folderId',folderId);
-  // if (folderId > 0) return <></>;
-  // const [folder,setFolder] = useState<IFolder | null>(null)
 
   const cursor = useAppSelector((state) => state.folderReducer.cursor);
   const dispatch = useAppDispatch();
   const [allFiles, setAllFiles] = useState<IFile[]>([]);
   const [currentPageFiles, setCurrentPageFiles] = useState<IFile[]>([]);
-  // const folder = useLiveQuery(() =>
-  //   db.folders.where({id:folderId}).first()
-  // );
-
  
   const [limit, setLimit] = useState(4);
 
@@ -61,7 +53,7 @@ const ModelList = ({ folderId }: Props) => {
       file: File,
       fileHandle: FileSystemFileHandle,
       url: string,
-      folderId: number
+      folderId: string
     ): IFile {
       // md5 hash the file name and folder id together,
       // when we return to the folder it will 
@@ -113,6 +105,7 @@ const ModelList = ({ folderId }: Props) => {
     setCurrentPageFiles(pageFiles);
     dispatch(setCursor(page));
   };
+  
   console.log("page modelList cursor", cursor);
 
   useEffect(() => {

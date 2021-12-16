@@ -1,10 +1,10 @@
 import { Link, Route, Routes, NavLink } from "react-router-dom";
-import Help from "../help/Help";
-import Folders from "../folders/Folders";
-import Projects from "../projects/Projects";
-import Project from "../projects/Project";
-import Settings from "../settings/Settings";
-import Home from "../home/Home";
+import Help from "../../pages/help/Help";
+import Folders from "../../pages/folders/Folders";
+import Projects from "../../pages/projects/Projects";
+import Project from "../../pages/projects/Project";
+import Settings from "../../pages/settings/Settings";
+import Home from "../../pages/home/Home";
 import IconFolder from "~icons/fluent/folder-16-regular";
 import IconProjects from "~icons/fluent/briefcase-24-regular";
 import IconHome from "~icons/fluent/home-16-regular";

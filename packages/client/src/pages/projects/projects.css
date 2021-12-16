@@ -1,0 +1,139 @@
+.page {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  grid-template-rows: 5rem 1fr;
+  height: calc(100vh - 4.5rem);
+  border-radius: var(--border-radius-m);
+}
+.aside__header {
+  padding: 1rem;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.aside{
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  margin: 3px 0;
+  height: calc(100vh - 9.5rem);
+  /* height: calc(100vh - 14rem); */
+ 
+}
+
+/* .aside--small{
+   height: calc(100vh - 14rem);
+} */
+
+.aside__details{
+  margin: 0 1rem;
+  padding: 1rem ;
+  background: var(--gray-20);
+}
+/* 
+Project List
+*/
+
+.aside__list {
+  
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  height: 100%;
+  /* height: calc(100vh - 15rem); */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.project__list{
+  gap:1rem;
+}
+
+ .aside__list  .active {
+  border: solid 4px var(--pink-30);
+}
+
+/* 
+     Project Card
+*/
+.project-card {
+  position: relative;
+  font-size: var(--font-size-s);
+  border-radius: var(--border-radius-m);
+  padding: 0;
+  margin-top: 2px;
+  width: 100%;
+  /* min-height: 6rem; */
+  border: solid 4px var(--gray-15);
+  background: var(--gray-20);
+  /* cursor: pointer; */
+  transition: all 0.6s ease-in-out;
+  color: var(--gray-80);
+}
+.project-card:hover {
+  /* color: var(--gray-20); */
+  background: var(--gray-20);
+  border: solid 4px var(--pink-40);
+  transform: translate(-0rem, -3px);
+}
+
+/*  This overlay contains the bin and edit buttons.
+
+    We are using the event bubbling to capture the
+    hover state on the card below, it changes the color
+    of the text so we can see it,
+    and then again when we hover over the
+    overlay buttons once more. Order is important here.
+*/
+.project-card__overlay {
+  position: absolute;
+  /* border: solid 2px sienna; */
+  right: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  color: var(--gray-20);
+  transition: color 0.5s ease-in-out;
+}
+
+.project-card__overlay:hover {
+  color: var(--gray-70);
+}
+
+/*  This is the bin and edit buttons on the Card. */
+.project-card__action {
+  margin: 0.2rem 0.2rem;
+  padding: 0.4rem 0.2rem 0.2rem 0.2rem;
+  background: inherit;
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  color: inherit;
+  border: none;
+  height: fit-content;
+  border-radius: var(--border-radius-xs);
+}
+.project-card__action:hover {
+  background-color: var(--gray-50);
+  color: var(--pink-40);
+}
+
+.project-card__header {
+  padding: 1rem;
+  font-size: var(--font-size-m);
+  text-transform: capitalize;
+}
+.project-card__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 1rem 1rem 1rem 1rem;
+}
+.project-card__list-item {
+  list-style: none;
+  /* padding-top: .2em; */
+}

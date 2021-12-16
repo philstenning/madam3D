@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import {  db, ICurrentFolder } from "../db/db";
+import {  db, ICurrentFolder } from "../db";
 
 interface IFolderState {
   currentFolder: ICurrentFolder | null;
@@ -26,7 +26,7 @@ const getKnownFoldersAsync = createAsyncThunk(
 
 const deleteFolderAsync = createAsyncThunk(
   "deleteFolderAsync",
-  async (folderId: number) => {
+  async (folderId: string) => {
     try {
       await db.folders.delete(folderId);
       return folderId;
