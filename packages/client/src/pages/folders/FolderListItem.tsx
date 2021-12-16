@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useContext, useState } from "react";
-import { IFolder, ICurrentFolder } from "../../db/db";
+import { IFolder, ICurrentFolder } from "../../db";
 import { haveFolderPermission } from "../../utils/fileSystem";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";

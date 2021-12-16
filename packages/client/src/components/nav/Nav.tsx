@@ -11,14 +11,16 @@ import IconHome from "~icons/fluent/home-16-regular";
 import IconSettings from "~icons/fluent/settings-24-regular";
 import IconQuestion from "~icons/fluent/question-circle-24-regular";
 import { useLiveQuery } from "dexie-react-hooks";
-import {db} from '../../db/db'
+import { db } from "../../db";
 import { useAppSelector } from "../../app/hooks";
 import "./nav.css";
 const Nav = () => {
-    const allFolders = useLiveQuery(() =>
-      db.folders.orderBy("created").reverse().toArray()
-    );
-    const currentFolderId = useAppSelector( state => state.folderReducer.currentFolder?.id)
+  const allFolders = useLiveQuery(() =>
+    db.folders.orderBy("created").reverse().toArray()
+  );
+  const currentFolderId = useAppSelector(
+    (state) => state.folderReducer.currentFolder?.id
+  );
   return (
     <>
       <nav className="menu">
@@ -30,7 +32,10 @@ const Nav = () => {
             </NavLink>
           </li>
           <li className="menu__item">
-            <NavLink className="menu__link" to={currentFolderId?`/folders/${currentFolderId}`:'/folders'}>
+            <NavLink
+              className="menu__link"
+              to={currentFolderId ? `/folders/${currentFolderId}` : "/folders"}
+            >
               <IconFolder className="menu__svg" />
               Folders
             </NavLink>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IFile } from "../../db/db";
+import { IFile } from "../../db";
 import StlViewer from "../stlViewer/StlViewer";
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";

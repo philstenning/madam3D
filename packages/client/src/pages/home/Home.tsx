@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db, IFolder, IFolderCreate } from "../../db/db";
+import { db, IFolder, IFolderCreate } from "../../db";
 import { useLiveQuery } from "dexie-react-hooks";
 /*
 https://web.dev/file-system-access/
@@ -36,8 +36,8 @@ const Home = () => {
 
         try {
           // add folder to local database.
-         let res= await db.folders.add(folder as IFolder);
-   
+          let res = await db.folders.add(folder as IFolder);
+
           // this folder should set to the current folder
           setSelectedFolder(folder as IFolder);
         } catch (error) {
@@ -55,7 +55,6 @@ const Home = () => {
   const removeAllFolders = async () => {
     //TODO remove All folder from db.
   };
-
 
   return (
     <div>

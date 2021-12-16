@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IFolder } from "../../db/db";
+import { IFolder } from "../../db";
 import { getFileEntries } from "../../utils/fileSystem";
 type Props = {
   selectedFolder: IFolder;

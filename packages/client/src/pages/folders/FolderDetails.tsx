@@ -1,5 +1,5 @@
 // import React from "react";
-import { ICurrentFolder } from "../../db/db";
+import { ICurrentFolder } from "../../db";
 import { useAppDispatch } from "../../app/hooks";
 import { showDeleteFolderDialog } from "../../features/folderSlice";
 interface IFolderDetailsProps {

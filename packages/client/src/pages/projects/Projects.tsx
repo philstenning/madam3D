@@ -1,5 +1,5 @@
 // import React from "react";
-import { db, createProject } from "../../db/db";
+import { db, createProject } from "../../db";
 import { useLiveQuery } from "dexie-react-hooks";
 import "./projects.css";
 import { RiAddLine } from "react-icons/ri";
@@ -24,13 +24,13 @@ const Projects = () => {
       {/* this is section with the project list */}
       <div className="aside">
         <div className="aside__list project__list">
-        {projects &&
-          projects.map((project) => (
-            <ProjectCard project={project} key={project.id} />
-          ))}
+          {projects &&
+            projects.map((project) => (
+              <ProjectCard project={project} key={project.id} />
+            ))}
+        </div>
       </div>
-      </div>
-      
+
       <div>
         {/* TODO:  display the results of the project selected. */}
         <Outlet />

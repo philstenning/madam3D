@@ -1,10 +1,10 @@
 import { createCtx } from "./contextFactory";
-import { IFolder, db } from "../db/db";
+import { IFolder, db } from "../db";
 
 // interface
 // const placeholder: IFolder = {}
 const initialState = {
-  selectedFolder:  null,
+  selectedFolder: null,
   showDialog: true,
   folders: [] as IFolder[],
 };
@@ -16,7 +16,7 @@ type FolderPageState = {
 };
 
 type Action =
-  | { type: "SET_CURRENT_FOLDER"; payload: IFolder}
+  | { type: "SET_CURRENT_FOLDER"; payload: IFolder }
   | { type: "SHOW_DIALOG" }
   | { type: "HIDE_DIALOG" }
   | { type: "SET_FOLDERS"; payload: IFolder[] }
@@ -31,9 +31,9 @@ type Action =
 function reducer(state: FolderPageState, action: Action): FolderPageState {
   switch (action.type) {
     case "SET_CURRENT_FOLDER":
-    //   if (!action.payload) {
-    //     return { ...state, selectedFolder: null };
-    //   }
+      //   if (!action.payload) {
+      //     return { ...state, selectedFolder: null };
+      //   }
       return {
         ...state,
         selectedFolder: action.payload,
