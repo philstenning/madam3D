@@ -5,7 +5,7 @@ import Icons from "unplugin-icons/vite";
 export default defineConfig(({ command, mode }) => {
   if(mode === "production") {
     return{
-      base: "https://philstenning.github.io/madam3D/",
+      base: "/madam3D/",
       plugins: [react(), Icons({ compiler: "jsx", jsx: "react" })],
 
     }
