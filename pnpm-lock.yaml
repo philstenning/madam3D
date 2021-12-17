@@ -31,6 +31,7 @@ importers:
       '@vitejs/plugin-react': ^1.0.0
       dexie: ^3.2.0-rc.3
       dexie-react-hooks: ^1.0.7
+      dotenv: ^10.0.0
       md5: ^2.3.0
       project-name-generator: ^2.1.9
       react: ^17.0.0
@@ -55,6 +56,7 @@ importers:
       '@types/wicg-file-system-access': 2020.9.4
       dexie: 3.2.0
       dexie-react-hooks: 1.0.7_2095d32efb90058d1d339005805576f6
+      dotenv: 10.0.0
       md5: 2.3.0
       project-name-generator: 2.1.9
       react: 17.0.2
@@ -1189,6 +1191,11 @@ packages:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
     engines: {node: '>=0.3.1'}
     dev: true
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
+    dev: false
 
   /draco3d/1.5.0:
     resolution: {integrity: sha512-8ESjH7o5xju1nfSvcS2A9vIbwSRQ3yYY0Yv7SFhNszsq4FlN4LGZuxNc3YfAPcg0AddaK0dE5AES3w1JoGeViA==}
