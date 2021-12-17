@@ -14,7 +14,7 @@
   justify-content: flex-start;
 }
 
-.aside{
+.aside {
   grid-row: 2 / 3;
   grid-column: 1 / 2;
   display: flex;
@@ -22,16 +22,15 @@
   margin: 3px 0;
   height: calc(100vh - 9.5rem);
   /* height: calc(100vh - 14rem); */
- 
 }
 
 /* .aside--small{
    height: calc(100vh - 14rem);
 } */
 
-.aside__details{
+.aside__details {
   margin: 0 1rem;
-  padding: 1rem ;
+  padding: 1rem;
   background: var(--gray-20);
 }
 /* 
@@ -39,7 +38,6 @@ Project List
 */
 
 .aside__list {
-  
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
@@ -48,13 +46,11 @@ Project List
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.project__list{
-  gap:1rem;
+.project__list {
+  gap: 1rem;
 }
 
- .aside__list  .active {
-  border: solid 4px var(--pink-30);
-}
+
 
 /* 
      Project Card

@@ -100,6 +100,9 @@ body {
   --font-size-xl: 1.5rem;
   --font-size-xxl: 1.86rem;
 
+  --active-state-bar-width: 4px;
+  --active-state-bar-height: 1.5rem;
+ 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
