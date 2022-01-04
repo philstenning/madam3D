@@ -1,21 +1,32 @@
 import React from "react";
-import "./switch.css";
+import "./toggle.css";
 
 interface ToggleProps {
   onText?: string;
   offText?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  checked: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isChecked?: boolean;
   disabled?: boolean;
-  label?: string;
+  label: string;
 }
-const Toggle = () => {
+const Toggle = ({
+  label = "label",
+  disabled = false,
+  isChecked = false,
+}: ToggleProps) => {
+  const isEnabled = disabled ? "toggle__slider--disabled" : "";
+  const [checked, setChecked] = React.useState(isChecked);
   return (
-    //   <div className="switch" >
-    <label className="switch__wrapper">
-      <input className="switch__input" type="checkbox" />
-      <span className="switch__slider">label for the switch</span>
-      {/* <div className="switch__track"></div> */}
+    <label className="toggle">
+      <span className={`toggle__text ${disabled?'toggle__text--disabled':''}`}>{label}</span>
+      <input
+        className={`toggle__input`}
+        type="checkbox"
+        defaultChecked={checked}
+        onChange={() => setChecked(!checked)}
+        disabled={disabled}
+      />
+      <span className={`toggle__slider ${isEnabled}`} />
     </label>
   );
 };
