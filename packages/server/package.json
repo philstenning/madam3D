@@ -6,15 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
     "dev": "ts-node-dev ./src/index.ts",
-    "build":"tsc"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "fastify": "^3.22.0",
     "fastify-cors": "^6.0.2",
-    "graphql": "^15.6.1",
-    "mercurius": "^8.6.0"
+    "graphql": "^16.2.0",
+    "mercurius": "^9.1.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.1",
