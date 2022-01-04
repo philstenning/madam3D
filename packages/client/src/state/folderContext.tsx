@@ -1,8 +1,6 @@
 import { createCtx } from "./contextFactory";
 import { IFolder, db } from "../db";
 
-// interface
-// const placeholder: IFolder = {}
 const initialState = {
   selectedFolder: null,
   showDialog: true,

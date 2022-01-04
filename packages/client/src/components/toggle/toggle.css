@@ -1,0 +1,41 @@
+.toggle{
+    /* padding:1rem; */
+    box-sizing: border-box;
+    position: relative;
+    /* border: solid 1px greenyellow; */
+    width: 90px;
+    height: 25px;
+
+}
+
+.toggle__label{
+/* position: absolute; */
+}
+
+.toggle__checkbox{
+    display: none; 
+    z-index: -1;
+}
+
+.toggle__slider{
+    position:absolute;
+    cursor: pointer;
+    inset: 0;
+    background: var(--gray-90);
+    border-radius: 25px;
+}
+
+.toggle__slider::before{
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: var(--pink-40);
+    width: 43%;
+    height: 15px;
+    border-radius:15px;
+    transition: left 250ms ease-in;
+}
+input:checked + .toggle__slider::before{
+  left: 45px;
+}
