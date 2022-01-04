@@ -9,16 +9,50 @@ export async function filterFolderFiles(folder: IFolder) {
   for await (const entry of folder.handle.values()) {
     // filter dir we only need stl at the moment
     if (entry.kind === "file" && entry.name.endsWith(".stl")) {
-      const fileHandle = await folder.handle.getFileHandle(entry.name);
-      const file = await fileHandle.getFile();
-      const url = URL.createObjectURL(file);
-      // console.log(entry.name, url);
-      const newFile: IFile = createFile(file, fileHandle, url, folder.id);
+      const newFile: IFile = await _createNewFileEntry(folder, entry);
 
       filteredFiles.push(newFile);
     }
   }
   return filteredFiles;
+}
+
+export async function ff2(folderHandle: FileSystemDirectoryHandle,path:string) {
+  // create a new array to hold the files from the for loop.
+  let filteredFiles: string[] = [];
+  for await (const entry of folderHandle.values()) {
+    // filter dir we only need stl at the moment
+   if (entry.kind === "directory") {
+      try {
+        // const folder = await folderHandle.getDirectory(entry.name);
+        path = path + "/" + entry.name;
+        const files = await ff2(entry,path);
+        if(files.length > 0) {
+          console.log(`${path}/${entry.name}`);
+          console.log(`count: ${files.length}`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }else  if (entry.kind === "file" && entry.name.endsWith(".stl")) {
+      console.log(`\t ${path}/${entry.name}`);
+
+      filteredFiles.push(entry.name);
+    } 
+  }
+  return filteredFiles;
+}
+
+async function _createNewFileEntry(
+  folder: IFolder,
+  entry: FileSystemFileHandle
+) {
+  const fileHandle = await folder.handle.getFileHandle(entry.name);
+  const file = await fileHandle.getFile();
+  const url = URL.createObjectURL(file);
+  // console.log(entry.name, url);
+  const newFile: IFile = createFile(file, fileHandle, url, folder.id);
+  return newFile;
 }
 
 export function createFile(
