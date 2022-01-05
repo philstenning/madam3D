@@ -1,3 +1,3 @@
 export  *  from './types'
 export  *  from './db'
-export  *  from './addFolderToDatabase'
+export  *  from './folders'

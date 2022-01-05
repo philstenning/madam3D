@@ -9,8 +9,15 @@ import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import FolderListItem from "./FolderListItem";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
-import { addFolderToDatabase,createCurrentFolder, IFolder} from "../../db";
-import { selectFolderOnUsersFileSystem } from "../../utils";
+import {
+  addFolderToDb,
+  createSerializableCurrentFolder,
+  IFolder,
+} from "../../db";
+import {
+  selectDirectoryOnUsersFileSystem,
+  recursivelyScanLocalDrive,
+} from "../../utils";
 
 interface IProps {
   allFolders: IFolder[] | undefined;
@@ -21,20 +28,26 @@ const Folders = ({ allFolders }: IProps) => {
     (state) => state.folderReducer.currentFolder
   );
   const dispatch = useAppDispatch();
-  console.log("storeCurrentFolder", storeCurrentFolder?.id);
+  // console.log("storeCurrentFolder", storeCurrentFolder?.id);
 
   async function selectFolder(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.preventDefault();
-    const folder = await selectFolderOnUsersFileSystem()
-    if(folder){
-    const result = await addFolderToDatabase(folder)
-     dispatch(setCurrentFolder(createCurrentFolder(result.object)));
-    }
+    const folder = await selectDirectoryOnUsersFileSystem();
 
+    if (folder) {
+      const rootFolder = await recursivelyScanLocalDrive(
+        folder.handle,
+        folder.name,
+        true
+      );
+      if (rootFolder) {
+        dispatch(setCurrentFolder(createSerializableCurrentFolder(rootFolder.object)));
+      }
+    }
   }
-  
+
   return (
     <div className="page">
       {/* Dialog */}

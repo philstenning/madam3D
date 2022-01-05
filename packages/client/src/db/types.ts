@@ -3,6 +3,10 @@ interface IFolderBase {
   name: string;
   created: Date;
   updated: Date;
+  isRoot: boolean;
+  rootId: string;
+  // the number of parts or files it  has in it.
+  parts: number;
   // optional
   filePath?: string;
 }

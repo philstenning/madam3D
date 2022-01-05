@@ -25,6 +25,14 @@ export function createDatabase() {
   db = new AppDatabase();
 }
 
+/**
+ *
+ * @param name
+ * @param fileIds
+ * @returns Promise<project:IProject>
+ * @description Use to create a new project object that has been saved
+ * to the db already.
+ */
 export const createProject = async (
   name: string = "",
   fileIds: string[] = []
@@ -46,7 +54,7 @@ export const createProject = async (
     await db.projects.add(project);
     return project;
   } catch (err) {
-    console.error('error adding project to database: ', err)
+    console.error("error adding project to database: ", err);
   }
 
   // we don't want blank projects names
@@ -54,3 +62,7 @@ export const createProject = async (
 
   return project;
 };
+
+export async function updateProject(id: string) {
+  throw new Error("not yet implemented");
+}

@@ -1,12 +1,20 @@
+import {
+  IFolder,
+  IDatabaseRecordAddResult as IDbAddResult,
+  db,
+  ICurrentFolder,
+} from ".";
 
-import { IFolder, IDatabaseRecordAddResult,db ,ICurrentFolder} from "../db";
-
-export async function addFolderToDatabase(folder: IFolder) {
-  const status: IDatabaseRecordAddResult<IFolder> = {
-    result: false,
-    message: "",
-    object: folder || null,
-  };
+/**
+ * 
+ * add the folder to the db and returns a status
+ * message, it also checks if the entry already
+ * exists in the db.
+ * @param folder 
+ * @return 
+ */
+export async function addFolderToDb(folder: IFolder) {
+  const status: IDbAddResult<IFolder> = createDbAddResult(folder);
   if (!folder) {
     status.message = "No folder selected";
     return status;
@@ -41,9 +49,28 @@ export async function addFolderToDatabase(folder: IFolder) {
     return status;
   }
 }
-
-
-export function createCurrentFolder(folder: IFolder) {
+/**
+ * 
+ * @param folder 
+ * @param result 
+ * @param message 
+ * @returns 
+ */
+export function createDbAddResult(
+  folder: IFolder,
+  result: boolean = false,
+  message: string = ""
+): IDbAddResult<IFolder> {
+  return {
+    result,
+    message,
+    object: folder || null,
+  };
+}
+/**
+ *  returns a serializable current folder for the redux store.
+ */
+export function createSerializableCurrentFolder(folder: IFolder) {
   const currentFolder: ICurrentFolder = {
     id: folder.id,
     name: folder.name,

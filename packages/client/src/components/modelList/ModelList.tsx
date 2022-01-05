@@ -4,7 +4,7 @@ import { IFolder, IFile, FileTypes, db } from "../../db";
 import "./modelList.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCursor } from "../../features/folderSlice";
-import { filterFolderFiles, ff2 } from "../../utils";
+import { filterFolderFiles, recursivelyScanLocalDrive } from "../../utils";
 
 import Pagination, { paginate, sliceFiles } from "../pagination/Pagination";
 
@@ -36,8 +36,8 @@ const ModelList = ({ folderId }: Props) => {
       const _current_folder = await db.folders.where({ id: folderId }).first();
       if (!_current_folder) return;
       const _filteredFiles = await filterFolderFiles(_current_folder);
-      console.clear();
-      const _files = await ff2(_current_folder.handle, "");
+      // console.clear();
+     
       // if we have a fileList calculate the
       // number of pages for pagination
       if (_filteredFiles) {
