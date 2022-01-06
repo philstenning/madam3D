@@ -4,14 +4,15 @@ import {  db, ICurrentFolder } from "../db";
 interface IFolderState {
   currentFolder: ICurrentFolder | null;
   showDialog: boolean;
-  cursor:number
-  // folders: IFolder[];
+  cursor: number;
+  currentRootFolder: ICurrentFolder | null;
 }
 
 const initialState: IFolderState = {
   currentFolder: null,
   showDialog: false,
-  cursor:0
+  cursor:0,
+  currentRootFolder:null
 };
 const getKnownFoldersAsync = createAsyncThunk(
   "getKnownFoldersAsync",
@@ -49,6 +50,10 @@ const folderSlice = createSlice({
     setCurrentFolder(state, action: PayloadAction<ICurrentFolder>) {
       state.currentFolder = action.payload;
     },
+    setCurrentRootFolder(state, action: PayloadAction<ICurrentFolder | null>) {
+      state.currentRootFolder = action.payload;
+    },
+    
     deleteFolder(state) {},
     setCursor(state,action:PayloadAction<number>){
       state.cursor = action.payload
@@ -72,6 +77,7 @@ export const {
   hideDeleteFolderDialog,
   showDeleteFolderDialog,
   setCurrentFolder,
+  setCurrentRootFolder,
   setCursor,
 } = folderSlice.actions;
 

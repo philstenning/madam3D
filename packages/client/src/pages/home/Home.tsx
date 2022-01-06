@@ -7,8 +7,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 https://web.dev/file-system-access/
 https://web.dev/browser-fs-access/
 */
-// import { loadData, getFileEntries } from "../../utils/fileSystem";
-import DirFileViewer from "../../components/dirFileViewer/DirFileViewer";
+
 const Home = () => {
   const removeFolder = async () => {
     //TODO remove selected folder from db.

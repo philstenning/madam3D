@@ -206,3 +206,7 @@ li {
 .btn:active {
   background: var(--pink-40);
 }
+main {
+  background: var(--gray-15);
+  border-radius: var(--border-radius-m) 0 0 0;
+}
