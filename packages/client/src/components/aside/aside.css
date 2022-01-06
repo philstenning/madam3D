@@ -19,6 +19,7 @@
   grid-column: 1 / 2;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin: 3px 0;
   height: calc(100vh - 9.5rem);
 }

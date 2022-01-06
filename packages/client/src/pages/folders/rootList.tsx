@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { IFolder, ICurrentFolder } from "../../db";
+import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 interface IProps {
   folders: IFolder[] | undefined;
 }
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setCurrentRootFolder } from "../../features/folderSlice";
+import {
+  setCurrentRootFolder,
+  setCurrentFolder,
+} from "../../features/folderSlice";
 import { haveFolderPermission } from "../../utils/fileSystem";
 import FolderListItem from "./FolderListItem";
 
@@ -20,30 +23,32 @@ const RootList = ({ folders }: IProps) => {
     folder: IFolder,
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
   ) => {
-      e.stopPropagation()
-      e.preventDefault()
-    // if we don't have permission to read the folder,
-    // we need to show the permission dialog and get permission.
-    const permState = await haveFolderPermission(folder.handle);
-    // if we have permission, we can set the folder as the current folder.
+    // e.stopPropagation();
+    // e.preventDefault();
+
+
+    // if folder is already active then close it and set to null
     if (folder.id === storeCurrentRootFolder?.id) {
-      dispatch(setCurrentRootFolder(null));
-      return
+        dispatch(setCurrentRootFolder(null));
+        dispatch(setCurrentFolder(null));
+        return;
     }
 
-    if (permState) {
-      const currentFolder: ICurrentFolder = {
-        created: folder.created.toDateString(),
-        id: folder.id,
-        name: folder.name,
-        updated: folder.updated.toDateString(),
-        filePath: folder.filePath,
-      };
+    // if we don't have permission to read the folder,
+    // we need to show the permission dialog and get permission.
+    const folderHasPermission = await haveFolderPermission(folder.handle);
+    
+    
+    // if we have permission, we can set the folder as the current root folder.
+    if (folderHasPermission) {
+      const currentFolder = createSerializableCurrentFolder(folder);
       dispatch(setCurrentRootFolder(currentFolder));
+      dispatch(setCurrentFolder(currentFolder));
     }
   };
+
   const subListIsActive = (folder: IFolder) => {
-   return storeCurrentRootFolder?.id === folder.rootId
+    return storeCurrentRootFolder?.id === folder.rootId
       ? "folder-sub-list--active"
       : "";
   };
@@ -53,13 +58,19 @@ const RootList = ({ folders }: IProps) => {
         {folders
           ?.filter((folder) => folder.isRoot)
           .map((folder) => (
-            <li className="folder__item" onClick={(e) => handleClick(folder ,e)}>
+            <li
+              className="folder__item"
+              onClick={(e) => handleClick(folder, e)}
+            >
               <NavLink className={`folder__link `} to={`/folders/${folder.id}`}>
                 {folder.name}{" "}
-                <span className="badge badge__link">
+                <div className="badge">   
+
+                <span className="badge__link">
                   {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
-                  models
+                  <span className="badge__text--small">models</span>
                 </span>
+                </div>
               </NavLink>
               <ul
                 className={`folder-sub-list ${

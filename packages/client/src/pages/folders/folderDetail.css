@@ -1,0 +1,15 @@
+.fd {
+  margin: 0 1rem;
+  padding: 1rem;
+  background: var(--gray-20);
+  border-radius: var(--border-radius-s);
+}
+
+.fd__list{
+    display: flex;
+    flex-direction: column;
+    gap:.3rem;
+    margin:0;
+    padding:.5rem 0;
+    font-size: var(--font-size-s);
+}

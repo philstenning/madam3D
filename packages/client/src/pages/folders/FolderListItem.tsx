@@ -41,13 +41,15 @@ const FolderListItem = ({ folder }: Props) => {
   };
 
   return (
-    <li className="folder__item" onClick={e=>handleClick(e)}>
+    <li
+      className="folder__item folder__sub-item "
+      onClick={(e) => handleClick(e)}
+    >
       <NavLink
-        className={`folder__link folder__item--${permission}`}
+        className={`folder__link  folder__item--${permission} folder__sub-link`}
         to={`/folders/${folder.id}`}
       >
-        {folder.name}{" "}
-        <span className="badge badge__link">{folder.parts}</span>
+        {folder.name} <span className="badge badge__link">{folder.parts}</span>
       </NavLink>
     </li>
   );
