@@ -67,7 +67,7 @@ const Folders = ({ allFolders }: IProps) => {
               <FolderListItem key={folder.id} folder={folder} />
             ))}
         </ul>
-        <FolderDetails folder={storeCurrentFolder} />
+        {/* <FolderDetails folder={storeCurrentFolder} /> */}
       </div>
 
       {/* display the results of the project selected. */}

@@ -45,7 +45,8 @@ const FolderListItem = ({ folder }: Props) => {
         className={`folder__link folder__item--${permission}`}
         to={`/folders/${folder.id}`}
       >
-        {folder.name}
+        {folder.name}{" "}
+        <span className="badge badge__link">{folder.parts}</span>
       </NavLink>
     </li>
   );
