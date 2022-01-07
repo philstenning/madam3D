@@ -74,9 +74,9 @@ background: var(--gray-20);
   font-weight: 500;margin-left: .5rem;
 }
 
-.badge__link {
-  /*  */
-}
+/* .badge__link {
+ 
+} */
 .badge__text--small {
 font-size: var(--font-size-xs);
 }
@@ -94,6 +94,7 @@ font-size: var(--font-size-xs);
 }
 .folder-sub-list {
   display: none;
+  padding: .5rem 0 0 1rem;
 }
 .folder-sub-list--active {
   display: flex;

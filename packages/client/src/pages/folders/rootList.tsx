@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 interface IProps {
   folders: IFolder[] | undefined;
 }
@@ -26,19 +27,17 @@ const RootList = ({ folders }: IProps) => {
     // e.stopPropagation();
     // e.preventDefault();
 
-
     // if folder is already active then close it and set to null
     if (folder.id === storeCurrentRootFolder?.id) {
-        dispatch(setCurrentRootFolder(null));
-        dispatch(setCurrentFolder(null));
-        return;
+      dispatch(setCurrentRootFolder(null));
+      dispatch(setCurrentFolder(null));
+      return;
     }
 
     // if we don't have permission to read the folder,
     // we need to show the permission dialog and get permission.
     const folderHasPermission = await haveFolderPermission(folder.handle);
-    
-    
+
     // if we have permission, we can set the folder as the current root folder.
     if (folderHasPermission) {
       const currentFolder = createSerializableCurrentFolder(folder);
@@ -64,27 +63,29 @@ const RootList = ({ folders }: IProps) => {
             >
               <NavLink className={`folder__link `} to={`/folders/${folder.id}`}>
                 {folder.name}{" "}
-                <div className="badge">   
-
-                <span className="badge__link">
-                  {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
-                  <span className="badge__text--small">models</span>
-                </span>
+                <div className="badge">
+                  <span className="badge__link">
+                    {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
+                    <span className="badge__text--small">models</span>
+                  </span>
                 </div>
               </NavLink>
-              <ul
-                className={`folder-sub-list ${
-                  storeCurrentRootFolder?.id === folder.rootId
-                    ? "folder-sub-list--active"
-                    : ""
-                }`}
-              >
-                {folders
-                  .filter((f) => f.rootId === folder.rootId)
-                  .map((f) => (
-                    <FolderListItem key={folder.id} folder={f} />
-                  ))}
-              </ul>
+              <AnimatePresence>
+              { subListIsActive(folder) && (<motion.ul
+                  style={{ overflow: "hidden", display:'flex',gap:'0.5rem', flexDirection:'column' }}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{type:'tween' }}
+                  className={`folder-sub-list`}
+                >
+                  {folders
+                    .filter((f) => f.rootId === folder.rootId)
+                    .map((f) => (
+                      <FolderListItem key={folder.id} folder={f} />
+                    ))}
+                </motion.ul>)}
+              </AnimatePresence>
             </li>
           ))}
       </ul>
@@ -93,3 +94,10 @@ const RootList = ({ folders }: IProps) => {
 };
 
 export default RootList;
+
+
+//  className={`folder-sub-list ${
+//                     storeCurrentRootFolder?.id === folder.rootId
+//                       ? "folder-sub-list--active"
+//                       : ""
+//                   }`}
