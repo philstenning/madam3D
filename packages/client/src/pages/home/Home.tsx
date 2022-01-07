@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { db, IFolder, IFolderCreate } from "../../db";
 import { useLiveQuery } from "dexie-react-hooks";
-
+import Accordion from '../../components/accordion/Accordion'
 // import {loadEnv} from 'vite'
 /*
 https://web.dev/file-system-access/
 https://web.dev/browser-fs-access/
 */
-// import { loadData, getFileEntries } from "../../utils/fileSystem";
-import DirFileViewer from "../../components/dirFileViewer/DirFileViewer";
+
 const Home = () => {
   const removeFolder = async () => {
     //TODO remove selected folder from db.
@@ -27,6 +26,7 @@ const Home = () => {
         <a href="https://caniuse.com/?search=file%20system%20access">Chrome
         and Edge &#62; 86 and the technical preview in Safari.</a> 
       </p>
+      <Accordion/>
     </div>
   );
 };

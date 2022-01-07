@@ -20,7 +20,8 @@ const FolderListItem = ({ folder }: Props) => {
     folder.handle.queryPermission().then((res) => setPermission(res));
   }, [folder]);
 
-  const handleClick = async () => {
+  const handleClick = async (e:React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    e.stopPropagation()
     // if we don't have permission to read the folder,
     // we need to show the permission dialog and get permission.
     const permState = await haveFolderPermission(folder.handle);
@@ -40,13 +41,15 @@ const FolderListItem = ({ folder }: Props) => {
   };
 
   return (
-    <li className="folder__item" onClick={handleClick}>
+    <li
+      className="folder__item folder__sub-item "
+      onClick={(e) => handleClick(e)}
+    >
       <NavLink
-        className={`folder__link folder__item--${permission}`}
+        className={`folder__link  folder__item--${permission} folder__sub-link`}
         to={`/folders/${folder.id}`}
       >
-        {folder.name}{" "}
-        <span className="badge badge__link">{folder.parts}</span>
+        {folder.name} <span className="badge badge__link">{folder.parts}</span>
       </NavLink>
     </li>
   );

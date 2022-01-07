@@ -11,7 +11,9 @@ body {
   --gray-0: hsla(0, 0%, 5%, 1);
   --gray-10: hsla(0, 0%, 10%, 1);
   --gray-15: hsla(0, 0%, 15%, 1);
+  --gray-17: hsla(0, 0%, 17%, 1);
   --gray-20: hsla(0, 0%, 22%, 1);
+  --gray-25: hsla(0, 0%, 27%, 1);
   --gray-30: hsla(0, 0%, 33%, 1);
   --gray-40: hsla(0, 0%, 44%, 1);
   --gray-50: hsla(0, 0%, 51%, 1);
@@ -205,4 +207,8 @@ li {
 }
 .btn:active {
   background: var(--pink-40);
+}
+main {
+  background: var(--gray-15);
+  border-radius: var(--border-radius-m) 0 0 0;
 }

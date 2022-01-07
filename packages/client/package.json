@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^1.6.2",
     "dexie": "^3.2.0-rc.3",
     "dexie-react-hooks": "^1.0.7",
+    "framer-motion": "^5.5.5",
     "md5": "^2.3.0",
     "project-name-generator": "^2.1.9",
     "react": "^17.0.0",

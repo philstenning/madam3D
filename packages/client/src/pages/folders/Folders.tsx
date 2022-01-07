@@ -4,6 +4,7 @@ import { RiAddLine } from "react-icons/ri"; // icon
 
 import ModelList from "../../components/modelList/ModelList";
 import FolderDetails from "./FolderDetails";
+import RootList from "./rootList";
 
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import FolderListItem from "./FolderListItem";
@@ -43,7 +44,9 @@ const Folders = ({ allFolders }: IProps) => {
         true
       );
       if (rootFolder) {
-        dispatch(setCurrentFolder(createSerializableCurrentFolder(rootFolder.object)));
+        dispatch(
+          setCurrentFolder(createSerializableCurrentFolder(rootFolder.object))
+        );
       }
     }
   }
@@ -60,14 +63,15 @@ const Folders = ({ allFolders }: IProps) => {
         </button>
       </header>
       {/* this is section with the folder list */}
-      <div className="aside aside--small">
-        <ul className="aside__list folder__list">
+      <div className="aside">
+        <RootList folders={allFolders}/>
+        {/* <ul className="aside__list folder__list">
           {allFolders &&
             allFolders.map((folder) => (
               <FolderListItem key={folder.id} folder={folder} />
             ))}
-        </ul>
-        {/* <FolderDetails folder={storeCurrentFolder} /> */}
+        </ul> */}
+        <FolderDetails folder={storeCurrentFolder} />
       </div>
 
       {/* display the results of the project selected. */}
