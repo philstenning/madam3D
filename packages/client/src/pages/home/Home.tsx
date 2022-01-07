@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { db, IFolder, IFolderCreate } from "../../db";
-import { useLiveQuery } from "dexie-react-hooks";
-import Accordion from '../../components/accordion/Accordion'
+// import { db, IFolder, IFolderCreate } from "../../db";
+// import { useLiveQuery } from "dexie-react-hooks";
+// import Accordion from '../../components/accordion/Accordion'
 // import {loadEnv} from 'vite'
 /*
 https://web.dev/file-system-access/
@@ -26,7 +26,7 @@ const Home = () => {
         <a href="https://caniuse.com/?search=file%20system%20access">Chrome
         and Edge &#62; 86 and the technical preview in Safari.</a> 
       </p>
-      <Accordion/>
+    
     </div>
   );
 };
