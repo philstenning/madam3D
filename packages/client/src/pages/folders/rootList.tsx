@@ -17,16 +17,12 @@ const RootList = ({ folders }: IProps) => {
   const storeCurrentRootFolder = useAppSelector(
     (state) => state.folderReducer.currentRootFolder
   );
-  // const [isActive,setIsActive] = useState()
+  const selectedParts = useAppSelector(
+    (state) => state.selectedFolderItemsReducer.selectedParts
+  );
   const dispatch = useAppDispatch();
 
-  const handleClick = async (
-    folder: IFolder,
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => {
-    // e.stopPropagation();
-    // e.preventDefault();
-
+  const handleClick = async (folder: IFolder) => {
     // if folder is already active then close it and set to null
     if (folder.id === storeCurrentRootFolder?.id) {
       dispatch(setCurrentRootFolder(null));
@@ -45,16 +41,8 @@ const RootList = ({ folders }: IProps) => {
       dispatch(setCurrentFolder(currentFolder));
     }
   };
-
-  // const subListIsActive = (folder: IFolder) => {
-  //   return storeCurrentRootFolder?.id === folder.rootId
-  //     ? "folder-sub-list--active"
-  //     : "";
-  // };
   const subListIsActive = (folder: IFolder) => {
-    return storeCurrentRootFolder?.id === folder.rootId
-      ? true
-      : false;
+    return storeCurrentRootFolder?.id === folder.rootId ? true : false;
   };
   return (
     <nav className="folder__group">
@@ -64,7 +52,7 @@ const RootList = ({ folders }: IProps) => {
           .map((folder) => (
             <li
               className="folder__item"
-              onClick={(e) => handleClick(folder, e)}
+              onClick={() => handleClick(folder)}
               key={folder.id}
             >
               <NavLink className={`folder__link `} to={`/folders/${folder.id}`}>
@@ -73,8 +61,15 @@ const RootList = ({ folders }: IProps) => {
                   <span className="badge__link">
                     {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
                     <span className="badge__text--small">models</span>
+                  
                   </span>
-                </div>
+                 
+                </div> <span className="badge badge__parts">
+                    {
+                      selectedParts.filter((p) => p.rootId === folder.rootId)
+                        .length
+                    }
+                  </span>
               </NavLink>
               <SubListAccordion
                 folders={folders}
@@ -90,31 +85,40 @@ const RootList = ({ folders }: IProps) => {
 
 export default RootList;
 
-interface ISubListProps{
-  rootFolder:IFolder,
-  folders:IFolder[],
-  isActive:boolean
+interface ISubListProps {
+  rootFolder: IFolder;
+  folders: IFolder[];
+  isActive: boolean;
 }
-const  SubListAccordion =({rootFolder,folders , isActive}:ISubListProps)=>{
-
+const SubListAccordion = ({ rootFolder, folders, isActive }: ISubListProps) => {
   return (
-          <AnimatePresence>
-              { isActive && (<motion.ul
-                  style={{ overflow: "hidden", display:'flex',gap:'0.5rem', flexDirection:'column' }}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{type:'tween' }}
-                  className={`folder-sub-list`}
-                >
-                  {folders
-                    .filter((f) => f.rootId === rootFolder.rootId)
-                    .map((f,i) => (
-                      // Add the index i to prevent key collision
-                      <FolderListItem key={`${rootFolder.id}${i}`} folder={f} />
-                    ))}
-                </motion.ul>)}
-              </AnimatePresence>
-  )
-
-}                
+    <AnimatePresence>
+      {isActive && (
+        <motion.ul
+          style={{
+            overflow: "hidden",
+            display: "flex",
+            gap: "0.5rem",
+            flexDirection: "column",
+          }}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ type: "tween" }}
+          className={`folder-sub-list`}
+        >
+          {folders
+            .filter((f) => f.rootId === rootFolder.rootId)
+            .map((f, i) => (
+              // Add the index i to prevent key collision
+              // only show folders with parts, root folders may be empty.
+              <>
+              {f.parts>0 &&  <FolderListItem key={`${rootFolder.id}${i}`} folder={f} />}
+              </>
+              
+            ))}
+        </motion.ul>
+      )}
+    </AnimatePresence>
+  );
+};

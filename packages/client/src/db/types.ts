@@ -43,6 +43,7 @@ export interface IProject {
 export interface IFile {
   id: string;
   folderId: string;
+  rootId:string;
   name: string;
   handle: FileSystemFileHandle;
   size: number;

@@ -26,31 +26,31 @@ export default StlCard;
 //   setChecked(!checked);}
 
 const Overlay = ({ file }: Props) => {
-  const isChecked = useAppSelector((state) =>
-    state.selectedFolderItemsReducer.selectedParts.filter(p=>p.id===file.id).length===1
+  const isChecked = useAppSelector(
+    (state) =>
+      state.selectedFolderItemsReducer.selectedParts.filter(
+        (p) => p.id === file.id
+      ).length === 1
   );
-  const dispatch = useAppDispatch(); 
+  const { folderId, id, rootId, name } = file;
+  const dispatch = useAppDispatch();
 
-  const toggleChecked = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const toggleChecked = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     if (isChecked) {
-      dispatch(removePart(file.id));
+      dispatch(removePart(id));
     } else {
-      dispatch(addPart({id:file.id,folderId:file.folderId}));
+      dispatch(addPart({ id, folderId, rootId }));
     }
-    console.log('clicked')
+    // console.log("clicked");
   };
 
   return (
     <div className="card-overlay" onClick={(e) => toggleChecked(e)}>
       <div className="overlay-content">
-      <p className="card-filename">{file.name}</p>
+        <p className="card-filename">{name}</p>
         <div className="overlay-checkbox">
-          <input
-            type="checkbox"
-            checked={isChecked}
-            readOnly
-          />
+          <input type="checkbox" checked={isChecked} readOnly />
         </div>
       </div>
     </div>

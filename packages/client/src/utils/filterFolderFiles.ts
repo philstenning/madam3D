@@ -147,7 +147,7 @@ async function _createNewFileEntry(
   const file = await fileHandle.getFile();
   const url = URL.createObjectURL(file);
   // console.log(entry.name, url);
-  const newFile: IFile = createFile(file, fileHandle, url, folder.id);
+  const newFile: IFile = createFile(file, fileHandle, url, folder.id,folder.rootId);
   return newFile;
 }
 
@@ -156,6 +156,7 @@ export function createFile(
   fileHandle: FileSystemFileHandle,
   url: string,
   folderId: string,
+  rootId:string,
   fileType: FileTypes = FileTypes.STL
 ): IFile {
   // md5 hash the file name and folder id together,
@@ -164,7 +165,8 @@ export function createFile(
   return {
     id: md5(`${file.name}${folderId}`),
     created: new Date(file.lastModified),
-    folderId: folderId,
+    folderId,
+    rootId,
     handle: fileHandle,
     name: file.name,
     printed: false,
