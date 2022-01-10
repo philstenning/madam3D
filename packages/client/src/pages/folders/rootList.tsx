@@ -46,10 +46,15 @@ const RootList = ({ folders }: IProps) => {
     }
   };
 
+  // const subListIsActive = (folder: IFolder) => {
+  //   return storeCurrentRootFolder?.id === folder.rootId
+  //     ? "folder-sub-list--active"
+  //     : "";
+  // };
   const subListIsActive = (folder: IFolder) => {
     return storeCurrentRootFolder?.id === folder.rootId
-      ? "folder-sub-list--active"
-      : "";
+      ? true
+      : false;
   };
   return (
     <nav className="folder__group">
@@ -60,6 +65,7 @@ const RootList = ({ folders }: IProps) => {
             <li
               className="folder__item"
               onClick={(e) => handleClick(folder, e)}
+              key={folder.id}
             >
               <NavLink className={`folder__link `} to={`/folders/${folder.id}`}>
                 {folder.name}{" "}
@@ -70,22 +76,11 @@ const RootList = ({ folders }: IProps) => {
                   </span>
                 </div>
               </NavLink>
-              <AnimatePresence>
-              { subListIsActive(folder) && (<motion.ul
-                  style={{ overflow: "hidden", display:'flex',gap:'0.5rem', flexDirection:'column' }}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{type:'tween' }}
-                  className={`folder-sub-list`}
-                >
-                  {folders
-                    .filter((f) => f.rootId === folder.rootId)
-                    .map((f) => (
-                      <FolderListItem key={folder.id} folder={f} />
-                    ))}
-                </motion.ul>)}
-              </AnimatePresence>
+              <SubListAccordion
+                folders={folders}
+                isActive={subListIsActive(folder)}
+                rootFolder={folder}
+              />
             </li>
           ))}
       </ul>
@@ -95,9 +90,31 @@ const RootList = ({ folders }: IProps) => {
 
 export default RootList;
 
+interface ISubListProps{
+  rootFolder:IFolder,
+  folders:IFolder[],
+  isActive:boolean
+}
+const  SubListAccordion =({rootFolder,folders , isActive}:ISubListProps)=>{
 
-//  className={`folder-sub-list ${
-//                     storeCurrentRootFolder?.id === folder.rootId
-//                       ? "folder-sub-list--active"
-//                       : ""
-//                   }`}
+  return (
+          <AnimatePresence>
+              { isActive && (<motion.ul
+                  style={{ overflow: "hidden", display:'flex',gap:'0.5rem', flexDirection:'column' }}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{type:'tween' }}
+                  className={`folder-sub-list`}
+                >
+                  {folders
+                    .filter((f) => f.rootId === rootFolder.rootId)
+                    .map((f,i) => (
+                      // Add the index i to prevent key collision
+                      <FolderListItem key={`${rootFolder.id}${i}`} folder={f} />
+                    ))}
+                </motion.ul>)}
+              </AnimatePresence>
+  )
+
+}                

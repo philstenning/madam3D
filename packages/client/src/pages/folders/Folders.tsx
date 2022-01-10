@@ -25,12 +25,8 @@ interface IProps {
 }
 
 const Folders = ({ allFolders }: IProps) => {
-  const storeCurrentFolder = useAppSelector(
-    (state) => state.folderReducer.currentFolder
-  );
   const dispatch = useAppDispatch();
-  // console.log("storeCurrentFolder", storeCurrentFolder?.id);
-
+  
   async function selectFolder(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
@@ -54,7 +50,7 @@ const Folders = ({ allFolders }: IProps) => {
   return (
     <div className="page">
       {/* Dialog */}
-      <ConfirmDeleteFolderDialog folder={storeCurrentFolder} />
+      <ConfirmDeleteFolderDialog />
       {/*   */}
       <header className="aside__header">
         <button className="btn" onClick={(e) => selectFolder(e)}>
@@ -64,18 +60,12 @@ const Folders = ({ allFolders }: IProps) => {
       </header>
       {/* this is section with the folder list */}
       <div className="aside">
-        <RootList folders={allFolders}/>
-        {/* <ul className="aside__list folder__list">
-          {allFolders &&
-            allFolders.map((folder) => (
-              <FolderListItem key={folder.id} folder={folder} />
-            ))}
-        </ul> */}
-        <FolderDetails folder={storeCurrentFolder} />
+        <RootList folders={allFolders} />
+        <FolderDetails />
       </div>
 
       {/* display the results of the project selected. */}
-      {storeCurrentFolder && <ModelList folderId={storeCurrentFolder.id} />}
+       <ModelList />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { db, ICurrentFolder, IFolder } from "../db";
-
+import {removeAllPartsForFolder} from './folderSelectedItems'
 interface IFolderState {
   currentFolder: ICurrentFolder | null;
   showDialog: boolean;
@@ -27,7 +27,8 @@ const getKnownFoldersAsync = createAsyncThunk(
 
 const deleteFolderAsync = createAsyncThunk(
   "deleteFolderAsync",
-  async (folderId: string) => {
+  async (folderId: string,  thunkApi) => {
+    thunkApi.dispatch(removeAllPartsForFolder(folderId));
     try {
       await db.folders.delete(folderId);
       return folderId;
@@ -62,8 +63,9 @@ const folderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(deleteFolderAsync.fulfilled, (state, action) => {
-        // state.folders.filter((folder) => folder.id !== action.payload);
-        // if(state.)
+        // setting currentFolder to null will remove the parts
+        // being displayed in the folder page.
+        state.currentFolder = null;
         state.showDialog = false;
       })
       .addCase(getKnownFoldersAsync.fulfilled, (state, action) => {

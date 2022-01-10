@@ -12,7 +12,9 @@ type Props = {
   folderId: string;
 };
 
-const ModelList = ({ folderId }: Props) => {
+const ModelList = () => {
+  const {cursor,currentFolder} = useAppSelector((state) => state.folderReducer);
+  const folderId= currentFolder?.id
   const dispatch = useAppDispatch();
   // all files in the current folder
   const [allFiles, setAllFiles] = useState<IFile[]>([]);
@@ -20,7 +22,7 @@ const ModelList = ({ folderId }: Props) => {
   // the files in the current paginated page
   const [currentPageFiles, setCurrentPageFiles] = useState<IFile[]>([]);
   // cursor and limit are used to paginate the files
-  const cursor = useAppSelector((state) => state.folderReducer.cursor);
+  // const cursor = useAppSelector((state) => state.folderReducer.cursor);
   const [limit, setLimit] = useState(4);
   // !TODO: fix useMeasure to change the limit
 
@@ -62,11 +64,11 @@ const ModelList = ({ folderId }: Props) => {
     <>
       {folderId && <Pagination countOfFiles={allFiles.length} limit={limit} />}
 
-      <div className="model-list">
+     {folderId &&  <div className="model-list">
         {currentPageFiles?.map((file) => (
           <StlCard key={file.imageUrl} file={file} />
         ))}
-      </div>
+      </div>}
     </>
   );
 };

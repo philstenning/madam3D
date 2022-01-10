@@ -3,7 +3,7 @@ import { IFile } from "../../db";
 import StlViewer from "../stlViewer/StlViewer";
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addItem, removeItem } from "../../features/folderSelectedItems";
+import { addPart, removePart } from "../../features/folderSelectedItems";
 interface Props {
   file: IFile;
   // file: FileSystemHandle;
@@ -27,16 +27,16 @@ export default StlCard;
 
 const Overlay = ({ file }: Props) => {
   const isChecked = useAppSelector((state) =>
-    state.selectedFolderItemsReducer.selectedItems.includes(file.id)
+    state.selectedFolderItemsReducer.selectedParts.filter(p=>p.id===file.id).length===1
   );
   const dispatch = useAppDispatch(); 
 
   const toggleChecked = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     if (isChecked) {
-      dispatch(removeItem(file.id));
+      dispatch(removePart(file.id));
     } else {
-      dispatch(addItem(file.id));
+      dispatch(addPart({id:file.id,folderId:file.folderId}));
     }
     console.log('clicked')
   };

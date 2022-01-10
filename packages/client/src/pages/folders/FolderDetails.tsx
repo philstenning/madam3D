@@ -1,17 +1,15 @@
 // import React from "react";
-import { ICurrentFolder } from "../../db";
-import { useAppDispatch } from "../../app/hooks";
+
+import { useAppDispatch ,useAppSelector} from "../../app/hooks";
 import { showDeleteFolderDialog } from "../../features/folderSlice";
 import './folderDetail.css'
-interface IFolderDetailsProps {
-  folder: ICurrentFolder | null;
-}
 
-const FolderDetails = ({ folder }: IFolderDetailsProps) => {
+const FolderDetails = () => {
+   const currentFolder = useAppSelector((state) => state.folderReducer.currentFolder);
   const dispatch = useAppDispatch();
-  if (typeof folder === "undefined") return null;
+  if (typeof currentFolder === "undefined") return null;
   const handleDelete = () => {
-    if (folder?.id) dispatch(showDeleteFolderDialog());
+    if (currentFolder?.id) dispatch(showDeleteFolderDialog());
   };
   return (
     <div className="fd">
@@ -20,9 +18,9 @@ const FolderDetails = ({ folder }: IFolderDetailsProps) => {
       </div>
 
       <ul className="fd__list">
-        <li>{folder?.filePath || folder?.name}</li>
-        {/* <li>{folder?.id} one</li> */}
-        <li>{folder?.created}</li>
+        <li>{currentFolder?.filePath || currentFolder?.name}</li>
+        {/* <li>{currentFolder?.id} one</li> */}
+        <li>{currentFolder?.created}</li>
       </ul>
     </div>
   );
