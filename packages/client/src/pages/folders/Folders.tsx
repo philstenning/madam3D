@@ -1,17 +1,13 @@
 import React from "react";
 import "./folders.css";
 import { RiAddLine } from "react-icons/ri"; // icon
-
 import ModelList from "../../components/modelList/ModelList";
 import FolderDetails from "./FolderDetails";
 import RootList from "./rootList";
-
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
-import FolderListItem from "./FolderListItem";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
 import {
-  addFolderToDb,
   createSerializableCurrentFolder,
   IFolder,
 } from "../../db";
@@ -19,7 +15,6 @@ import {
   selectDirectoryOnUsersFileSystem,
   recursivelyScanLocalDrive,
 } from "../../utils";
-
 interface IProps {
   allFolders: IFolder[] | undefined;
 }

@@ -93,51 +93,6 @@ export async function recursivelyScanLocalDrive(
   return currentFolderResult;
 }
 
-// export async function scanLocalDirectory(
-//   folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
-// ) {
-//   // create a arrays to hold the files and directories from the for async loop.
-//   const dirFiles: FileSystemFileHandle[] = [];
-//   const directories: FileSystemDirectoryHandle[] = [];
-
-//   try {
-//     // iterate over the folder contents all files and folders.
-//     for await (const entry of folderHandle.values()) {
-//       if (entry.kind === "directory") {
-//         directories.push(entry);
-//       } else if (entry.kind === "file" && entry.name.endsWith(".stl")) {
-//         dirFiles.push(entry);
-//       }
-//     }
-//   } catch (error) {
-//     console.error(`Error getting folder entries:\r\n${error}`);
-//   }
-
-//   return { files: dirFiles, directories };
-// }
-
-// export async function scanLocalDrive(
-//   folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
-// ) {
-//   // get files and dirs for root dir.
-//   const { files, directories } = await scanLocalDirectory(
-//     folderHandle,
-//     path,
-//     true
-//   );
-// }
-
-// async function foo(
-//   folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
-// ){
-//    await recursivelyScanLocalDrive(folder, `${path}/${folder.name}`, false);
-// }
 
 async function _createNewFileEntry(
   folder: IFolder,

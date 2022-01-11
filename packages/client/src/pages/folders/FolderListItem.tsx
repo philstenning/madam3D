@@ -4,24 +4,16 @@ import { haveFolderPermission } from "../../utils/fileSystem";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
-
+import Badge from '../../components/badge/Badge'
 type Props = {
   folder: IFolder;
 };
 
 const FolderListItem = ({ folder }: Props) => {
   const dispatch = useAppDispatch();
-  const [permission, setPermission] = useState<string>();
   const parts = useAppSelector(
     (state) => state.selectedFolderItemsReducer.selectedParts
   );
-
-  useEffect(() => {
-    // get the permissions for the folder.
-    // and set it in the state.
-    // it is used for the css class query.
-    folder.handle.queryPermission().then((res) => setPermission(res));
-  }, [folder]);
 
   const handleClick = async (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
@@ -41,34 +33,42 @@ const FolderListItem = ({ folder }: Props) => {
       };
       dispatch(setCurrentFolder(currentFolder));
       // update state
-      setPermission("granted");
+      // setPermission("granted");
     }
   };
 
   const partsCount = (folderId: string) => {
-    
     return parts.filter((p) => p.folderId === folderId).length;
   };
 
-  // if(partsCount(folder.id)<1){
-  // return<></>
-  // }
+  const badgeDisplayText=(folder:IFolder)=>{
+    const parts = partsCount(folder.id)
+    if(parts>0){
+        return `${parts} / ${folder.parts} parts selected`;
+    }
+    return `${folder.parts} parts`;
+  }
   return (
-    <li
-      className="folder__item folder__sub-item "
-      onClick={(e) => handleClick(e)}
-    >
+    <li className="accordion__child-item" onClick={(e) => handleClick(e)}>
       <NavLink
-        className={`folder__link  folder__item--${permission} folder__sub-link`}
+        className={`accordion__link  
+       
+        accordion__child-link`}
         to={`/folders/${folder.id}`}
       >
-        {folder.name} <span className="badge">{folder.parts} parts</span>
-        {partsCount(folder.id)>0 && (
-          <span className="badge badge__parts">{partsCount(folder.id)} selected</span>
-        )}
+        {folder.name}
+        <span className="flex">
+          <Badge type={partsCount(folder.id) > 0 ? "primary" : "secondary"}>
+            {badgeDisplayText(folder)} 
+          </Badge>
+
+          {/* {partsCount(folder.id) === 0 &&  <Badge>{folder.parts} parts</Badge>} */}
+        </span>
       </NavLink>
     </li>
   );
 };
 
 export default FolderListItem;
+
+

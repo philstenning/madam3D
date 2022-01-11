@@ -4,6 +4,7 @@ import StlViewer from "../stlViewer/StlViewer";
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addPart, removePart } from "../../features/folderSelectedItems";
+import { AnimatePresence, motion } from "framer-motion";
 interface Props {
   file: IFile;
   // file: FileSystemHandle;
@@ -46,13 +47,21 @@ const Overlay = ({ file }: Props) => {
   };
 
   return (
-    <div className="card-overlay" onClick={(e) => toggleChecked(e)}>
-      <div className="overlay-content">
-        <p className="card-filename">{name}</p>
-        <div className="overlay-checkbox">
-          <input type="checkbox" checked={isChecked} readOnly />
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        exit={{ opacity: 0}}
+        className="card-overlay"
+        onClick={(e) => toggleChecked(e)}
+      >
+        <div className="overlay-content">
+          <p className="card-filename">{name}</p>
+          <div className="overlay-checkbox">
+            <input type="checkbox" checked={isChecked} readOnly />
+          </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };

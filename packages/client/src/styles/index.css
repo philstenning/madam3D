@@ -212,3 +212,18 @@ main {
   background: var(--gray-15);
   border-radius: var(--border-radius-m) 0 0 0;
 }
+
+.primary {
+  background: var(--pink-30);
+  color: var(--pink-90);
+}
+
+.success {
+  background: var(--green-20);
+  color: var(--green-90);
+}
+
+.warning {
+  background: var(--red-40);
+  color: var(--gray-90);
+}

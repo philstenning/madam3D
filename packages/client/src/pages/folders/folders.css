@@ -1,95 +1,64 @@
-.folder__list {
+/* .folder__list {
   gap: 0.5rem;
-}
+} */
 
-.folder__item {
+.accordion__item,
+.accordion__child-item {
   display: block;
   position: relative;
 }
 
-.folder__item .active {
+.accordion__item .active {
   border: solid 4px var(--gray-20);
   background: var(--gray-20);
 }
 
-.folder__link {
+.accordion__link {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  /* align-items: center; */
   background: var(--gray-20);
   border: solid 4px var(--gray-20);
   border-radius: var(--border-radius-s);
-  /* margin-top: 8px; */
   padding: 0.5rem;
   transition: all 0.3s ease-in-out;
- 
+  gap: 0.5rem;
+  overflow: hidden;
 }
-.folder__link:hover {
-  /* color: var(--gray-20); */
+.accordion__link:hover {
   background: var(--gray-20);
   border: solid 4px var(--gray-20);
-  /* transform: translate(-0rem, -.5px); */
 }
 
-.folder__link:hover::before {
-  height: var(--active-state-bar-height);
-  top: 23%;
+.accordion__link:hover::before {
+  /* height: var(--active-state-bar-height); */
+  bottom: 30%;
+  top: 30%;
+  height: auto;
   background: var(--pink-40);
 }
-.folder__delete {
+.accordion__delete {
   position: absolute;
 }
 
-.folder__item--granted,
-.folder__item--granted:visited,
-.folder__item--granted:link {
+.accordion__item--granted,
+.accordion__item--granted:visited,
+.accordion__item--granted:link {
   color: inherit;
 }
-.folder__item--denied,
-.folder__item--denied:visited,
-.folder__item--denied:link {
+.accordion__item--denied,
+.accordion__item--denied:visited,
+.accordion__item--denied:link {
   color: var(--red-80);
   text-decoration: line-through;
 }
-.folder__item--prompt,
-.folder__item--prompt:visited,
-.folder__item--prompt:link {
+.accordion__item--prompt,
+.accordion__item--prompt:visited,
+.accordion__item--prompt:link {
   color: var(--blue-80);
 }
 
-.badge {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--gray-0);
-  background: var(--gray-60);
-  border-radius: var(--border-radius-m);
-  padding: 0 0.3rem;
-  min-width: 2rem;
-  /* text-align: center; */
-  font-size: var(--font-size-s);
-  font-weight: 500;
-  margin-left: 0.5rem;
-}
-
-
-.badge__text--small {
-  font-size: var(--font-size-xs);
-}
-.badge__parts {
-
-  padding-right: .37rem;
-  background: var(--pink-30);
-  color: var(--pink-90);
-  margin-left: .5rem;
-  min-width: 1.2rem;
-  
-}
-
-/* .folder__group {  border-bottom: solid 3px var(--gray-20);
-} */
-.folder__group__list {
+.accordion__group__list {
   gap: 0.5rem;
   margin-bottom: 0.8rem;
 
@@ -97,11 +66,11 @@
   min-height: 2.9rem;
   max-height: 80vh;
 }
-.folder-sub-list {
+.accordion__child-list {
   display: none;
   padding: 0.5rem 0 0 1rem;
 }
-.folder-sub-list--active {
+.accordion__child-list--active {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -109,41 +78,59 @@
   font-size: var(--font-size-s);
   border-radius: 0 0 var(--border-radius-s) var(--border-radius-s);
 }
-.folder__sub-item .active {
+
+.accordion__child-item .active {
   background: var(--gray-17);
   border-color: var(--gray-17);
 }
-.folder__sub-link {
+
+.accordion__child-link {
   color: var(--pink-90);
   background: var(--gray-17);
   border-color: var(--gray-17);
   border-radius: var(--border-radius-s);
 }
-.folder__sub-link:hover {
+.accordion__child-link:hover {
   background: var(--gray-17);
   border-color: var(--gray-17);
 }
 
-.folder__sub-item .active::before {
+.accordion__child-item .active::before {
   content: "";
   position: absolute;
-  top: 23%;
+  top: 30%;
+  bottom: 30%;
+  height: auto;
   width: var(--active-state-bar-width);
-  height: 1.5rem;
   background: var(--pink-30);
   border-radius: 5px;
   left: 0px;
 }
 
-.folder__sub-link::before {
+.accordion__child-link::before {
   content: "";
   position: absolute;
-  top: 40%;
+  top: 50%;
+  bottom: 50%;
   width: var(--active-state-bar-width);
-  height: 0px;
+  height: auto;
   background: var(--pink-40);
   border-radius: 5px;
   left: 0px;
   transition: all 250ms ease-in;
   /* transition: top 200ms ease-in-out; */
+}
+
+/*------------   Badge  ----------------*/
+
+
+/*------------   Utils  ----------------*/
+
+
+
+.flex {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
 }

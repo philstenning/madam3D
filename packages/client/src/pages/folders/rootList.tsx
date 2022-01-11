@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import Badge, { LevelType } from "../../components/badge/Badge";
+import { v4 as uuid } from "uuid";
 interface IProps {
   folders: IFolder[] | undefined;
 }
@@ -46,30 +48,33 @@ const RootList = ({ folders }: IProps) => {
   };
   return (
     <nav className="folder__group">
-      <ul className="aside__list folder__group__list">
+      <ul className="aside__list accordion__group__list">
         {folders
           ?.filter((folder) => folder.isRoot)
           .map((folder) => (
             <li
-              className="folder__item"
+              className="accordion__item"
               onClick={() => handleClick(folder)}
               key={folder.id}
             >
-              <NavLink className={`folder__link `} to={`/folders/${folder.id}`}>
+              <NavLink
+                className={`accordion__link `}
+                to={`/folders/${folder.id}`}
+              >
                 {folder.name}{" "}
-                <div className="badge">
-                  <span className="badge__link">
-                    {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
-                    <span className="badge__text--small">models</span>
-                  
-                  </span>
-                 
-                </div> <span className="badge badge__parts">
-                    {
+                <span className="flex">
+                  <Badge
+                    type={
                       selectedParts.filter((p) => p.rootId === folder.rootId)
-                        .length
+                        .length > 0
+                        ? "primary"
+                        : "secondary"
                     }
-                  </span>
+                  >
+                    {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
+                    models
+                  </Badge>
+                </span>
               </NavLink>
               <SubListAccordion
                 folders={folders}
@@ -105,18 +110,14 @@ const SubListAccordion = ({ rootFolder, folders, isActive }: ISubListProps) => {
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ type: "tween" }}
-          className={`folder-sub-list`}
+          className={`accordion__child-list`}
         >
           {folders
             .filter((f) => f.rootId === rootFolder.rootId)
-            .map((f, i) => (
-              // Add the index i to prevent key collision
-              // only show folders with parts, root folders may be empty.
-              <>
-              {f.parts>0 &&  <FolderListItem key={`${rootFolder.id}${i}`} folder={f} />}
-              </>
-              
-            ))}
+            .map((folder) => {
+              if (folder.parts)
+                return <FolderListItem key={uuid()} folder={folder} />;
+            })}
         </motion.ul>
       )}
     </AnimatePresence>
