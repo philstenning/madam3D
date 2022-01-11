@@ -21,7 +21,7 @@
   flex-direction: column;
   justify-content: space-between;
   margin: 3px 0;
-  height: calc(100vh - 9.5rem);
+  height: calc(100vh - 9rem);
 }
 
 

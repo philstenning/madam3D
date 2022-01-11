@@ -8,6 +8,9 @@ interface IFolderBase {
   // the number of parts or files it  has in it.
   parts: number;
   // optional
+
+  // if it is a root dir count of parts 
+  rootParts?:number;
   filePath?: string;
 }
 export interface ICurrentFolder {

@@ -42,10 +42,10 @@ const FolderListItem = ({ folder }: Props) => {
   };
 
   const badgeDisplayText=(folder:IFolder)=>{
-    const parts = partsCount(folder.id)
-    if(parts>0){
-        return `${parts} / ${folder.parts} parts selected`;
-    }
+    // const parts = partsCount(folder.id)
+    // if(parts>0){
+    //     return `${parts} / ${folder.parts} parts selected`;
+    // }
     return `${folder.parts} parts`;
   }
   return (
@@ -61,9 +61,9 @@ const FolderListItem = ({ folder }: Props) => {
           <Badge type={partsCount(folder.id) > 0 ? "primary" : "secondary"}>
             {badgeDisplayText(folder)} 
           </Badge>
-
-          {/* {partsCount(folder.id) === 0 &&  <Badge>{folder.parts} parts</Badge>} */}
         </span>
+        {/* <span >parts: {folder.parts}</span> */}
+        {/* <span >path: {folder.filePath}</span> */}
       </NavLink>
     </li>
   );

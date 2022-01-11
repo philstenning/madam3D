@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Badge, { LevelType } from "../../components/badge/Badge";
+import Badge from "../../components/badge/Badge";
 import { v4 as uuid } from "uuid";
 interface IProps {
   folders: IFolder[] | undefined;
@@ -47,8 +47,8 @@ const RootList = ({ folders }: IProps) => {
     return storeCurrentRootFolder?.id === folder.rootId ? true : false;
   };
   return (
-    <nav className="folder__group">
-      <ul className="aside__list accordion__group__list">
+   
+      <ul className=" accordion__group__list">
         {folders
           ?.filter((folder) => folder.isRoot)
           .map((folder) => (
@@ -84,7 +84,7 @@ const RootList = ({ folders }: IProps) => {
             </li>
           ))}
       </ul>
-    </nav>
+   
   );
 };
 

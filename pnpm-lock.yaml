@@ -42,6 +42,7 @@ importers:
       react-use-measure: ^2.0.4
       three: ^0.134.0
       three-stdlib: ^2.5.5
+      typeface-roboto: ^1.1.13
       typescript: ^4.3.2
       unplugin-icons: ^0.12.18
       uuid: ^8.3.2
@@ -64,6 +65,7 @@ importers:
       react-use-measure: 2.1.1_react-dom@17.0.2+react@17.0.2
       three: 0.134.0
       three-stdlib: 2.6.1_three@0.134.0
+      typeface-roboto: 1.1.13
       uuid: 8.3.2
     devDependencies:
       '@iconify/json': 1.1.443
@@ -3377,6 +3379,10 @@ packages:
     dependencies:
       zlib: 1.0.5
     dev: true
+
+  /typeface-roboto/1.1.13:
+    resolution: {integrity: sha512-YXvbd3a1QTREoD+FJoEkl0VQNJoEjewR2H11IjVv4bp6ahuIcw0yyw/3udC4vJkHw3T3cUh85FTg8eWef3pSaw==}
+    dev: false
 
   /typescript/4.5.4:
     resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
