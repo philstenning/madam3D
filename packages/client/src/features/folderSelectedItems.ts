@@ -1,37 +1,48 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import folderSlice from "./folderSlice";
 
-// interface IFolderItem{
-//     id:string
-// }
-
-interface ISelectedFolderItems{
-    selectedItems:string[]
+import { createSlice, PayloadAction} from "@reduxjs/toolkit";
+interface ISelectedPart {
+  id: string;
+  folderId:string;
+  rootId: string;
 }
-
-const initialState:ISelectedFolderItems ={
-   selectedItems:[]
+interface ISelectedParts {
+  selectedParts: ISelectedPart[];
 }
+const initialState: ISelectedParts = {
+  selectedParts: [],
+};
 
 
 const selectedFolderItemsSlice = createSlice({
   name: "selectedFolderItems",
   initialState,
   reducers: {
-    addItem(state, action: PayloadAction<string>) {
-      state.selectedItems.push(action.payload);
-    },
-    removeItem(state, action: PayloadAction<string>) {
-      state.selectedItems = state.selectedItems.filter(
-        (item) => item != action.payload
+    // addPart(state, action: PayloadAction<string>) {
+
+    //   state.selectedParts.push({id:res.});
+    // },
+    removePart(state, action: PayloadAction<string>) {
+      state.selectedParts = state.selectedParts.filter(
+        (item) => item.id != action.payload
       );
     },
-    clear(state) {
-      state.selectedItems = [];
+    clearParts(state) {
+      state.selectedParts = [];
     },
+    addPart(state,action:PayloadAction<ISelectedPart>){
+      state.selectedParts.push(action.payload)
+    },
+    removeAllPartsForFolder(state,action:PayloadAction<string>){
+     state.selectedParts= state.selectedParts.filter(part=> part.folderId !==action.payload)
+    }
   },
+  // extraReducers: (builder) => {
+  //   builder
+  // },
 });
 
-export const {  addItem,removeItem,clear} = selectedFolderItemsSlice.actions
+export const { removePart, clearParts, addPart, removeAllPartsForFolder } =
+  selectedFolderItemsSlice.actions;
 
-export default selectedFolderItemsSlice.reducer
+export default selectedFolderItemsSlice.reducer;
+

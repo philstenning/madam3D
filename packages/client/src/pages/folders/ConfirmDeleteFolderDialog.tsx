@@ -6,15 +6,13 @@ import {
   deleteFolderAsync,
   
 } from "../../features/folderSlice";
-interface IFolderDialogProps {
-  folder: ICurrentFolder | null;
-}
 
-export  function ConfirmDeleteFolderDialog({folder}:IFolderDialogProps) {
+export  function ConfirmDeleteFolderDialog() {
   const data = useAppSelector(state=>state.folderReducer)
   const dispatch = useAppDispatch()
  const handleDelete = () => {
-   if (folder?.id) dispatch(deleteFolderAsync(folder.id));
+   if (data.currentFolder?.id)
+     dispatch(deleteFolderAsync(data.currentFolder?.id));
  };
   return (
     <Dialog title="Delete Folder" show={data.showDialog}>

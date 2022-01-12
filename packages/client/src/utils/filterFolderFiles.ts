@@ -93,51 +93,6 @@ export async function recursivelyScanLocalDrive(
   return currentFolderResult;
 }
 
-// export async function scanLocalDirectory(
-//   folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
-// ) {
-//   // create a arrays to hold the files and directories from the for async loop.
-//   const dirFiles: FileSystemFileHandle[] = [];
-//   const directories: FileSystemDirectoryHandle[] = [];
-
-//   try {
-//     // iterate over the folder contents all files and folders.
-//     for await (const entry of folderHandle.values()) {
-//       if (entry.kind === "directory") {
-//         directories.push(entry);
-//       } else if (entry.kind === "file" && entry.name.endsWith(".stl")) {
-//         dirFiles.push(entry);
-//       }
-//     }
-//   } catch (error) {
-//     console.error(`Error getting folder entries:\r\n${error}`);
-//   }
-
-//   return { files: dirFiles, directories };
-// }
-
-// export async function scanLocalDrive(
-//   folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
-// ) {
-//   // get files and dirs for root dir.
-//   const { files, directories } = await scanLocalDirectory(
-//     folderHandle,
-//     path,
-//     true
-//   );
-// }
-
-// async function foo(
-//   folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
-// ){
-//    await recursivelyScanLocalDrive(folder, `${path}/${folder.name}`, false);
-// }
 
 async function _createNewFileEntry(
   folder: IFolder,
@@ -147,7 +102,7 @@ async function _createNewFileEntry(
   const file = await fileHandle.getFile();
   const url = URL.createObjectURL(file);
   // console.log(entry.name, url);
-  const newFile: IFile = createFile(file, fileHandle, url, folder.id);
+  const newFile: IFile = createFile(file, fileHandle, url, folder.id,folder.rootId);
   return newFile;
 }
 
@@ -156,6 +111,7 @@ export function createFile(
   fileHandle: FileSystemFileHandle,
   url: string,
   folderId: string,
+  rootId:string,
   fileType: FileTypes = FileTypes.STL
 ): IFile {
   // md5 hash the file name and folder id together,
@@ -164,7 +120,8 @@ export function createFile(
   return {
     id: md5(`${file.name}${folderId}`),
     created: new Date(file.lastModified),
-    folderId: folderId,
+    folderId,
+    rootId,
     handle: fileHandle,
     name: file.name,
     printed: false,

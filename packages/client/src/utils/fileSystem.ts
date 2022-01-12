@@ -21,7 +21,7 @@ async function haveFolderPermission(
   dirHandle: FileSystemDirectoryHandle
 ): Promise<boolean> {
   let permissionState = await dirHandle.queryPermission();
-  console.log(permissionState);
+  // console.log(permissionState);
   if (permissionState === "prompt") {
     permissionState = await dirHandle.requestPermission();
   }

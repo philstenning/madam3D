@@ -4,24 +4,21 @@ import { haveFolderPermission } from "../../utils/fileSystem";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
-
+import Badge from '../../components/badge/Badge'
 type Props = {
   folder: IFolder;
 };
 
 const FolderListItem = ({ folder }: Props) => {
   const dispatch = useAppDispatch();
-  const [permission, setPermission] = useState<string>();
+  const parts = useAppSelector(
+    (state) => state.selectedFolderItemsReducer.selectedParts
+  );
 
-  useEffect(() => {
-    // get the permissions for the folder.
-    // and set it in the state.
-    // it is used for the css class query.
-    folder.handle.queryPermission().then((res) => setPermission(res));
-  }, [folder]);
-
-  const handleClick = async (e:React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    e.stopPropagation()
+  const handleClick = async (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
     // if we don't have permission to read the folder,
     // we need to show the permission dialog and get permission.
     const permState = await haveFolderPermission(folder.handle);
@@ -36,23 +33,42 @@ const FolderListItem = ({ folder }: Props) => {
       };
       dispatch(setCurrentFolder(currentFolder));
       // update state
-      setPermission("granted");
+      // setPermission("granted");
     }
   };
 
+  const partsCount = (folderId: string) => {
+    return parts.filter((p) => p.folderId === folderId).length;
+  };
+
+  const badgeDisplayText=(folder:IFolder)=>{
+    // const parts = partsCount(folder.id)
+    // if(parts>0){
+    //     return `${parts} / ${folder.parts} parts selected`;
+    // }
+    return `${folder.parts} parts`;
+  }
   return (
-    <li
-      className="folder__item folder__sub-item "
-      onClick={(e) => handleClick(e)}
-    >
+    <li className="accordion__child-item" onClick={(e) => handleClick(e)}>
       <NavLink
-        className={`folder__link  folder__item--${permission} folder__sub-link`}
+        className={`accordion__link  
+       
+        accordion__child-link`}
         to={`/folders/${folder.id}`}
       >
-        {folder.name} <span className="badge badge__link">{folder.parts}</span>
+        {folder.name}
+        <span className="flex-end">
+          <Badge type={partsCount(folder.id) > 0 ? "primary" : "secondary"}>
+            {badgeDisplayText(folder)} 
+          </Badge>
+        </span>
+        {/* <span >parts: {folder.parts}</span> */}
+        {/* <span >path: {folder.filePath}</span> */}
       </NavLink>
     </li>
   );
 };
 
 export default FolderListItem;
+
+

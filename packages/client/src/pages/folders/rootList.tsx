@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import Badge from "../../components/badge/Badge";
+import { v4 as uuid } from "uuid";
 interface IProps {
   folders: IFolder[] | undefined;
 }
@@ -17,16 +19,12 @@ const RootList = ({ folders }: IProps) => {
   const storeCurrentRootFolder = useAppSelector(
     (state) => state.folderReducer.currentRootFolder
   );
-  // const [isActive,setIsActive] = useState()
+  const selectedParts = useAppSelector(
+    (state) => state.selectedFolderItemsReducer.selectedParts
+  );
   const dispatch = useAppDispatch();
 
-  const handleClick = async (
-    folder: IFolder,
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>
-  ) => {
-    // e.stopPropagation();
-    // e.preventDefault();
-
+  const handleClick = async (folder: IFolder) => {
     // if folder is already active then close it and set to null
     if (folder.id === storeCurrentRootFolder?.id) {
       dispatch(setCurrentRootFolder(null));
@@ -45,59 +43,83 @@ const RootList = ({ folders }: IProps) => {
       dispatch(setCurrentFolder(currentFolder));
     }
   };
-
   const subListIsActive = (folder: IFolder) => {
-    return storeCurrentRootFolder?.id === folder.rootId
-      ? "folder-sub-list--active"
-      : "";
+    return storeCurrentRootFolder?.id === folder.rootId ? true : false;
   };
   return (
-    <nav className="folder__group">
-      <ul className="aside__list folder__group__list">
+   
+      <ul className=" accordion__group__list">
         {folders
           ?.filter((folder) => folder.isRoot)
           .map((folder) => (
             <li
-              className="folder__item"
-              onClick={(e) => handleClick(folder, e)}
+              className="accordion__item"
+              onClick={() => handleClick(folder)}
+              key={folder.id}
             >
-              <NavLink className={`folder__link `} to={`/folders/${folder.id}`}>
+              <NavLink
+                className={`accordion__link `}
+                to={`/folders/${folder.id}`}
+              >
                 {folder.name}{" "}
-                <div className="badge">
-                  <span className="badge__link">
+                <span className="flex-end">
+                  <Badge
+                    type={
+                      selectedParts.filter((p) => p.rootId === folder.rootId)
+                        .length > 0
+                        ? "primary"
+                        : "secondary"
+                    }
+                  >
                     {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
-                    <span className="badge__text--small">models</span>
-                  </span>
-                </div>
+                    models
+                  </Badge>
+                </span>
               </NavLink>
-              <AnimatePresence>
-              { subListIsActive(folder) && (<motion.ul
-                  style={{ overflow: "hidden", display:'flex',gap:'0.5rem', flexDirection:'column' }}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{type:'tween' }}
-                  className={`folder-sub-list`}
-                >
-                  {folders
-                    .filter((f) => f.rootId === folder.rootId)
-                    .map((f) => (
-                      <FolderListItem key={folder.id} folder={f} />
-                    ))}
-                </motion.ul>)}
-              </AnimatePresence>
+              <SubListAccordion
+                folders={folders}
+                isActive={subListIsActive(folder)}
+                rootFolder={folder}
+              />
             </li>
           ))}
       </ul>
-    </nav>
+   
   );
 };
 
 export default RootList;
 
-
-//  className={`folder-sub-list ${
-//                     storeCurrentRootFolder?.id === folder.rootId
-//                       ? "folder-sub-list--active"
-//                       : ""
-//                   }`}
+interface ISubListProps {
+  rootFolder: IFolder;
+  folders: IFolder[];
+  isActive: boolean;
+}
+const SubListAccordion = ({ rootFolder, folders, isActive }: ISubListProps) => {
+  return (
+    <AnimatePresence>
+      {isActive && (
+        <motion.ul
+          style={{
+            overflow: "hidden",
+            display: "flex",
+            gap: "0.5rem",
+            flexDirection: "column",
+          }}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ type: "tween" }}
+          className={`accordion__child-list`}
+        >
+          {folders
+            .filter((f) => f.rootId === rootFolder.rootId)
+            .map((folder) => {
+              if (folder.parts)
+                return <FolderListItem key={uuid()} folder={folder} />;
+            })}
+        </motion.ul>
+      )}
+    </AnimatePresence>
+  );
+};

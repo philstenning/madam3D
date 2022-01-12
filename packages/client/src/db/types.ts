@@ -8,6 +8,9 @@ interface IFolderBase {
   // the number of parts or files it  has in it.
   parts: number;
   // optional
+
+  // if it is a root dir count of parts 
+  rootParts?:number;
   filePath?: string;
 }
 export interface ICurrentFolder {
@@ -43,6 +46,7 @@ export interface IProject {
 export interface IFile {
   id: string;
   folderId: string;
+  rootId:string;
   name: string;
   handle: FileSystemFileHandle;
   size: number;

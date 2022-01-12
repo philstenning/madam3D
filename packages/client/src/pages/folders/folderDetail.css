@@ -3,13 +3,25 @@
   padding: 1rem;
   background: var(--gray-20);
   border-radius: var(--border-radius-s);
+  /* min-height: 29rem; */
+  min-height: fit-content;
+  max-height: 30rem;
+  /* overflow: hidden; */
 }
 
-.fd__list{
+.fd__list, .fd__more{
     display: flex;
     flex-direction: column;
     gap:.3rem;
     margin:0;
     padding:.5rem 0;
     font-size: var(--font-size-s);
+    /* border: solid ; */
+    
+}
+.fd__list{
+  height: fit-content;
+}
+.fd__more{
+padding-bottom: 0;
 }

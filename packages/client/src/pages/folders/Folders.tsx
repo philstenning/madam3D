@@ -1,17 +1,13 @@
 import React from "react";
 import "./folders.css";
 import { RiAddLine } from "react-icons/ri"; // icon
-
 import ModelList from "../../components/modelList/ModelList";
 import FolderDetails from "./FolderDetails";
 import RootList from "./rootList";
-
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
-import FolderListItem from "./FolderListItem";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
 import {
-  addFolderToDb,
   createSerializableCurrentFolder,
   IFolder,
 } from "../../db";
@@ -19,18 +15,13 @@ import {
   selectDirectoryOnUsersFileSystem,
   recursivelyScanLocalDrive,
 } from "../../utils";
-
 interface IProps {
   allFolders: IFolder[] | undefined;
 }
 
 const Folders = ({ allFolders }: IProps) => {
-  const storeCurrentFolder = useAppSelector(
-    (state) => state.folderReducer.currentFolder
-  );
   const dispatch = useAppDispatch();
-  // console.log("storeCurrentFolder", storeCurrentFolder?.id);
-
+  
   async function selectFolder(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
@@ -54,7 +45,7 @@ const Folders = ({ allFolders }: IProps) => {
   return (
     <div className="page">
       {/* Dialog */}
-      <ConfirmDeleteFolderDialog folder={storeCurrentFolder} />
+      <ConfirmDeleteFolderDialog />
       {/*   */}
       <header className="aside__header">
         <button className="btn" onClick={(e) => selectFolder(e)}>
@@ -64,18 +55,12 @@ const Folders = ({ allFolders }: IProps) => {
       </header>
       {/* this is section with the folder list */}
       <div className="aside">
-        <RootList folders={allFolders}/>
-        {/* <ul className="aside__list folder__list">
-          {allFolders &&
-            allFolders.map((folder) => (
-              <FolderListItem key={folder.id} folder={folder} />
-            ))}
-        </ul> */}
-        <FolderDetails folder={storeCurrentFolder} />
+        <RootList folders={allFolders} />
+        <FolderDetails folders={allFolders} />
       </div>
 
       {/* display the results of the project selected. */}
-      {storeCurrentFolder && <ModelList folderId={storeCurrentFolder.id} />}
+      <ModelList />
     </div>
   );
 };

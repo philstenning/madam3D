@@ -3,7 +3,8 @@ import { IFile } from "../../db";
 import StlViewer from "../stlViewer/StlViewer";
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addItem, removeItem } from "../../features/folderSelectedItems";
+import { addPart, removePart } from "../../features/folderSelectedItems";
+import { AnimatePresence, motion } from "framer-motion";
 interface Props {
   file: IFile;
   // file: FileSystemHandle;
@@ -26,33 +27,41 @@ export default StlCard;
 //   setChecked(!checked);}
 
 const Overlay = ({ file }: Props) => {
-  const isChecked = useAppSelector((state) =>
-    state.selectedFolderItemsReducer.selectedItems.includes(file.id)
+  const isChecked = useAppSelector(
+    (state) =>
+      state.selectedFolderItemsReducer.selectedParts.filter(
+        (p) => p.id === file.id
+      ).length === 1
   );
-  const dispatch = useAppDispatch(); 
+  const { folderId, id, rootId, name } = file;
+  const dispatch = useAppDispatch();
 
-  const toggleChecked = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const toggleChecked = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     if (isChecked) {
-      dispatch(removeItem(file.id));
+      dispatch(removePart(id));
     } else {
-      dispatch(addItem(file.id));
+      dispatch(addPart({ id, folderId, rootId }));
     }
-    console.log('clicked')
+    // console.log("clicked");
   };
 
   return (
-    <div className="card-overlay" onClick={(e) => toggleChecked(e)}>
-      <div className="overlay-content">
-      <p className="card-filename">{file.name}</p>
-        <div className="overlay-checkbox">
-          <input
-            type="checkbox"
-            checked={isChecked}
-            readOnly
-          />
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        exit={{ opacity: 0}}
+        className="card-overlay"
+        onClick={(e) => toggleChecked(e)}
+      >
+        <div className="overlay-content">
+          <p className="card-filename">{name}</p>
+          <div className="overlay-checkbox">
+            <input type="checkbox" checked={isChecked} readOnly />
+          </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
