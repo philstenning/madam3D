@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { showDeleteFolderDialog } from "../../features/folderSlice";
@@ -7,6 +7,8 @@ import {
   toggle3mf,
   toggleGcode,
   setPartFilter,
+  PartsFilter,
+  toggleSettingsDetails
 } from "../../features/settingsSlice";
 import { AnimatePresence, motion } from "framer-motion";
 import "./folderDetail.css";
@@ -16,7 +18,7 @@ interface IProps {
   folders: IFolder[] | undefined;
 }
 const FolderDetails = ({ folders }: IProps) => {
-  const [isVisible, setIsVisible] = useState(false);
+
   const currentFolder = useAppSelector(
     (state) => state.folderReducer.currentFolder
   );
@@ -55,27 +57,33 @@ const FolderDetails = ({ folders }: IProps) => {
       <button
         role="button"
         className="btn badge"
-        onClick={() => setIsVisible(!isVisible)}
+        onClick={() => dispatch(toggleSettingsDetails())}
       >
         filter
       </button>
-      <DetailsFilter isVisible={isVisible} />
+      <DetailsFilter  />
     </div>
   );
 };
 
 export default FolderDetails;
 
-interface IDetailsProps {
-  isVisible: boolean;
-}
 
-const DetailsFilter = ({ isVisible }: IDetailsProps) => {
+
+const DetailsFilter = () => {
   const settings = useAppSelector((state) => state.settingsReducer);
   const dispatch = useAppDispatch();
+
+  function handleClick(
+    e: React.MouseEvent<HTMLInputElement>,
+    selected: PartsFilter
+  ) {
+    e.stopPropagation();
+    dispatch(setPartFilter(selected));
+  }
   return (
     <AnimatePresence>
-      {isVisible && (
+      {settings.folder.settingDetailsIsOpen && (
         <motion.ul
           style={{ overflow: "hidden" }}
           initial={{ opacity: 0, height: 0 }}
@@ -84,51 +92,82 @@ const DetailsFilter = ({ isVisible }: IDetailsProps) => {
           transition={{ type: "tween" }}
           className="fd__more"
         >
-          <li>
-          <input type="radio" id='all' name='all' value='344' />
-          <label htmlFor="all">All</label>
-
-          <input type="radio" id='selected' name='selected' value='534' />
-          <label htmlFor="selected">selected</label>
-
-          <input type="radio" id='unselected' name='unselected' value='ok' />
-          <label htmlFor="unselected">unselected</label>
-          </li>
-          <li>
-            {" "}
-            <label htmlFor="stl">
-              .stl{" "}
+          <li className="flex flex-column">
+            <div>
+              <label className="pr-0" htmlFor="all">
+                all files
+              </label>
               <input
-                id="stl"
-                type="checkbox"
-                checked={settings.show.stl}
-                onClick={() => dispatch(toggleStl())}
+                onClick={(e) => handleClick(e, "allFiles")}
+                type="radio"
+                id="all"
+                name="selected"
+                value="all"
+                checked={settings.partsFilter === "allFiles"}
               />
-            </label>
+            </div>
+            <div>
+              <label className="pr-0" htmlFor="selected">
+                selected files only
+              </label>
+              <input
+                type="radio"
+                id="selected"
+                name="selected"
+                value="selected"
+                checked={settings.partsFilter === "selectedFiles"}
+                onClick={(e) => handleClick(e, "selectedFiles")}
+              />
+            </div>
+            <div>
+              <label className="pr-0" htmlFor="unselected">
+                unselected files only
+              </label>
+              <input
+                onClick={(e) => handleClick(e, "unSelectedFiles")}
+                type="radio"
+                id="unselected"
+                name="selected"
+                value="unselected"
+                checked={settings.partsFilter === "unSelectedFiles"}
+              />
+            </div>
           </li>
           <li>
             {" "}
-            <label htmlFor="3MF">
+            <label className="pr-0" htmlFor="stl">
+              .stl{" "}
+            </label>
+            <input
+              id="stl"
+              type="checkbox"
+              checked={settings.show.stl}
+              onClick={() => dispatch(toggleStl())}
+            />
+          </li>
+          <li>
+            {" "}
+            <label className="pr-0" htmlFor="3MF">
               .3MF{" "}
-              <input
-                id="3MF"
-                type="checkbox"
-                checked={settings.show.threeMF}
-                onClick={() => dispatch(toggle3mf())}
-              />{" "}
             </label>
+            <input
+              id="3MF"
+              type="checkbox"
+              checked={settings.show.threeMF}
+              onClick={() => dispatch(toggle3mf())}
+            />{" "}
           </li>
           <li>
             {" "}
-            <label htmlFor="gcode">
+            <label className="pr-0" htmlFor="gcode">
               .gcode{" "}
-              <input
-                id="gcode"
-                type="checkbox"
-                checked={settings.show.gcode}
-                onClick={() => dispatch(toggleGcode())}
-              />{" "}
             </label>
+            <input
+              id="gcode"
+              type="checkbox"
+              checked={settings.show.gcode}
+              onClick={() => dispatch(toggleGcode())}
+            />{" "}
           </li>
         </motion.ul>
       )}

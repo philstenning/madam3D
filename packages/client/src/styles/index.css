@@ -213,6 +213,25 @@ main {
   background: var(--gray-15);
   border-radius: var(--border-radius-m) 0 0 0;
 }
+/*------------   Utils  ----------------*/
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flex-column{
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 .primary {
   background: var(--pink-30);
@@ -227,4 +246,18 @@ main {
 .warning {
   background: var(--red-40);
   color: var(--gray-90);
+}
+.pl-0{
+  padding-left: .25rem;}
+.pl-1{
+  padding-left: .5rem;}
+.pl-2{
+  padding-left: .75rem;
+}
+.pr-0{
+  padding-right: .25rem;}
+.pr-1{
+  padding-right: .5rem;}
+.pr-2{
+  padding-right: .75rem;
 }

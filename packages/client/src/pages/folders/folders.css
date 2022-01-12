@@ -127,19 +127,5 @@
   /* transition: top 200ms ease-in-out; */
 }
 
-/*------------   Badge  ----------------*/
 
-/*------------   Utils  ----------------*/
 
-.flex {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.5rem;
-}
-.flex-end {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-}

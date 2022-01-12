@@ -57,7 +57,7 @@ const FolderListItem = ({ folder }: Props) => {
         to={`/folders/${folder.id}`}
       >
         {folder.name}
-        <span className="flex">
+        <span className="flex-end">
           <Badge type={partsCount(folder.id) > 0 ? "primary" : "secondary"}>
             {badgeDisplayText(folder)} 
           </Badge>

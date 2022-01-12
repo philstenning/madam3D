@@ -10,9 +10,12 @@ interface ISettings {
     threeMF: boolean;
     obj: boolean;
   };
+  folder:{
+    settingDetailsIsOpen:boolean;
+  }
 }
 
-type PartsFilter = "selectedFiles" | "unSelectedFiles" | "allFiles";
+export type PartsFilter = "selectedFiles" | "unSelectedFiles" | "allFiles";
 
 const initialState: ISettings = {
   partsFilter: "allFiles",
@@ -22,6 +25,9 @@ const initialState: ISettings = {
     stl: true,
     threeMF: true,
   },
+  folder:{
+    settingDetailsIsOpen:false
+  }
 };
 
 const settingsSlice = createSlice({
@@ -43,10 +49,13 @@ const settingsSlice = createSlice({
     setPartFilter(state, action: PayloadAction<PartsFilter>) {
       state.partsFilter = action.payload;
     },
+    toggleSettingsDetails(state){
+      state.folder.settingDetailsIsOpen= !state.folder.settingDetailsIsOpen
+    }
   },
 });
 
-export const { toggleGcode, toggle3mf, setPartFilter, toggleObj, toggleStl } =
+export const { toggleGcode, toggle3mf, setPartFilter, toggleObj, toggleStl,toggleSettingsDetails } =
   settingsSlice.actions;
 
 

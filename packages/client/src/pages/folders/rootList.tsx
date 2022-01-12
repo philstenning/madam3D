@@ -62,7 +62,7 @@ const RootList = ({ folders }: IProps) => {
                 to={`/folders/${folder.id}`}
               >
                 {folder.name}{" "}
-                <span className="flex">
+                <span className="flex-end">
                   <Badge
                     type={
                       selectedParts.filter((p) => p.rootId === folder.rootId)
