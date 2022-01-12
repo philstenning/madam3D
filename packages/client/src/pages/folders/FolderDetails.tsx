@@ -8,7 +8,8 @@ import {
   toggleGcode,
   setPartFilter,
   PartsFilter,
-  toggleSettingsDetails
+  toggleSettingsDetails,
+  toggleSearchFiltersParts
 } from "../../features/settingsSlice";
 import { AnimatePresence, motion } from "framer-motion";
 import "./folderDetail.css";
@@ -59,7 +60,7 @@ const FolderDetails = ({ folders }: IProps) => {
         className="btn badge"
         onClick={() => dispatch(toggleSettingsDetails())}
       >
-        filter
+       filters
       </button>
       <DetailsFilter  />
     </div>
@@ -167,6 +168,18 @@ const DetailsFilter = () => {
               type="checkbox"
               checked={settings.show.gcode}
               onClick={() => dispatch(toggleGcode())}
+            />{" "}
+          </li>
+          <li>
+            {" "}
+            <label className="pr-0" htmlFor="search-filters-parts">
+              search filters parts
+            </label>
+            <input
+              id="search-filters-parts"
+              type="checkbox"
+              checked={settings.folder.searchFiltersParts}
+              onClick={() => dispatch(toggleSearchFiltersParts())}
             />{" "}
           </li>
         </motion.ul>

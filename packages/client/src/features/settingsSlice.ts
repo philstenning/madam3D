@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { db, ICurrentFolder, IFolder } from "../db";
 
-
 interface ISettings {
   partsFilter: PartsFilter;
   show: {
@@ -10,9 +9,10 @@ interface ISettings {
     threeMF: boolean;
     obj: boolean;
   };
-  folder:{
-    settingDetailsIsOpen:boolean;
-  }
+  folder: {
+    settingDetailsIsOpen: boolean;
+    searchFiltersParts: boolean;
+  };
 }
 
 export type PartsFilter = "selectedFiles" | "unSelectedFiles" | "allFiles";
@@ -25,9 +25,10 @@ const initialState: ISettings = {
     stl: true,
     threeMF: true,
   },
-  folder:{
-    settingDetailsIsOpen:false
-  }
+  folder: {
+    settingDetailsIsOpen: false,
+    searchFiltersParts: true,
+  },
 };
 
 const settingsSlice = createSlice({
@@ -49,14 +50,23 @@ const settingsSlice = createSlice({
     setPartFilter(state, action: PayloadAction<PartsFilter>) {
       state.partsFilter = action.payload;
     },
-    toggleSettingsDetails(state){
-      state.folder.settingDetailsIsOpen= !state.folder.settingDetailsIsOpen
-    }
+    toggleSettingsDetails(state) {
+      state.folder.settingDetailsIsOpen = !state.folder.settingDetailsIsOpen;
+    },
+    toggleSearchFiltersParts(state) {
+      state.folder.searchFiltersParts = !state.folder.searchFiltersParts;
+    },
   },
 });
 
-export const { toggleGcode, toggle3mf, setPartFilter, toggleObj, toggleStl,toggleSettingsDetails } =
-  settingsSlice.actions;
+export const {
+  toggleGcode,
+  toggle3mf,
+  setPartFilter,
+  toggleObj,
+  toggleStl,
+  toggleSettingsDetails,
+  toggleSearchFiltersParts,
+} = settingsSlice.actions;
 
-
-  export default settingsSlice.reducer
+export default settingsSlice.reducer;
