@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,12 +16,75 @@ import { haveFolderPermission } from "../../utils/fileSystem";
 import FolderListItem from "./FolderListItem";
 
 const RootList = ({ folders }: IProps) => {
+  const [filteredFolders,setFilteredFolders] = useState(folders)
+
   const storeCurrentRootFolder = useAppSelector(
     (state) => state.folderReducer.currentRootFolder
   );
   const selectedParts = useAppSelector(
     (state) => state.selectedFolderItemsReducer.selectedParts
   );
+
+
+  useEffect(() => {
+   setFilteredFolders(folders)
+  }, [folders])
+
+  // console.clear()
+  const searchText = useAppSelector((state) => state.searchReducer.searchText);
+  
+  if (searchText.length > 3 && folders) {
+    console.log(searchText);
+   
+    const rootFolders = folders.filter((folder) => folder.isRoot);
+
+    const subFolders = folders.filter((folder) =>
+    folder.name.includes(searchText)
+    );
+    
+    let tempRoot: IFolder[] = [];
+   
+    subFolders?.forEach((folder) => {
+      rootFolders?.forEach((rootFolder) => {
+        if (rootFolder.id === folder.rootId) {
+          // we need to remove this folder from the displayed folders 
+          // if is name does not match the search text so we set the 
+          // parts to zero.
+          if (!rootFolder.name.includes(searchText)){
+            
+            // rootFolder.parts = 0;
+          } 
+          let t =[...tempRoot,{...rootFolder,parts:0}]
+      //  if (!rootFolder.name.includes(searchText)){
+
+      //    tempRoot.push(rootFolder );
+      //  }
+      //  else{
+      //    tempRoot.push(rootFolder)
+      //  }
+          // remove duplicate entries.
+          tempRoot = [...new Set(t)];
+        }
+      });
+    });
+    const fff = [...subFolders, ...tempRoot];
+    // folders = [...new Set(folders)];
+    setFilteredFolders([...new Set(fff)])
+    // if(tempRoot)folders = []
+    folders?.forEach((f, idx) =>
+      console.log(idx + 1, " name: ", f.name, f.rootId)
+    );
+    console.log("root folders");
+    rootFolders?.forEach((f, idx) =>
+      console.log(idx + 1, " name: ", f.name, f.id)
+    );
+
+    console.log("/////// temp root folders");
+    tempRoot?.forEach((f, idx) =>
+      console.log(idx + 1, " name: ", f.name, f.id)
+    );
+  }
+
   const dispatch = useAppDispatch();
 
   const handleClick = async (folder: IFolder) => {
@@ -47,44 +110,45 @@ const RootList = ({ folders }: IProps) => {
     return storeCurrentRootFolder?.id === folder.rootId ? true : false;
   };
   return (
-   
-      <ul className=" accordion__group__list">
-        {folders
-          ?.filter((folder) => folder.isRoot)
-          .map((folder) => (
-            <li
-              className="accordion__item"
-              onClick={() => handleClick(folder)}
-              key={folder.id}
+    <ul className=" accordion__group__list">
+      {filteredFolders
+        ?.filter((folder) => folder.isRoot)
+        .map((folder) => (
+          <li
+            className="accordion__item"
+            onClick={() => handleClick(folder)}
+            key={folder.id}
+          >
+            <NavLink
+              className={`accordion__link `}
+              to={`/folders/${folder.id}`}
             >
-              <NavLink
-                className={`accordion__link `}
-                to={`/folders/${folder.id}`}
-              >
-                {folder.name}{" "}
-                <span className="flex-end">
-                  <Badge
-                    type={
-                      selectedParts.filter((p) => p.rootId === folder.rootId)
-                        .length > 0
-                        ? "primary"
-                        : "secondary"
-                    }
-                  >
-                    {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
-                    models
-                  </Badge>
-                </span>
-              </NavLink>
-              <SubListAccordion
-                folders={folders}
-                isActive={subListIsActive(folder)}
-                rootFolder={folder}
-              />
-            </li>
-          ))}
-      </ul>
-   
+              {folder.name}{" "}
+              <span className="flex-end">
+                <Badge
+                  type={
+                    selectedParts.filter((p) => p.rootId === folder.rootId)
+                      .length > 0
+                      ? "primary"
+                      : "secondary"
+                  }
+                >
+                  {
+                    filteredFolders.filter((f) => f.rootId === folder.rootId)
+                      .length
+                  }{" "}
+                  models
+                </Badge>
+              </span>
+            </NavLink>
+            <SubListAccordion
+              folders={filteredFolders}
+              isActive={subListIsActive(folder)}
+              rootFolder={folder}
+            />
+          </li>
+        ))}
+    </ul>
   );
 };
 
