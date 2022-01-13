@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,12 +16,56 @@ import { haveFolderPermission } from "../../utils/fileSystem";
 import FolderListItem from "./FolderListItem";
 
 const RootList = ({ folders }: IProps) => {
+  const [filteredFolders, setFilteredFolders] = useState(folders);
+
   const storeCurrentRootFolder = useAppSelector(
     (state) => state.folderReducer.currentRootFolder
   );
   const selectedParts = useAppSelector(
     (state) => state.selectedFolderItemsReducer.selectedParts
   );
+  const searchText = useAppSelector((state) => state.searchReducer.searchText);
+
+  useEffect(() => {
+    if (folders) {
+      console.log("folders has changed.");
+      setFilteredFolders([...folders]);
+    }
+  }, [folders]);
+
+  useEffect(() => {
+    console.log(`search text has changed to ${searchText}`);
+    if (folders) {
+      filterFolders(folders, searchText);
+    }
+  }, [searchText, folders]);
+
+  // console.clear()
+
+  function filterFolders(_folders: IFolder[], _searchText: string) {
+    const subFolders = _folders.filter(
+      (folder) => folder.name.includes(_searchText) && !folder.isRoot
+    );
+
+    // first check it is root folder,
+    const rootFolders = _folders
+    .filter((folder) => folder.isRoot)
+    // then if it search text does not match
+    // we set parts to zero to hide in results.
+      .map((f) => {
+        if(f.name.includes(_searchText)){
+          return {...f}
+        }else{
+          return {...f,parts:0}
+        }
+        })
+        // if the entry has no sub folder entries we can now remove it
+       .filter(f=> f.parts>0 ||   subFolders.filter(sf=>sf.rootId ===f.id ).length>0)
+
+  
+     setFilteredFolders([...subFolders, ...rootFolders]);
+  }
+
   const dispatch = useAppDispatch();
 
   const handleClick = async (folder: IFolder) => {
@@ -47,44 +91,45 @@ const RootList = ({ folders }: IProps) => {
     return storeCurrentRootFolder?.id === folder.rootId ? true : false;
   };
   return (
-   
-      <ul className=" accordion__group__list">
-        {folders
-          ?.filter((folder) => folder.isRoot)
-          .map((folder) => (
-            <li
-              className="accordion__item"
-              onClick={() => handleClick(folder)}
-              key={folder.id}
+    <ul className=" accordion__group__list">
+      {filteredFolders
+        ?.filter((folder) => folder.isRoot)
+        .map((folder) => (
+          <li
+            className="accordion__item"
+            onClick={() => handleClick(folder)}
+            key={folder.id}
+          >
+            <NavLink
+              className={`accordion__link `}
+              to={`/folders/${folder.id}`}
             >
-              <NavLink
-                className={`accordion__link `}
-                to={`/folders/${folder.id}`}
-              >
-                {folder.name}{" "}
-                <span className="flex-end">
-                  <Badge
-                    type={
-                      selectedParts.filter((p) => p.rootId === folder.rootId)
-                        .length > 0
-                        ? "primary"
-                        : "secondary"
-                    }
-                  >
-                    {folders.filter((f) => f.rootId === folder.rootId).length}{" "}
-                    models
-                  </Badge>
-                </span>
-              </NavLink>
-              <SubListAccordion
-                folders={folders}
-                isActive={subListIsActive(folder)}
-                rootFolder={folder}
-              />
-            </li>
-          ))}
-      </ul>
-   
+              {folder.name}{" "}
+              <span className="flex-end">
+                <Badge
+                  type={
+                    selectedParts.filter((p) => p.rootId === folder.rootId)
+                      .length > 0
+                      ? "primary"
+                      : "secondary"
+                  }
+                >
+                  {
+                    filteredFolders.filter((f) => f.rootId === folder.rootId)
+                      .length + (folder.parts>0?0:-1)
+                  }{" "}
+                  models
+                </Badge>
+              </span>
+            </NavLink>
+            <SubListAccordion
+              folders={filteredFolders}
+              isActive={subListIsActive(folder)}
+              rootFolder={folder}
+            />
+          </li>
+        ))}
+    </ul>
   );
 };
 

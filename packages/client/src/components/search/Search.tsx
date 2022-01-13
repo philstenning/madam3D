@@ -1,11 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import "./search.css";
 import IconSearch from "~icons/fluent/search-28-filled";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {clearSearchText,setSearchText} from '../../features/searchSlice'
 
 const Search = () => {
+
+  const searchText = useAppSelector(state=>state.searchReducer.searchText)
+  const dispatch = useAppDispatch()
+
   function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
+      dispatch(clearSearchText())
   }
+
   return (
     <form className="search">
       <div className="search__container">
@@ -14,11 +22,13 @@ const Search = () => {
           type="text"
           name="search"
           id="search"
-          placeholder="Search"
-          autoComplete="false"
+          placeholder="Filter Models"
+          autoComplete="true"
+          value={searchText}
+          onChange={(e) => dispatch(setSearchText(e.target.value))}
         />
         <button onClick={(e) => handleClick(e)} className="search__button">
-          <IconSearch style={{}} />
+          {searchText.length ? "X" : <IconSearch style={{}} />}
         </button>
       </div>
     </form>

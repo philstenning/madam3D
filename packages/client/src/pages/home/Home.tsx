@@ -28,11 +28,11 @@ const Home = () => {
         </a>
       </p>
 
-      <div className="containerA">
+      {/* <div className="containerA">
         <div className="one"></div>
         <div className="two"></div>
         <div className="three"></div>
-      </div>
+      </div> */}
     </div>
   );
 };

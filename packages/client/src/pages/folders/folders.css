@@ -32,8 +32,8 @@
 
 .accordion__link:hover::before {
   /* height: var(--active-state-bar-height); */
-  bottom: 30%;
-  top: 30%;
+  bottom: calc(50% - .8rem);
+  top: calc(50% - .8rem);
   height: auto;
   background: var(--pink-40);
 }
@@ -104,8 +104,8 @@
 .accordion__child-item .active::before {
   content: "";
   position: absolute;
-  top: 30%;
-  bottom: 30%;
+   bottom: calc(50% - .8rem);
+  top: calc(50% - .8rem);
   height: auto;
   width: var(--active-state-bar-width);
   background: var(--pink-30);
@@ -118,6 +118,7 @@
   position: absolute;
   top: 50%;
   bottom: 50%;
+  
   width: var(--active-state-bar-width);
   height: auto;
   background: var(--pink-40);
