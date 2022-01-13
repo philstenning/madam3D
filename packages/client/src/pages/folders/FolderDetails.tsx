@@ -9,7 +9,7 @@ import {
   setPartFilter,
   PartsFilter,
   toggleSettingsDetails,
-  toggleSearchFiltersParts
+  toggleSearchFiltersParts,
 } from "../../features/settingsSlice";
 import { AnimatePresence, motion } from "framer-motion";
 import "./folderDetail.css";
@@ -19,7 +19,6 @@ interface IProps {
   folders: IFolder[] | undefined;
 }
 const FolderDetails = ({ folders }: IProps) => {
-
   const currentFolder = useAppSelector(
     (state) => state.folderReducer.currentFolder
   );
@@ -39,37 +38,38 @@ const FolderDetails = ({ folders }: IProps) => {
   }
 
   return (
-    <div className="fd">
-      <div>
-        <button onClick={handleDelete}>Delete</button>
-      </div>
+    <>
+        <div
+          className="fd"
+        >
+          <div>
+            <button onClick={handleDelete}>Delete</button>
+          </div>
 
-      <ul className="fd__list">
-        <li>path: {currentFolder?.filePath || currentFolder?.name}</li>
-        <li>added: {currentFolder?.created}</li>
-        {/* <li>parts: {folders?.filter(f=>f.id === currentFolder?.id)[0].parts}</li> */}
-        <li className="flex-start">
-          selected:{" "}
-          <Badge type={countParts() ? "primary" : "secondary"}>
-            {countParts()}
-          </Badge>
-        </li>
-      </ul>
-      <button
-        role="button"
-        className="btn badge"
-        onClick={() => dispatch(toggleSettingsDetails())}
-      >
-       filters
-      </button>
-      <DetailsFilter  />
-    </div>
+          <ul className="fd__list">
+            <li>path: {currentFolder?.filePath || currentFolder?.name}</li>
+            <li>added: {currentFolder?.created}</li>
+            <li className="flex-start">
+              selected:{" "}
+              <Badge type={countParts() ? "primary" : "secondary"}>
+                {countParts()}
+              </Badge>
+            </li>
+          </ul>
+          <button
+            role="button"
+            className="btn badge"
+            onClick={() => dispatch(toggleSettingsDetails())}
+          >
+            filters
+          </button>
+          <DetailsFilter />
+        </div>
+    </>
   );
 };
 
 export default FolderDetails;
-
-
 
 const DetailsFilter = () => {
   const settings = useAppSelector((state) => state.settingsReducer);

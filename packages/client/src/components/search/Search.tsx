@@ -22,7 +22,7 @@ const Search = () => {
           type="text"
           name="search"
           id="search"
-          placeholder="Search"
+          placeholder="Filter Models"
           autoComplete="true"
           value={searchText}
           onChange={(e) => dispatch(setSearchText(e.target.value))}

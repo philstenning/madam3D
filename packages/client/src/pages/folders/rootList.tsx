@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { IFolder, createSerializableCurrentFolder } from "../../db";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,7 +16,7 @@ import { haveFolderPermission } from "../../utils/fileSystem";
 import FolderListItem from "./FolderListItem";
 
 const RootList = ({ folders }: IProps) => {
-  const [filteredFolders,setFilteredFolders] = useState(folders)
+  const [filteredFolders, setFilteredFolders] = useState(folders);
 
   const storeCurrentRootFolder = useAppSelector(
     (state) => state.folderReducer.currentRootFolder
@@ -24,65 +24,46 @@ const RootList = ({ folders }: IProps) => {
   const selectedParts = useAppSelector(
     (state) => state.selectedFolderItemsReducer.selectedParts
   );
-
+  const searchText = useAppSelector((state) => state.searchReducer.searchText);
 
   useEffect(() => {
-   setFilteredFolders(folders)
-  }, [folders])
+    if (folders) {
+      console.log("folders has changed.");
+      setFilteredFolders([...folders]);
+    }
+  }, [folders]);
+
+  useEffect(() => {
+    console.log(`search text has changed to ${searchText}`);
+    if (folders) {
+      filterFolders(folders, searchText);
+    }
+  }, [searchText, folders]);
 
   // console.clear()
-  const searchText = useAppSelector((state) => state.searchReducer.searchText);
-  
-  if (searchText.length > 3 && folders) {
-    console.log(searchText);
-   
-    const rootFolders = folders.filter((folder) => folder.isRoot);
 
-    const subFolders = folders.filter((folder) =>
-    folder.name.includes(searchText)
+  function filterFolders(_folders: IFolder[], _searchText: string) {
+    const subFolders = _folders.filter(
+      (folder) => folder.name.includes(_searchText) && !folder.isRoot
     );
-    
-    let tempRoot: IFolder[] = [];
-   
-    subFolders?.forEach((folder) => {
-      rootFolders?.forEach((rootFolder) => {
-        if (rootFolder.id === folder.rootId) {
-          // we need to remove this folder from the displayed folders 
-          // if is name does not match the search text so we set the 
-          // parts to zero.
-          if (!rootFolder.name.includes(searchText)){
-            
-            // rootFolder.parts = 0;
-          } 
-          let t =[...tempRoot,{...rootFolder,parts:0}]
-      //  if (!rootFolder.name.includes(searchText)){
 
-      //    tempRoot.push(rootFolder );
-      //  }
-      //  else{
-      //    tempRoot.push(rootFolder)
-      //  }
-          // remove duplicate entries.
-          tempRoot = [...new Set(t)];
+    // first check it is root folder,
+    const rootFolders = _folders
+    .filter((folder) => folder.isRoot)
+    // then if it search text does not match
+    // we set parts to zero to hide in results.
+      .map((f) => {
+        if(f.name.includes(_searchText)){
+          return {...f}
+        }else{
+          return {...f,parts:0}
         }
-      });
-    });
-    const fff = [...subFolders, ...tempRoot];
-    // folders = [...new Set(folders)];
-    setFilteredFolders([...new Set(fff)])
-    // if(tempRoot)folders = []
-    folders?.forEach((f, idx) =>
-      console.log(idx + 1, " name: ", f.name, f.rootId)
-    );
-    console.log("root folders");
-    rootFolders?.forEach((f, idx) =>
-      console.log(idx + 1, " name: ", f.name, f.id)
-    );
+        })
+        // if the entry has no sub folder entries we can now remove it
+       .filter(f=> f.parts>0 ||   subFolders.filter(sf=>sf.rootId ===f.id ).length>0)
 
-    console.log("/////// temp root folders");
-    tempRoot?.forEach((f, idx) =>
-      console.log(idx + 1, " name: ", f.name, f.id)
-    );
+  
+     setFilteredFolders([...subFolders, ...rootFolders]);
   }
 
   const dispatch = useAppDispatch();
@@ -135,7 +116,7 @@ const RootList = ({ folders }: IProps) => {
                 >
                   {
                     filteredFolders.filter((f) => f.rootId === folder.rootId)
-                      .length
+                      .length + (folder.parts>0?0:-1)
                   }{" "}
                   models
                 </Badge>
