@@ -8,6 +8,8 @@ import {
 import "./temp.css";
 
 import  StlViewer from '../../components/stlViewer/StlViewer'
+import  ThreeMFViewer from '../../components/threeMFViewer/ThreeMFViewer'
+
 
 const Temp = () => {
     const x = useMotionValue(0)
@@ -17,6 +19,7 @@ const Temp = () => {
     <div>
        {/* <img src={model} alt="" /> */}
        <StlViewer  />
+       <ThreeMFViewer/>
     </div>
   );
 };

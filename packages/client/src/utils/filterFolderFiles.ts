@@ -3,10 +3,9 @@ import {
   IFile,
   FileTypes,
   addFolderToDb,
-  createDbAddResult,
   IDatabaseRecordAddResult,
 } from "../db";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+
 import md5 from "md5";
 import { createFolder } from ".";
 
@@ -15,19 +14,21 @@ export async function filterFolderFiles(folder: IFolder) {
   let filteredFiles: IFile[] = [];
   if (!folder) return filteredFiles;
   for await (const entry of folder.handle.values()) {
-    // filter dir we only need stl at the moment
-    if (entry.kind === "file" && entry.name.endsWith(".stl")) {
-      const newFile: IFile = await _createNewFileEntry(folder, entry);
-
-      filteredFiles.push(newFile);
+    if (entry.kind === "file") {
+      if (
+        entry.name.toLowerCase().endsWith(".stl") ||
+        entry.name.toLowerCase().endsWith(".3mf") ||
+        entry.name.toLowerCase().endsWith(".gcode")
+      ) {
+        const newFile = await _createNewFileEntry(folder, entry);
+        if (newFile) {
+          filteredFiles.push(newFile);
+        }
+      }
     }
   }
   return filteredFiles;
 }
-
-// folderHandle: FileSystemDirectoryHandle,
-//   path: string,
-//   isRoot: boolean = false
 
 export async function recursivelyScanLocalDrive(
   folderHandle: FileSystemDirectoryHandle,
@@ -45,8 +46,14 @@ export async function recursivelyScanLocalDrive(
     for await (const entry of folderHandle.values()) {
       if (entry.kind === "directory") {
         folders.push(entry);
-      } else if (entry.kind === "file" && entry.name.endsWith(".stl")) {
-        filteredFiles.push(entry);
+      } else if (entry.kind === "file") {
+        if (
+          entry.name.toLowerCase().endsWith(".stl") ||
+          entry.name.toLowerCase().endsWith(".3mf") ||
+          entry.name.toLowerCase().endsWith(".gcode")
+        ) {
+          filteredFiles.push(entry);
+        }
       }
     }
   } catch (error) {
@@ -93,7 +100,6 @@ export async function recursivelyScanLocalDrive(
   return currentFolderResult;
 }
 
-
 async function _createNewFileEntry(
   folder: IFolder,
   entry: FileSystemFileHandle
@@ -102,8 +108,36 @@ async function _createNewFileEntry(
   const file = await fileHandle.getFile();
   const url = URL.createObjectURL(file);
   // console.log(entry.name, url);
-  const newFile: IFile = createFile(file, fileHandle, url, folder.id,folder.rootId);
-  return newFile;
+
+  const fileType = GetFileType(file);
+  if (fileType !== FileTypes.NOT_SUPPORTED) {
+    const newFile: IFile = createFile(
+      file,
+      fileHandle,
+      url,
+      folder.id,
+      folder.rootId,
+      fileType
+    );
+    return newFile;
+  }
+  return null;
+}
+
+function GetFileType(file: File): FileTypes {
+  const fileExtension = file.name.toLowerCase().split(".").pop();
+  console.log(fileExtension, file.name);
+  switch (fileExtension) {
+    case "stl":
+      return FileTypes.STL;
+    case "3mf":
+      return FileTypes.THREE_MF;
+    case "gcode":
+      return FileTypes.GCODE;
+
+    default:
+      return FileTypes.NOT_SUPPORTED;
+  }
 }
 
 export function createFile(
@@ -111,8 +145,8 @@ export function createFile(
   fileHandle: FileSystemFileHandle,
   url: string,
   folderId: string,
-  rootId:string,
-  fileType: FileTypes = FileTypes.STL
+  rootId: string,
+  fileType: FileTypes
 ): IFile {
   // md5 hash the file name and folder id together,
   // when we return to the folder it will
