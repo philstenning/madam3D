@@ -4,9 +4,6 @@ import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Badge from "../../components/badge/Badge";
 import { v4 as uuid } from "uuid";
-interface IProps {
-  folders: IFolder[] | undefined;
-}
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   setCurrentRootFolder,
@@ -14,6 +11,10 @@ import {
 } from "../../features/folderSlice";
 import { haveFolderPermission } from "../../utils/fileSystem";
 import FolderListItem from "./FolderListItem";
+
+interface IProps {
+  folders: IFolder[] | undefined;
+}
 
 const RootList = ({ folders }: IProps) => {
   const [filteredFolders, setFilteredFolders] = useState(folders);
@@ -25,48 +26,14 @@ const RootList = ({ folders }: IProps) => {
     (state) => state.selectedFolderItemsReducer.selectedParts
   );
   const searchText = useAppSelector((state) => state.searchReducer.searchText);
+  const dispatch = useAppDispatch();
 
+  // if the search text or folder change, refilter.
   useEffect(() => {
     if (folders) {
-      console.log("folders has changed.");
-      setFilteredFolders([...folders]);
-    }
-  }, [folders]);
-
-  useEffect(() => {
-    console.log(`search text has changed to ${searchText}`);
-    if (folders) {
-      filterFolders(folders, searchText);
+      setFilteredFolders(filterFolders(folders, searchText)); 
     }
   }, [searchText, folders]);
-
-  // console.clear()
-
-  function filterFolders(_folders: IFolder[], _searchText: string) {
-    const subFolders = _folders.filter(
-      (folder) => folder.name.includes(_searchText) && !folder.isRoot
-    );
-
-    // first check it is root folder,
-    const rootFolders = _folders
-    .filter((folder) => folder.isRoot)
-    // then if it search text does not match
-    // we set parts to zero to hide in results.
-      .map((f) => {
-        if(f.name.includes(_searchText)){
-          return {...f}
-        }else{
-          return {...f,parts:0}
-        }
-        })
-        // if the entry has no sub folder entries we can now remove it
-       .filter(f=> f.parts>0 ||   subFolders.filter(sf=>sf.rootId ===f.id ).length>0)
-
-  
-     setFilteredFolders([...subFolders, ...rootFolders]);
-  }
-
-  const dispatch = useAppDispatch();
 
   const handleClick = async (folder: IFolder) => {
     // if folder is already active then close it and set to null
@@ -75,7 +42,6 @@ const RootList = ({ folders }: IProps) => {
       dispatch(setCurrentFolder(null));
       return;
     }
-
     // if we don't have permission to read the folder,
     // we need to show the permission dialog and get permission.
     const folderHasPermission = await haveFolderPermission(folder.handle);
@@ -87,6 +53,7 @@ const RootList = ({ folders }: IProps) => {
       dispatch(setCurrentFolder(currentFolder));
     }
   };
+
   const subListIsActive = (folder: IFolder) => {
     return storeCurrentRootFolder?.id === folder.rootId ? true : false;
   };
@@ -114,10 +81,8 @@ const RootList = ({ folders }: IProps) => {
                       : "secondary"
                   }
                 >
-                  {
-                    filteredFolders.filter((f) => f.rootId === folder.rootId)
-                      .length + (folder.parts>0?0:-1)
-                  }{" "}
+                  {filteredFolders.filter((f) => f.rootId === folder.rootId)
+                    .length + (folder.parts > 0 ? 0 : -1)}{" "}
                   models
                 </Badge>
               </span>
@@ -134,6 +99,40 @@ const RootList = ({ folders }: IProps) => {
 };
 
 export default RootList;
+
+
+
+
+  function filterFolders(_folders: IFolder[], _searchText: string) {
+    const subFolders = _folders.filter(
+      (folder) => folder.name.includes(_searchText) && !folder.isRoot
+    );
+
+    // first check it is root folder,
+    const rootFolders = _folders
+      .filter((folder) => folder.isRoot)
+      // then if it search text does not match
+      // we set parts to zero to hide in results.
+      .map((f) => {
+        if (f.name.includes(_searchText)) {
+          return { ...f };
+        } else {
+          return { ...f, parts: 0 };
+        }
+      })
+      // if the entry has no sub folder entries we can now remove it
+      .filter(
+        (f) =>
+          f.parts > 0 ||
+          subFolders.filter((sf) => sf.rootId === f.id).length > 0
+      );
+
+    // setFilteredFolders([...subFolders, ...rootFolders]);
+    return [...subFolders, ...rootFolders];
+  }
+
+
+
 
 interface ISubListProps {
   rootFolder: IFolder;

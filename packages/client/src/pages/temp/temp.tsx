@@ -9,6 +9,7 @@ import "./temp.css";
 
 import  StlViewer from '../../components/stlViewer/StlViewer'
 import  ThreeMFViewer from '../../components/threeMFViewer/ThreeMFViewer'
+import  GcodeViewer from '../../components/threeMFViewer/gcodeViewer'
 
 
 const Temp = () => {
@@ -20,6 +21,7 @@ const Temp = () => {
        {/* <img src={model} alt="" /> */}
        <StlViewer  />
        <ThreeMFViewer/>
+       <GcodeViewer/>
     </div>
   );
 };

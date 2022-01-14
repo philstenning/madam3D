@@ -18,7 +18,7 @@ import Badge from "../../components/badge/Badge";
 interface IProps {
   folders: IFolder[] | undefined;
 }
-const FolderDetails = ({ folders }: IProps) => {
+const FolderDetails = () => {
   const currentFolder = useAppSelector(
     (state) => state.folderReducer.currentFolder
   );
