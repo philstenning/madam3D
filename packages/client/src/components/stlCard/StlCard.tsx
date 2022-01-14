@@ -2,20 +2,30 @@ import { useState, useEffect } from "react";
 import { FileTypes, IFile } from "../../db";
 import StlViewer from "../stlViewer/StlViewer";
 import ThreeMFViewer from "../threeMFViewer/ThreeMFViewer";
+import GcodeViewer from "../threeMFViewer/gcodeViewer"
+
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addPart, removePart } from "../../features/folderSelectedItems";
 import { AnimatePresence, motion } from "framer-motion";
+
 interface Props {
   file: IFile;
 }
 
 const StlCard = ({ file }: Props) => {
+  // const canView = useAppSelector(state=> state.settingsReducer.show)
+ 
+  // if(!canView.gcode && file.type=== FileTypes.GCODE)return null
+  // if(!canView.stl && file.type=== FileTypes.STL)return null
+  // if(!canView.threeMF && file.type=== FileTypes.THREE_MF)return null
   return (
     <div className="card">
 
     { file.type===FileTypes.STL && <StlViewer fileUrl={file.imageUrl} />}  
     { file.type===FileTypes.THREE_MF && <ThreeMFViewer fileUrl={file.imageUrl} />}  
+    { file.type===FileTypes.GCODE && <GcodeViewer fileUrl={file.imageUrl} />}  
+
       <Overlay file={file} />
     </div>
   );

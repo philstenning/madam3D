@@ -56,7 +56,7 @@ const Folders = ({ allFolders }: IProps) => {
       {/* this is section with the folder list */}
       <div className="aside">
         <RootList folders={allFolders} />
-        <FolderDetails folders={allFolders} />
+        <FolderDetails  />
       </div>
 
       {/* display the results of the project selected. */}
