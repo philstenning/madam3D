@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
-import { IFile } from "../../db";
+import { FileTypes, IFile } from "../../db";
 import StlViewer from "../stlViewer/StlViewer";
+import ThreeMFViewer from "../threeMFViewer/ThreeMFViewer";
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addPart, removePart } from "../../features/folderSelectedItems";
 import { AnimatePresence, motion } from "framer-motion";
 interface Props {
   file: IFile;
-  // file: FileSystemHandle;
 }
 
 const StlCard = ({ file }: Props) => {
-  // add overlay for checkbox if selected
-
   return (
     <div className="card">
-      <StlViewer fileUrl={file.imageUrl} />
+
+    { file.type===FileTypes.STL && <StlViewer fileUrl={file.imageUrl} />}  
+    { file.type===FileTypes.THREE_MF && <ThreeMFViewer fileUrl={file.imageUrl} />}  
       <Overlay file={file} />
     </div>
   );

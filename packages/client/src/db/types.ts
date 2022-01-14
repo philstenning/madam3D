@@ -65,6 +65,8 @@ export enum FileTypes {
   STL,
   OBJ,
   GCODE,
+  THREE_MF,
+  NOT_SUPPORTED,
 }
 
 export interface IDatabaseRecordAddResult<RecordType> {

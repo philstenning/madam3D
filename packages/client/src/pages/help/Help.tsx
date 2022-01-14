@@ -66,6 +66,16 @@ const Help = () => {
           – create GUI controls in seconds
         </li>
       </ul>
+      <ul>
+        <li>
+          <a href="https://github.com/mrdoob/three.js/blob/master/examples/webgl_loader_3mf.html">
+            3mf loader
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/mrdoob/three.js/blob/master/examples/webgl_loader_gcode.html">gcode loader</a>
+        </li>
+      </ul>
     </div>
   );
 };

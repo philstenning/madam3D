@@ -14,6 +14,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../db";
 import { useAppSelector } from "../../app/hooks";
 import "./nav.css";
+import Temp from "../../pages/temp/temp";
 const Nav = () => {
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()
@@ -72,6 +73,8 @@ const Nav = () => {
             <Route path=":projectId" element={<Project />} />
           </Route>
           <Route path="/settings" element={<Settings />} />
+          {/* just a page for working out stuff. */}
+          <Route path='temp' element={<Temp/>}/>
           <Route path="/" element={<Home />} />
         </Routes>
       </main>
