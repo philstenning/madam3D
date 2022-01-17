@@ -1,19 +1,20 @@
-
-
-
 /* 
    start  with the smallest grid size 
    and use the media queries to change 
    the number of columns.
 */
+
 .model-list {
+  --model-list-columns:1;
+  --model-list-rows:1;
   grid-row: 2 / 3;
   grid-column: 2 / 3;
   padding: 1rem;
   width: 100%;
   height: calc(100vh - 8rem);
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(var(--model-list-columns), 1fr) ;
+  grid-template-rows: repeat(var(--model-list-rows), 1fr) ;
   gap: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -21,10 +22,6 @@
 .model-list::-webkit-scrollbar {
   width: 1rem;
 }
-
-
-
-
 
 .pagination {
   display: flex;
@@ -34,53 +31,54 @@
   align-items: flex-start;
 }
 
-.pagination__btn{
-    padding: .5rem;
-    min-width: 5.5rem;
+.pagination__btn {
+  padding: 0.5rem;
+  min-width: 5.5rem;
 }
 
-.pagination__txt{
-    padding: 0 1rem;
-    margin: .7rem;
-    font-size: var(--font-size-s);
+.pagination__txt {
+  padding: 0 1rem;
+  margin: 0.7rem;
+  font-size: var(--font-size-s);
 }
 
-@media screen and (min-width: 500px )  {
+@media screen and (min-width: 500px) {
   .model-list {
+    /* --model-list-columns:2; */
     gap: 1rem;
-    
-    grid-template-columns: 1fr;
-     overflow-y: hidden;
-  overflow-x: hidden;
+   
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
   .pagination {
-      margin: 0;
+    margin: 0;
   }
-  
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (min-width:950px  ) {
   .model-list {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+
+    /* --model-list-columns:3; */
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* grid-template-rows: repeat(2, 1fr); */
     /* border: 1px solid green; */
   }
-  .pagination__txt{
+  .pagination__txt {
     padding: 0 1rem;
-    margin: .7rem;
+    margin: 0.7rem;
     font-size: var(--font-size-m);
-}
-}
-@media screen and (min-width: 1200px) {
-  .model-list {
-    grid-template-columns: repeat(3, 1fr);
-    /* border: 1px solid green; */
   }
 }
+/* @media screen and (min-width: 1800px) { */
+  /* .model-list { */
+    /* grid-template-columns: repeat(3, 1fr); */
+    /* border: 1px solid green;
+  }
+} */
 
-@media screen and (min-width: 2000px) {
-  .model-list {
-    grid-template-columns: repeat(4, 1fr);
+/* @media screen and (min-width: 2000px) { */
+  /* .model-list { */
+    /* grid-template-columns: repeat(4, 1fr); */
     /* border: 1px solid green; */
-  }
-}
+  /* } */
+/* } */
