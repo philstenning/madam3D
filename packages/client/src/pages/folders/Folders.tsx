@@ -7,6 +7,7 @@ import RootList from "./rootList";
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import { useAppDispatch } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
+import useMeasure from "react-use-measure";
 import {
   createSerializableCurrentFolder,
   IFolder,
@@ -21,7 +22,8 @@ interface IProps {
 
 const Folders = ({ allFolders }: IProps) => {
   const dispatch = useAppDispatch();
-  
+    // const [ref, { width, height }] = useMeasure();
+    // console.log(`###### width: ${width} height: ${height}`)
   async function selectFolder(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
@@ -60,7 +62,10 @@ const Folders = ({ allFolders }: IProps) => {
       </div>
 
       {/* display the results of the project selected. */}
+      {/* <div ref={ref} className="container" style={{height:'fit',width:'fit'}}> */}
+
       <ModelList />
+      {/* </div> */}
     </div>
   );
 };

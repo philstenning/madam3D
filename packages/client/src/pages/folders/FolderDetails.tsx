@@ -76,7 +76,7 @@ const DetailsFilter = () => {
   const dispatch = useAppDispatch();
 
   function handleClick(
-    e: React.MouseEvent<HTMLInputElement>,
+    e: React.MouseEvent<HTMLInputElement> |React.ChangeEvent<HTMLInputElement>,
     selected: PartsFilter
   ) {
     e.stopPropagation();
@@ -99,7 +99,7 @@ const DetailsFilter = () => {
                 all files
               </label>
               <input
-                onClick={(e) => handleClick(e, "allFiles")}
+                onChange={(e) => handleClick(e, "allFiles")}
                 type="radio"
                 id="all"
                 name="selected"
@@ -117,7 +117,7 @@ const DetailsFilter = () => {
                 name="selected"
                 value="selected"
                 checked={settings.partsFilter === "selectedFiles"}
-                onClick={(e) => handleClick(e, "selectedFiles")}
+                onChange={(e) => handleClick(e, "selectedFiles")}
               />
             </div>
             <div>
@@ -125,7 +125,7 @@ const DetailsFilter = () => {
                 unselected files only
               </label>
               <input
-                onClick={(e) => handleClick(e, "unSelectedFiles")}
+                onChange={(e) => handleClick(e, "unSelectedFiles")}
                 type="radio"
                 id="unselected"
                 name="selected"
@@ -143,7 +143,7 @@ const DetailsFilter = () => {
               id="stl"
               type="checkbox"
               checked={settings.show.stl}
-              onClick={() => dispatch(toggleStl())}
+              onChange={() => dispatch(toggleStl())}
             />
           </li>
           <li>
@@ -155,7 +155,7 @@ const DetailsFilter = () => {
               id="3MF"
               type="checkbox"
               checked={settings.show.threeMF}
-              onClick={() => dispatch(toggle3mf())}
+              onChange={() => dispatch(toggle3mf())}
             />{" "}
           </li>
           <li>
@@ -167,7 +167,7 @@ const DetailsFilter = () => {
               id="gcode"
               type="checkbox"
               checked={settings.show.gcode}
-              onClick={() => dispatch(toggleGcode())}
+              onChange={() => dispatch(toggleGcode())}
             />{" "}
           </li>
           <li>
@@ -179,7 +179,7 @@ const DetailsFilter = () => {
               id="search-filters-parts"
               type="checkbox"
               checked={settings.folder.searchFiltersParts}
-              onClick={() => dispatch(toggleSearchFiltersParts())}
+              onChange={() => dispatch(toggleSearchFiltersParts())}
             />{" "}
           </li>
         </motion.ul>

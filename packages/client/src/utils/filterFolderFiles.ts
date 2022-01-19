@@ -126,7 +126,7 @@ async function _createNewFileEntry(
 
 function GetFileType(file: File): FileTypes {
   const fileExtension = file.name.toLowerCase().split(".").pop();
-  console.log(fileExtension, file.name);
+  // console.log(fileExtension, file.name);
   switch (fileExtension) {
     case "stl":
       return FileTypes.STL;
