@@ -24,6 +24,8 @@ jobs:
           run_install: true
       
       - name: build
+        env:
+          VITE_DEPLOY_HOST: madam3D
         run: pnpm build
   
       - name: test
