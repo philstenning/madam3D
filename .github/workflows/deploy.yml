@@ -29,7 +29,7 @@ jobs:
       - name: test
         run: pnpm test --if-present
       
-      - name: deploy with gh-pages to dev server
+      - name: deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           pnpm deploy  -- -u "github-actions-bot <support+actions@github.com>"
