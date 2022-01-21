@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "dependencies": {
     "@react-three/drei": "^7.20.1",

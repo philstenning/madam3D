@@ -1,0 +1,38 @@
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+  
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+  
+       - name: set up pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: ^6.24.1
+          run_install: true
+
+      - name: build
+        run: pnpm build
+  
+      - name: test
+        run: pnpm test --if-present
+      
+      - name: deploy with gh-pages to dev server
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          pnpm deploy  -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+     

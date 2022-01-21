@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "test": "echo test",
+    "test": "pnpm -r  test",
     "clean": "pnpm -r exec -- rm -rf node_modules",
     "clean-build": "pnpm -r exec -- rm -rf dist",
     "dev": "pnpm -r dev",
