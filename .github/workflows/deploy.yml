@@ -17,12 +17,12 @@ jobs:
         with:
           node-version: 16.x
   
-       - name: set up pnpm
+      - name: set up pnpm
         uses: pnpm/action-setup@v2.0.1
         with:
           version: ^6.24.1
           run_install: true
-
+      
       - name: build
         run: pnpm build
   
@@ -32,7 +32,6 @@ jobs:
       - name: deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          pnpm deploy  -- -u "github-actions-bot <support+actions@github.com>"
+          pnpm deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-     
