@@ -11,8 +11,12 @@
       "path": "packages\\client"
     }
   ],
+  "extensions": {
+    "recommendations": ["redhat.vscode-yaml", "esbenp.prettier-vscode",]
+  },
   "settings": {
     "cSpell.words": [
+      "esbenp",
       "gcode",
       "iconify",
       "keyval",
@@ -20,6 +24,11 @@
       "svgr",
       "THREEMF",
       "unplugin"
-    ]
+    ],
+    "yaml.schemas": {
+      "https://json.schemastore.org/github-workflow.json": [
+        ".github/workflows/**/*.yml"
+      ]
+    }
   }
 }

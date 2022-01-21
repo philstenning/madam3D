@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode production",
     "serve": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
