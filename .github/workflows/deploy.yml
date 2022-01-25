@@ -25,6 +25,8 @@ jobs:
       
       - name: build
         env:
+          # this env value is used in the app when built in prod
+          # and is needed for react router base route.
           VITE_DEPLOY_HOST: madam3D
         run: pnpm build
   
