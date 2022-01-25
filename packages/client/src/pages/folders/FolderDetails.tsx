@@ -92,6 +92,7 @@ const DetailsFilter = () => {
           exit={{ opacity: 0, height: 0 }}
           transition={{ type: "tween" }}
           className="fd__more"
+          data-cy='folder-details'
         >
           <li className="flex flex-column">
             <div>

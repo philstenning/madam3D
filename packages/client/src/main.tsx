@@ -16,3 +16,9 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+// @ts-ignore
+if(window.Cypress){
+  // @ts-ignore
+  window.store =store
+}

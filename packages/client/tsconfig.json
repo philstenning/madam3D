@@ -16,11 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noImplicitAny": true,
-    "types": ["unplugin-icons/types/react", "wicg-file-system-access"],
-
+    "types": [
+      "unplugin-icons/types/react",
+      "wicg-file-system-access",
+      "cypress"
+    ]
   },
-  "include": ["./src"]
+  "include": ["./src", "./cypress/**/*.ts", "node_modules/cypress"]
 }
-
 
 // "unplugin-icons/types/react",

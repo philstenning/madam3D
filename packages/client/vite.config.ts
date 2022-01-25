@@ -11,6 +11,9 @@ export default defineConfig(({ command, mode }) => {
   }
   return {
     plugins: [react(), Icons({ compiler: "jsx", jsx: "react" })],
-   
+    server: {
+      host: true,
+      // https:true
+    },
   };
 });

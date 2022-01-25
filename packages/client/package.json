@@ -5,12 +5,13 @@
     "dev": "vite",
     "build": "tsc && vite build --mode production",
     "serve": "vite preview",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "cy:test": "cypress open"
   },
   "dependencies": {
     "@react-three/drei": "^7.20.1",
     "@react-three/fiber": "^7.0.18",
     "@reduxjs/toolkit": "^1.6.2",
+    "cypress": "^9.3.1",
     "dexie": "^3.2.0-rc.3",
     "dexie-react-hooks": "^1.0.7",
     "framer-motion": "^5.5.5",
