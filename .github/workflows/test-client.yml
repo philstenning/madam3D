@@ -30,13 +30,15 @@ jobs:
         with:
           version: ^6.24.1
           run_install: true
+          
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           install: false
-          command: pnpm cy:test
+          command: pnpm test
           start: pnpm dev
           wait-on: 'http://localhost:3000'
+          
       
     

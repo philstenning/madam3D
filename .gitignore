@@ -8,3 +8,5 @@ dist-ssr
 .turbo
 packages/client/.env.production
 packages/client/.env.development
+
+packages/client/cypress/videos

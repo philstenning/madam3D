@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "tsc && vite build --mode production",
     "serve": "vite preview",
-    "cy:test": "cypress open"
+    "test": "cypress run  "
   },
   "dependencies": {
     "@react-three/drei": "^7.20.1",
