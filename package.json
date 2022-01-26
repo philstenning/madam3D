@@ -6,6 +6,8 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test": "pnpm -r  test",
+    "cy": "pnpm -r  cy",
+    "cy:headless": "pnpm cy:headless --filter=client",
     "clean": "pnpm -r exec -- rm -rf node_modules",
     "clean-build": "pnpm -r exec -- rm -rf dist",
     "dev": "pnpm -r dev",

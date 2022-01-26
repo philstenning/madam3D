@@ -9,7 +9,7 @@ const Settings = lazy(() => import("../../pages/settings/Settings"));
 const Home = lazy(() => import("../../pages/home/Home"));
 const Folders = React.lazy(() => import("../../pages/folders/Folders"));
 
-const  IconFolder = lazy( ()=> import("~icons/fluent/folder-16-regular")) ;
+const IconFolder = lazy(() => import("~icons/fluent/folder-16-regular"));
 import IconProjects from "~icons/fluent/briefcase-24-regular";
 import IconHome from "~icons/fluent/home-16-regular";
 import IconSettings from "~icons/fluent/settings-24-regular";
@@ -31,38 +31,49 @@ const Nav = () => {
       <nav className="menu">
         <ul className="menu__list">
           <li className="menu__item">
-            <NavLink className="menu__link" to="/">
+            <NavLink className="menu__link" data-cy="main-nav-home" to="/">
               <IconHome className="menu__svg" />
               Home
             </NavLink>
           </li>
-          <li className="menu__item"><Suspense fallback={<div>Loading...</div>}>
-            <NavLink
-              className="menu__link"
-              to={currentFolderId ? `/folders/${currentFolderId}` : "/folders"}
-            >
-              <IconFolder className="menu__svg" />
-              Folders
-            </NavLink></Suspense>
+          <li className="menu__item">
+            <Suspense fallback={<div>Loading...</div>}>
+              <NavLink
+                className="menu__link"
+                to={
+                  currentFolderId ? `/folders/${currentFolderId}` : "/folders"
+                }
+                data-cy="main-nav-folders"
+              >
+                <IconFolder className="menu__svg" />
+                Folders
+              </NavLink>
+            </Suspense>
           </li>
           <li className="menu__item">
-            
-              <NavLink className="menu__link" to="/projects">
-                <IconProjects className="menu__svg" />
-                Projects
-              </NavLink>
-            
+            <NavLink
+              className="menu__link"
+              to="/projects"
+              data-cy="main-nav-projects"
+            >
+              <IconProjects className="menu__svg" />
+              Projects
+            </NavLink>
           </li>
         </ul>
         <ul className="menu__list">
           <li>
-            <NavLink className="menu__link" to="/settings">
+            <NavLink
+              className="menu__link"
+              to="/settings"
+              data-cy="main-nav-settings"
+            >
               <IconSettings className="menu__svg" />
               Settings
             </NavLink>
           </li>
           <li className="menu__item">
-            <NavLink className="menu__link" to="/help">
+            <NavLink className="menu__link" to="/help" data-cy="main-nav-help">
               <IconQuestion className="menu__svg" />
               Help
             </NavLink>

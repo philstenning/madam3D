@@ -5,7 +5,9 @@
     "dev": "vite",
     "build": "tsc && vite build --mode production",
     "serve": "vite preview",
-    "test": "cypress run  "
+    "test": "cypress run --config baseUrl=http://localhost:3000",
+    "cy": "cypress open",
+    "cy:headless": "cypress run"
   },
   "dependencies": {
     "@react-three/drei": "^7.20.1",
