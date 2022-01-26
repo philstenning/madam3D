@@ -1,11 +1,15 @@
-import { Link, Route, Routes, NavLink } from "react-router-dom";
-import Help from "../../pages/help/Help";
-import Folders from "../../pages/folders/Folders";
-import Projects from "../../pages/projects/Projects";
-import Project from "../../pages/projects/Project";
-import Settings from "../../pages/settings/Settings";
-import Home from "../../pages/home/Home";
-import IconFolder from "~icons/fluent/folder-16-regular";
+import React, { Suspense, lazy } from "react";
+
+import { Route, Routes, NavLink } from "react-router-dom";
+
+const Help = lazy(() => import("../../pages/help/Help"));
+const Project = lazy(() => import("../../pages/projects/Project"));
+const Projects = lazy(() => import("../../pages/projects/Projects"));
+const Settings = lazy(() => import("../../pages/settings/Settings"));
+const Home = lazy(() => import("../../pages/home/Home"));
+const Folders = React.lazy(() => import("../../pages/folders/Folders"));
+
+const  IconFolder = lazy( ()=> import("~icons/fluent/folder-16-regular")) ;
 import IconProjects from "~icons/fluent/briefcase-24-regular";
 import IconHome from "~icons/fluent/home-16-regular";
 import IconSettings from "~icons/fluent/settings-24-regular";
@@ -32,20 +36,22 @@ const Nav = () => {
               Home
             </NavLink>
           </li>
-          <li className="menu__item">
+          <li className="menu__item"><Suspense fallback={<div>Loading...</div>}>
             <NavLink
               className="menu__link"
               to={currentFolderId ? `/folders/${currentFolderId}` : "/folders"}
             >
               <IconFolder className="menu__svg" />
               Folders
-            </NavLink>
+            </NavLink></Suspense>
           </li>
           <li className="menu__item">
-            <NavLink className="menu__link" to="/projects">
-              <IconProjects className="menu__svg" />
-              Projects
-            </NavLink>
+            
+              <NavLink className="menu__link" to="/projects">
+                <IconProjects className="menu__svg" />
+                Projects
+              </NavLink>
+            
           </li>
         </ul>
         <ul className="menu__list">
@@ -64,19 +70,24 @@ const Nav = () => {
         </ul>
       </nav>
       <main>
-        <Routes>
-          <Route path="/help" element={<Help />} />
-          <Route path="/folders" element={<Folders allFolders={allFolders} />}>
-            <Route path=":folderId" element={<div>ok</div>} />
-          </Route>
-          <Route path="/projects" element={<Projects />}>
-            <Route path=":projectId" element={<Project />} />
-          </Route>
-          <Route path="/settings" element={<Settings />} />
-          {/* just a page for working out stuff. */}
-          <Route path='temp' element={<Temp/>}/>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/help" element={<Help />} />
+            <Route
+              path="/folders"
+              element={<Folders allFolders={allFolders} />}
+            >
+              <Route path=":folderId" element={<div>ok</div>} />
+            </Route>
+            <Route path="/projects" element={<Projects />}>
+              <Route path=":projectId" element={<Project />} />
+            </Route>
+            <Route path="/settings" element={<Settings />} />
+            {/* just a page for working out stuff. */}
+            <Route path="temp" element={<Temp />} />
+            <Route path="/" element={<Home />} />
+          </Routes>{" "}
+        </Suspense>
       </main>
     </>
   );

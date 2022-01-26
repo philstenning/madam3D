@@ -1,4 +1,4 @@
-// foo.js created with Cypress
+// / <reference types="cypress" />
 //
 // Start writing your Cypress tests below!
 // If you're unfamiliar with how Cypress works,
@@ -42,16 +42,16 @@ describe("get working...", () => {
       });
   });
 
-  it('toggle filter',()=>{
+  it("toggle filter", () => {
     /* ==== Generated with Cypress Studio ==== */
-    cy.visit('http://localhost:3000/');
-    cy.get(':nth-child(1) > :nth-child(2) > .menu__link > .menu__svg').click();
+    cy.visit("http://localhost:3000/");
+    cy.get(":nth-child(1) > :nth-child(2) > .menu__link > .menu__svg").click();
     // cy.get('.fd > .btn').click();
     cy.window()
       .its("store")
       .invoke("dispatch", { type: "settings/toggleSettingsDetails" });
-      cy.wait(1000)
-    cy.get('[data-cy=folder-details]')
+    cy.wait(1000);
+    cy.get("[data-cy=folder-details]");
     /* ==== End Cypress Studio ==== */
-  })
+  });
 });

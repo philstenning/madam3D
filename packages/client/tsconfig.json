@@ -19,10 +19,10 @@
     "types": [
       "unplugin-icons/types/react",
       "wicg-file-system-access",
-      "cypress"
+      "cypress",
     ]
   },
-  "include": ["./src", "./cypress/**/*.ts", "node_modules/cypress"]
+  "include": ["./src"]
 }
 
 // "unplugin-icons/types/react",
