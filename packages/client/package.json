@@ -25,7 +25,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.1",
     "react-use-measure": "^2.0.4",
-    "three": "^0.134.0",
+    "three": "^0.137.0",
     "three-stdlib": "^2.5.5",
     "typeface-roboto": "^1.1.13",
     "uuid": "^8.3.2"
