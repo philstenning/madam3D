@@ -22,18 +22,39 @@ canvas {
 .card-overlay{
 position: absolute;
 display: flex;
-justify-content: center;
-flex-direction: column;
+justify-content: space-between;
+align-items: center;
+flex-direction: row;
 bottom: 0;
 font-size: .7rem;
-padding: 0 0 .5rem 1rem;
+padding: .5rem 1rem;
 /* background: var(--gray-90); */
 width: 100%;
+gap:.5rem;
+/* border: solid 1px white; */
 }
-.card-filename::selection{
+.card-overlay__filename::selection{
   background: transparent;
 }
 
+.card-overlay__filename{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap:1rem;
+
+}
+
+ .card-overlay__open-in-native-app ,.card-overlay__open-in-native-app:visited  {
+  color: var(--gray-10);
+  width: fit-content;
+  border-color: var(--gray-90);
+  font-size: var(--font-size-xs);
+  padding: 0;
+  height: 1.5rem;
+  border-radius: var(--border-radius-xs);
+  line-height: 0;
+}
 
 /* @media screen and (max-width: 992px) {
   .stl-container {

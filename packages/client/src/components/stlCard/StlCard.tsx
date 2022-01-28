@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { FileTypes, IFile } from "../../db";
-import StlViewer from "../stlViewer/StlViewer";
+import StlViewer from "../stlViewer/partViewers";
 import ThreeMFViewer from "../threeMFViewer/ThreeMFViewer";
-import GcodeViewer from "../threeMFViewer/gcodeViewer"
+import GcodeViewer from "../threeMFViewer/gcodeViewer";
 
 import "./stlCard.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -14,17 +14,13 @@ interface Props {
 }
 
 const StlCard = ({ file }: Props) => {
-  // const canView = useAppSelector(state=> state.settingsReducer.show)
- 
-  // if(!canView.gcode && file.type=== FileTypes.GCODE)return null
-  // if(!canView.stl && file.type=== FileTypes.STL)return null
-  // if(!canView.threeMF && file.type=== FileTypes.THREE_MF)return null
   return (
     <div className="card">
-
-    { file.type===FileTypes.STL && <StlViewer fileUrl={file.imageUrl} />}  
-    { file.type===FileTypes.THREE_MF && <ThreeMFViewer fileUrl={file.imageUrl} />}  
-    { file.type===FileTypes.GCODE && <GcodeViewer fileUrl={file.imageUrl} />}  
+      {file.type === FileTypes.STL && <StlViewer fileUrl={file.imageUrl} />}
+      {file.type === FileTypes.THREE_MF && (
+        <ThreeMFViewer fileUrl={file.imageUrl} />
+      )}
+      {file.type === FileTypes.GCODE && <GcodeViewer fileUrl={file.imageUrl} />}
 
       <Overlay file={file} />
     </div>
@@ -33,10 +29,8 @@ const StlCard = ({ file }: Props) => {
 
 export default StlCard;
 
-// const handleCheckbox = () => {
-//   setChecked(!checked);}
-
 const Overlay = ({ file }: Props) => {
+  const [url, setUrl] = useState<string>("");
   const isChecked = useAppSelector(
     (state) =>
       state.selectedFolderItemsReducer.selectedParts.filter(
@@ -46,7 +40,7 @@ const Overlay = ({ file }: Props) => {
   const { folderId, id, rootId, name } = file;
   const dispatch = useAppDispatch();
 
-  const toggleChecked = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const toggleChecked = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.stopPropagation();
     if (isChecked) {
       dispatch(removePart(id));
@@ -56,21 +50,42 @@ const Overlay = ({ file }: Props) => {
     // console.log("clicked");
   };
 
+ 
+
+  useEffect(() => {
+    const url = async () => {
+      const _file = await file.handle.getFile();
+      const _url = URL.createObjectURL(_file);
+      setUrl(_url);
+    };
+    url();
+  }, [file]);
+
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1}}
-        exit={{ opacity: 0}}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         className="card-overlay"
-        onClick={(e) => toggleChecked(e)}
       >
-        <div className="overlay-content">
-          <p className="card-filename">{name}</p>
-          <div className="overlay-checkbox">
-            <input type="checkbox" checked={isChecked} readOnly />
-          </div>
-        </div>
+        <label htmlFor="model-selected-ck" className="card-overlay__filename">
+          <input
+            id="model-selected-ck"
+            type="checkbox"
+            checked={isChecked}
+            readOnly
+            onClick={(e) => toggleChecked(e)}
+          />
+          {name}
+        </label>
+        <a
+          href={url}
+          download={file.name}
+          className="btn card-overlay__open-in-native-app"
+        >
+          {file.type===FileTypes.GCODE?'Print':'Slice'}
+        </a>
       </motion.div>
     </AnimatePresence>
   );
