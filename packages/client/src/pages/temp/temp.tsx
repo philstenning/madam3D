@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import "./temp.css";
 
-import  StlViewer from '../../components/stlViewer/StlViewer'
+import  StlViewer from '../../components/stlViewer/partViewers'
 import  ThreeMFViewer from '../../components/threeMFViewer/ThreeMFViewer'
 import  GcodeViewer from '../../components/threeMFViewer/gcodeViewer'
 

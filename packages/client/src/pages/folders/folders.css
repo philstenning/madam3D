@@ -91,7 +91,7 @@
 }
 
 .accordion__child-link {
-  color: var(--pink-90);
+  /* color: var(--pink-90); */
   background: var(--gray-17);
   border-color: var(--gray-17);
   border-radius: var(--border-radius-s);

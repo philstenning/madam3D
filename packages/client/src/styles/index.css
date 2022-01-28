@@ -158,8 +158,8 @@ form {
   height: 100%;
 }
 
-a:link,
-a:visited {
+:link,
+:visited {
   color: inherit;
   text-decoration: none;
 }
