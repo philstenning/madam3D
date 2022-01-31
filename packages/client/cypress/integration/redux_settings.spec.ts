@@ -1,4 +1,4 @@
-// / <reference types="cypress" />
+/// <reference types="cypress" />
 //
 // Start writing your Cypress tests below!
 // If you're unfamiliar with how Cypress works,
