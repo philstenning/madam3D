@@ -48,16 +48,26 @@ root/
 ```
 
 ## Getting started
-You will need Nodejs installed on your machine to run this project and it uses pnpm to manage the dependencies and workspaces.
+You will need Nodejs installed on your machine(it is built and tested with ^16).  
+To run this project locally, you will need pnpm to manage the dependencies/workspaces.
 
-```
-pnpm install
+```sh
+# install pnpm as a global dependency
+npx pnpm add -g pnpm
 ```
 
-Now you can run the development servers:
 
+```sh
+# install the dependencies
+pnpm i
 ```
-pnpm run dev
+
+<!-- Now you can run the development servers: -->
+
+```sh
+# start the dev servers
+# It will start the client and server apps.
+pnpm dev
 ```
 In your browser check:
 
@@ -70,5 +80,5 @@ In your browser check:
 ## Testing
 
 ```
-pnpm run test
+pnpm test
 ```
