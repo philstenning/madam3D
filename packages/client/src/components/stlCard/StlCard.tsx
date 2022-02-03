@@ -50,8 +50,6 @@ const Overlay = ({ file }: Props) => {
     // console.log("clicked");
   };
 
- 
-
   useEffect(() => {
     const url = async () => {
       const _file = await file.handle.getFile();
@@ -69,9 +67,12 @@ const Overlay = ({ file }: Props) => {
         exit={{ opacity: 0 }}
         className="card-overlay"
       >
-        <label htmlFor="model-selected-ck" className="card-overlay__filename">
+        <label
+          htmlFor={`model-selected-ck-${file.id}`}
+          className="card-overlay__filename"
+        >
           <input
-            id="model-selected-ck"
+            id={`model-selected-ck-${file.id}`}
             type="checkbox"
             checked={isChecked}
             readOnly
@@ -84,7 +85,7 @@ const Overlay = ({ file }: Props) => {
           download={file.name}
           className="btn card-overlay__open-in-native-app"
         >
-          {file.type===FileTypes.GCODE?'Print':'Slice'}
+          {file.type === FileTypes.GCODE ? "Print" : "Slice"}
         </a>
       </motion.div>
     </AnimatePresence>
