@@ -1,29 +1,27 @@
 import React from "react";
-import "./folders.css";
 import { RiAddLine } from "react-icons/ri"; // icon
 import ModelList from "../../components/modelList/ModelList";
-import FolderDetails from "./FolderDetails";
+import FolderDetails from "./model-detail";
 import RootList from "./rootList";
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";
 import { useAppDispatch } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
-import useMeasure from "react-use-measure";
-import {
-  createSerializableCurrentFolder,
-  IFolder,
-} from "../../db";
+import { createSerializableCurrentFolder, IFolder } from "../../db";
 import {
   selectDirectoryOnUsersFileSystem,
   recursivelyScanLocalDrive,
 } from "../../utils";
+
+import "./models.css";
+
 interface IProps {
   allFolders: IFolder[] | undefined;
 }
 
 const Folders = ({ allFolders }: IProps) => {
   const dispatch = useAppDispatch();
-    // const [ref, { width, height }] = useMeasure();
-    // console.log(`###### width: ${width} height: ${height}`)
+  // const [ref, { width, height }] = useMeasure();
+  // console.log(`###### width: ${width} height: ${height}`)
   async function selectFolder(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
@@ -58,7 +56,7 @@ const Folders = ({ allFolders }: IProps) => {
       {/* this is section with the folder list */}
       <div className="aside">
         <RootList folders={allFolders} />
-        <FolderDetails  />
+        <FolderDetails />
       </div>
 
       {/* display the results of the project selected. */}
