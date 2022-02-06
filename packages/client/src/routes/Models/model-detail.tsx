@@ -12,13 +12,12 @@ import {
   toggleSearchFiltersParts,
 } from "../../features/settingsSlice";
 import { AnimatePresence, motion } from "framer-motion";
-import "./folderDetail.css";
-import { IFolder } from "../../db";
+
 import Badge from "../../components/badge/Badge";
-interface IProps {
-  folders: IFolder[] | undefined;
-}
-const FolderDetails = () => {
+
+import "./model-detail.css";
+
+const ModelDetails = () => {
   const currentFolder = useAppSelector(
     (state) => state.folderReducer.currentFolder
   );
@@ -39,44 +38,42 @@ const FolderDetails = () => {
 
   return (
     <>
-        <div
-          className="fd"
-        >
-          <div>
-            <button onClick={handleDelete}>Delete</button>
-          </div>
-
-          <ul className="fd__list">
-            <li>path: {currentFolder?.filePath || currentFolder?.name}</li>
-            <li>added: {currentFolder?.created}</li>
-            <li className="flex-start">
-              selected:{" "}
-              <Badge type={countParts() ? "primary" : "secondary"}>
-                {countParts()}
-              </Badge>
-            </li>
-          </ul>
-          <button
-            role="button"
-            className="btn badge"
-            onClick={() => dispatch(toggleSettingsDetails())}
-          >
-            filters
-          </button>
-          <DetailsFilter />
+      <div className="fd">
+        <div>
+          <button onClick={handleDelete}>Delete</button>
         </div>
+
+        <ul className="fd__list">
+          <li>path: {currentFolder?.filePath || currentFolder?.name}</li>
+          <li>added: {currentFolder?.created}</li>
+          <li className="flex-start">
+            selected:{" "}
+            <Badge type={countParts() ? "primary" : "secondary"}>
+              {countParts()}
+            </Badge>
+          </li>
+        </ul>
+        <button
+          role="button"
+          className="btn badge"
+          onClick={() => dispatch(toggleSettingsDetails())}
+        >
+          filters
+        </button>
+        <DetailsFilter />
+      </div>
     </>
   );
 };
 
-export default FolderDetails;
+export default ModelDetails;
 
 const DetailsFilter = () => {
   const settings = useAppSelector((state) => state.settingsReducer);
   const dispatch = useAppDispatch();
 
   function handleClick(
-    e: React.MouseEvent<HTMLInputElement> |React.ChangeEvent<HTMLInputElement>,
+    e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
     selected: PartsFilter
   ) {
     e.stopPropagation();
@@ -92,7 +89,7 @@ const DetailsFilter = () => {
           exit={{ opacity: 0, height: 0 }}
           transition={{ type: "tween" }}
           className="fd__more"
-          data-cy='folder-details'
+          data-cy="folder-details"
         >
           <li className="flex flex-column">
             <div>

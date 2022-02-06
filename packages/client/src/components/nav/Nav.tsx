@@ -2,12 +2,12 @@ import React, { Suspense, lazy } from "react";
 
 import { Route, Routes, NavLink } from "react-router-dom";
 
-const Help = lazy(() => import("../../pages/help/Help"));
-const Project = lazy(() => import("../../pages/projects/Project"));
-const Projects = lazy(() => import("../../pages/projects/Projects"));
-const Settings = lazy(() => import("../../pages/settings/Settings"));
-const Home = lazy(() => import("../../pages/home/Home"));
-const Folders = React.lazy(() => import("../../pages/folders/Folders"));
+const Help = lazy(() => import("../../routes/help/Help"));
+const Project = lazy(() => import("../../routes/projects/Project"));
+const Projects = lazy(() => import("../../routes/projects/Projects"));
+const Settings = lazy(() => import("../../routes/settings/Settings"));
+const Home = lazy(() => import("../../routes/home/Home"));
+const Folders = React.lazy(() => import("../../routes/Models/models"));
 
 const IconFolder = lazy(() => import("~icons/fluent/folder-16-regular"));
 import IconProjects from "~icons/fluent/briefcase-24-regular";
@@ -18,7 +18,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../db";
 import { useAppSelector } from "../../app/hooks";
 import "./nav.css";
-import Temp from "../../pages/temp/temp";
+import Temp from "../../routes/temp/temp";
 const Nav = () => {
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()
@@ -46,7 +46,7 @@ const Nav = () => {
                 data-cy="main-nav-folders"
               >
                 <IconFolder className="menu__svg" />
-                Folders
+                Models
               </NavLink>
             </Suspense>
           </li>
@@ -57,7 +57,7 @@ const Nav = () => {
               data-cy="main-nav-projects"
             >
               <IconProjects className="menu__svg" />
-              Projects
+              Collections
             </NavLink>
           </li>
         </ul>
