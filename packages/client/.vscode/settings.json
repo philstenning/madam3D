@@ -1,0 +1,11 @@
+{
+  "cssvar.files": [
+  "./node_modules/open-props/open-props.min.css",
+  // if you have an alternative path to where your styles are located
+  // you can add it in this array of files
+  // "assets/styles/variables.css"
+  ],
+
+  // you can also add support for autocomplete in other file extensions
+  "cssvar.extensions": ["css", "html", "jsx", "tsx","scss"],
+}
