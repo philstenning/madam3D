@@ -1,6 +1,6 @@
 import {useAppSelector, useAppDispatch} from '../../app/hooks'
 import { hideDeleteFolderDialog } from "../../features/folderSlice";
-import Dialog from '../../components/dialog/Dialog';
+import Dialog from '../../components/dialog';
 import { ICurrentFolder } from "../../db";
 import {
   deleteFolderAsync,

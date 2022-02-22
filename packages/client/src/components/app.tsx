@@ -1,9 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
-import Nav from "../nav/Nav";
-import Header from "../header/Header";
+import Nav from "./nav";
+import Header from "./header";
 import "typeface-roboto";
 import "./app.css";
-import "../aside/aside.css";
+import "./aside.css";
 
 function App() {
   return (

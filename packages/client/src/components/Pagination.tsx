@@ -1,7 +1,7 @@
 import React from "react";
-import { IFile } from "../../db";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setCursor } from "../../features/folderSlice";
+import { IFile } from "../db";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setCursor } from "../features/folderSlice";
 type PaginationProps = {
   countOfFiles: number;
   limit: number;

@@ -1,9 +1,7 @@
-import React, { useRef, Suspense, useState } from "react";
-import { Vector3, LoadingManager, Euler } from "three";
+import { Suspense } from "react";
 import { GCodeLoader } from "three/examples/jsm/loaders/GCodeLoader.js";
-import { Canvas, useLoader, useThree } from "@react-three/fiber";
+import { Canvas, useLoader } from "@react-three/fiber";
 
-import useMeasure from 'react-use-measure'
 import {
   useProgress,
   Html,
@@ -19,9 +17,6 @@ interface Props {
 const ThreeMFViewer = ({
   fileUrl = "http://localhost:3000/src/images/demo.gcode",
 }: Props) => {
-  //   const manager = new LoadingManager()
-  //  const loader = new ThreeMFLoader(manager)
-
   const ThreeMF = useLoader(GCodeLoader, fileUrl);
   return (
     <Center alignTop>

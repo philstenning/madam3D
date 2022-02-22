@@ -2,12 +2,12 @@ import React, { Suspense, lazy } from "react";
 
 import { Route, Routes, NavLink } from "react-router-dom";
 
-const Help = lazy(() => import("../../routes/help/Help"));
-const Project = lazy(() => import("../../routes/projects/Project"));
-const Projects = lazy(() => import("../../routes/projects/Projects"));
-const Settings = lazy(() => import("../../routes/settings/Settings"));
-const Home = lazy(() => import("../../routes/home/Home"));
-const Folders = React.lazy(() => import("../../routes/Models/models"));
+const Help = lazy(() => import("../routes/help/help"));
+const Project = lazy(() => import("../routes/projects/Project"));
+const Projects = lazy(() => import("../routes/projects/projects"));
+const Settings = lazy(() => import("../routes/settings/settings"));
+const Home = lazy(() => import("../routes/home/home"));
+const Folders = React.lazy(() => import("../routes/models/models"));
 
 const IconFolder = lazy(() => import("~icons/fluent/folder-16-regular"));
 import IconProjects from "~icons/fluent/briefcase-24-regular";
@@ -15,10 +15,10 @@ import IconHome from "~icons/fluent/home-16-regular";
 import IconSettings from "~icons/fluent/settings-24-regular";
 import IconQuestion from "~icons/fluent/question-circle-24-regular";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../../db";
-import { useAppSelector } from "../../app/hooks";
+import { db } from "../db";
+import { useAppSelector } from "../app/hooks";
 import "./nav.css";
-import Temp from "../../routes/temp/temp";
+import Temp from "../routes/temp/temp";
 const Nav = () => {
   const allFolders = useLiveQuery(() =>
     db.folders.orderBy("created").reverse().toArray()

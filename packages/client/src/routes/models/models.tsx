@@ -1,6 +1,6 @@
 import React from "react";
 import { RiAddLine } from "react-icons/ri"; // icon
-import ModelList from "../../components/modelList/ModelList";
+import ModelList from "../../components/modelList";
 import FolderDetails from "./model-detail";
 import RootList from "./rootList";
 import { ConfirmDeleteFolderDialog } from "./ConfirmDeleteFolderDialog";

@@ -6,7 +6,7 @@
 Madam3D is a project to view and manage/organize and share your .stl .3mf and .gcode files. 
 
 The idea was inspired by [van_dam](https://github.com/Floppy/van_dam) but uses only
-the web browser to and its capabilities to do everything. You can clone and build this repo yourself, but it is the same version that is the current main branch.
+the web browser and its capabilities to do everything. You can clone and build this repo yourself, but it is the same version that is the current main branch.
 
 ___
 ## The Client
@@ -24,6 +24,10 @@ When you add a folder it will recursively scan your drive from that point, so if
 There are some folder/directories that can't be opened from the browser and this will differ depending from which os and browser you are using, on windows the c: or Program Files for example.
 
 The app makes the assumption (at the moment) that each folder is a model, and the files within are its parts. 
+
+Folder Features:
+- Filter models with the search box at top of page. 
+<!-- - TODO:  Select the file types that you want to show/hide - toggle the filter button  -->
 
 ___
 

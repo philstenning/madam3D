@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import "./search.css";
 import IconSearch from "~icons/fluent/search-28-filled";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import {clearSearchText,setSearchText} from '../../features/searchSlice'
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {clearSearchText,setSearchText} from '../features/searchSlice'
 
 const Search = () => {
 

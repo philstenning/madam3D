@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { FileTypes, IFile } from "../../db";
-import StlViewer from "../stlViewer/partViewers";
-import ThreeMFViewer from "../threeMFViewer/ThreeMFViewer";
-import GcodeViewer from "../threeMFViewer/gcodeViewer";
+import { FileTypes, IFile } from "../db";
+import StlViewer from "./threeViewers/stlViewers";
+import ThreeMFViewer from "./threeViewers/ThreeMFViewer";
+import GcodeViewer from "./threeViewers/gcodeViewer";
 
 import "./stlCard.css";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { addPart, removePart } from "../../features/folderSelectedItems";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { addPart, removePart } from "../features/folderSelectedItems";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface Props {

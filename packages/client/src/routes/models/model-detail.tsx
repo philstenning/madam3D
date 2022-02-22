@@ -13,7 +13,7 @@ import {
 } from "../../features/settingsSlice";
 import { AnimatePresence, motion } from "framer-motion";
 
-import Badge from "../../components/badge/Badge";
+import Badge from "../../components/badge";
 
 import "./model-detail.css";
 

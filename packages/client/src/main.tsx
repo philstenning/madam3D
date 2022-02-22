@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/normalize.css";
 import "./styles/index.css";
-import App from "./components/app/App";
+import App from "./components/app";
 // import { render, events } from "@react-three/fiber";
 import { createDatabase } from "./db";
 import { Provider } from "react-redux";

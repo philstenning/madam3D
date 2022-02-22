@@ -8,11 +8,11 @@
       "path": "packages\\server"
     },
     {
-      "path": "packages\\client",
-      "name": "web"
+      "path": "packages\\utils"
     },
     {
-      "path": "packages\\utils"
+      "path": "packages\\client",
+      "name": "web"
     }
   ],
   "extensions": {

@@ -7,9 +7,9 @@ import {
 } from "framer-motion";
 import "./temp.css";
 
-import  StlViewer from '../../components/stlViewer/partViewers'
-import  ThreeMFViewer from '../../components/threeMFViewer/ThreeMFViewer'
-import  GcodeViewer from '../../components/threeMFViewer/gcodeViewer'
+import  StlViewer from '../../components/threeViewers/stlViewers'
+import  ThreeMFViewer from '../../components/threeViewers/ThreeMFViewer'
+import  GcodeViewer from '../../components/threeViewers/gcodeViewer'
 
 
 const Temp = () => {

@@ -4,7 +4,7 @@ import { haveFolderPermission } from "../../utils/fileSystem";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setCurrentFolder } from "../../features/folderSlice";
-import Badge from '../../components/badge/Badge'
+import Badge from '../../components/badge'
 type Props = {
   folder: IFolder;
 };

@@ -1,6 +1,6 @@
 import React from "react";
-import Toggle from "../../components/toggle/toggle";
-import Stack from "../../components/stack/Stack";
+import Toggle from "../../components/toggle";
+import Stack from "../../components/stack";
 import "./settings.css";
 const Settings = () => {
   return (

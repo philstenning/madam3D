@@ -1,13 +1,11 @@
-import React, { useRef, Suspense, useState } from "react";
-import { Vector3 } from "three";
+import  { useRef, Suspense} from "react";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
-import { Canvas, useLoader, useThree } from "@react-three/fiber";
-import useMeasure from 'react-use-measure'
+import { Canvas, useLoader } from "@react-three/fiber";
+
 import {
   useProgress,
   Html,
   Center,
-  useHelper,
   OrbitControls,
 } from "@react-three/drei";
 

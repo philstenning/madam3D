@@ -1,12 +1,12 @@
 import { useState, useEffect, CSSProperties } from "react";
-import StlCard from "../stlCard/StlCard";
-import { IFile, db } from "../../db";
+import StlCard from "./stlCard";
+import { IFile, db } from "../db";
 import "./modelList.css";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setCursor } from "../../features/folderSlice";
-import { filterFolderFiles } from "../../utils";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setCursor } from "../features/folderSlice";
+import { filterFolderFiles } from "../utils";
 import { v4 as uuid } from "uuid";
-import Pagination, { paginate, sliceFiles } from "../pagination/Pagination";
+import Pagination, { paginate, sliceFiles } from "./Pagination";
 import useMeasure from "react-use-measure";
 
 function calculateVariables(): {
