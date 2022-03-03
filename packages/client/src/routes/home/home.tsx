@@ -27,12 +27,6 @@ const Home = () => {
           Chrome and Edge &#62; 86 and the technical preview in Safari.
         </a>
       </p>
-
-      {/* <div className="containerA">
-        <div className="one"></div>
-        <div className="two"></div>
-        <div className="three"></div>
-      </div> */}
     </div>
   );
 };
