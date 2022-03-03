@@ -1,6 +1,11 @@
+<div align="center">
+
 # Madam3D
 
+![example workflow](https://github.com/philstenning/madam3d/actions/workflows/deploy.ymal/badge.svg)
+
 ## Manage your 3D printer files from your browser.
+</div>
 
 ![screenshot](packages/client/src/images/Screenshot1.png)
 Madam3D is a project to view and manage/organize and share your .stl .3mf and .gcode files. 
