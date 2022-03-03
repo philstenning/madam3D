@@ -12,10 +12,6 @@ function App() {
         className="app"
       >
         <Header />
-
-        {/* <BrowserRouter
-          basename={import.meta.env.MODE === "production" ? "madam3D" : ""}
-        > */}
           <BrowserRouter basename={import.meta.env.VITE_DEPLOY_HOST?.toString()}>
           <div className="app-content">
             <Nav />
