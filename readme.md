@@ -1,18 +1,21 @@
 <div align="center">
+<img src='packages/client/public/cube-purple.svg' height=150>
 
-# MaDam3D
+# MaDam3D 
 
 ![Deploy website](https://github.com/philstenning/madam3D/actions/workflows/deploy.yml/badge.svg)
+
+<br/>
 
 
 ## Manage your 3D printer files from your browser.
 
-[GIVE IT A TRY](philstenning.github.io/madam3d/)
+[👉 GIVE IT A TRY 👈](philstenning.github.io/madam3d/)
 
 </div>
 
 ![screenshot](packages/client/src/images/Screenshot1.png)
-Madam3D is a project to view and manage/organize and share your .stl .3mf and .gcode files. 
+MaDam3D is a project to view and manage/organize and share your .stl .3mf and .gcode files. 
 
 The idea was inspired by [van_dam](https://github.com/Floppy/van_dam) but uses only
 the web browser and its capabilities to do everything. You can clone and build this repo yourself, but it is the same version that is the current main branch.
