@@ -1,0 +1,14 @@
+{
+  "plugins": ["stylelint-order", "stylelint-selector-bem-pattern"],
+  "rules": {
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "custom-property-empty-line-before": null,
+    "order/order": ["declarations", "custom-properties", "rules"],
+    "order/properties-order": ["width", "height", "padding"],
+    "plugin/selector-bem-pattern": {
+      "preset": "bem"
+    }
+  },
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"]
+}
