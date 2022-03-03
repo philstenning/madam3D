@@ -1,10 +1,14 @@
 <div align="center">
 
-# Madam3D
+# MaDam3D
 
-![example workflow](https://github.com/philstenning/madam3d/actions/workflows/deploy.ymal/badge.svg)
+![Deploy website](https://github.com/philstenning/madam3D/actions/workflows/deploy.yml/badge.svg)
+
 
 ## Manage your 3D printer files from your browser.
+
+[GIVE IT A TRY](philstenning.github.io/madam3d/)
+
 </div>
 
 ![screenshot](packages/client/src/images/Screenshot1.png)
