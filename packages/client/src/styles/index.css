@@ -4,84 +4,86 @@
   scrollbar-width: thin;
   scrollbar-color: var(--pink-40) var(--gray-50);
 }
+
+/* default colors */
 body {
-  /* default colors */
   --gray-0: hsl(0deg 0% 5% / 100%);
-  --gray-10: hsl(0deg, 0%, 10%, 100%);
-  --gray-15: hsl(0, 0%, 15%, 1);
-  --gray-17: hsl(0, 0%, 17%, 1);
-  --gray-20: hsl(0, 0%, 22%, 1);
-  --gray-25: hsl(0, 0%, 27%, 1);
-  --gray-30: hsl(0, 0%, 33%, 1);
-  --gray-40: hsl(0, 0%, 44%, 1);
-  --gray-50: hsl(0, 0%, 51%, 1);
-  --gray-60: hsl(0, 0%, 62%, 1);
-  --gray-70: hsl(0, 0%, 70%, 1);
-  --gray-80: hsl(0, 0%, 80%, 1);
-  --gray-90: hsl(0, 0%, 90%, 1);
+  --gray-10: hsl(0deg 0% 10% / 100%);
+  --gray-15: hsl(0deg 0% 15% / 100%);
+  --gray-17: hsl(0deg 0% 17% / 100%);
+  --gray-20: hsl(0deg 0% 22% / 100%);
+  --gray-25: hsl(0deg 0% 27% / 100%);
+  --gray-30: hsl(0deg 0% 33% / 100%);
+  --gray-40: hsl(0deg 0% 44% / 100%);
+  --gray-50: hsl(0deg 0% 51% / 100%);
+  --gray-60: hsl(0deg 0% 62% / 100%);
+  --gray-70: hsl(0deg 0% 70% / 100%);
+  --gray-80: hsl(0deg 0% 80% / 100%);
+  --gray-90: hsl(0deg 0% 90% / 100%);
   --gray-100: hsl(0deg 0% 100% / 100%);
 
   /* green */
-  --green-0: hsla(174, 100%, 1%, 1);
-  --green-10: hsla(174, 100%, 11%, 1);
-  --green-20: hsla(174, 100%, 22%, 1);
-  --green-30: hsla(174, 100%, 33%, 1);
-  --green-40: hsla(174, 100%, 43%, 1);
-  --green-50: hsla(174, 100%, 53%, 1);
-  --green-60: hsla(174, 100%, 63%, 1);
-  --green-70: hsla(174, 100%, 72%, 1);
-  --green-80: hsla(174, 100%, 81%, 1);
-  --green-90: hsla(174, 100%, 90%, 1);
-  --green-100: hsla(174, 100%, 100%, 1);
+  --green-0: hsl(174deg 100 1% / 100%);
+  --green-10: hsl(174deg 100% 11% / 100%);
+  --green-20: hsl(174deg 100% 22% / 100%);
+  --green-30: hsl(174deg 100% 33% / 100%);
+  --green-40: hsl(174deg 100% 43% / 100%);
+  --green-50: hsl(174deg 100% 53% / 100%);
+  --green-60: hsl(174deg 100% 63% / 100%);
+  --green-70: hsl(174deg 100% 72% / 100%);
+  --green-80: hsl(174deg 100% 81% / 100%);
+  --green-90: hsl(174deg 100% 90% / 100%);
+  --green-100: hsl(174deg 100% 100% / 100%);
 
   /* red */
-  --red-10: hsla(352, 82%, 10%, 1);
-  --red-20: hsla(352, 82%, 17%, 1);
-  --red-30: hsla(352, 82%, 27%, 1);
-  --red-40: hsla(352, 82%, 37%, 1);
-  --red-50: hsla(352, 82%, 47%, 1);
-  --red-60: hsla(352, 82%, 57%, 1);
-  --red-70: hsla(352, 82%, 68%, 1);
-  --red-80: hsla(352, 82%, 79%, 1);
-  --red-90: hsla(352, 82%, 90%, 1);
-  --red-100: hsla(352, 82%, 100%, 1);
+  --red-10: hsl(352deg 82% 10% / 1100%);
+  --red-20: hsl(352deg 82% 17% / 1100%);
+  --red-30: hsl(352deg 82% 27% / 1100%);
+  --red-40: hsl(352deg 82% 37% / 1100%);
+  --red-50: hsl(352deg 82% 47% / 1100%);
+  --red-60: hsl(352deg 82% 57% / 1100%);
+  --red-70: hsl(352deg 82% 68% / 1100%);
+  --red-80: hsl(352deg 82% 79% / 1100%);
+  --red-90: hsl(352deg 82% 90% / 1100%);
+  --red-100: hsl(352deg 82% 100 / 100%);
 
   /* orange  */
-  --orange-10: hsla(22, 100%, 10%, 1);
-  --orange-20: hsla(22, 100%, 20%, 1);
-  --orange-30: hsla(22, 100%, 30%, 1);
-  --orange-40: hsla(22, 100%, 40%, 1);
-  --orange-50: hsla(22, 100%, 50%, 1);
-  --orange-60: hsla(22, 100%, 60%, 1);
-  --orange-70: hsla(22, 100%, 70%, 1);
-  --orange-80: hsla(22, 100%, 80%, 1);
-  --orange-90: hsla(22, 100%, 90%, 1);
-  --orange-100: hsla(22, 100%, 100%, 1);
+  --orange-10: hsl(22deg 100% 10% / 1100%);
+  --orange-20: hsl(22deg 100% 20% / 1100%);
+  --orange-30: hsl(22deg 100% 30% / 1100%);
+  --orange-40: hsl(22deg 100% 40% / 1100%);
+  --orange-50: hsl(22deg 100% 50% / 1100%);
+  --orange-60: hsl(22deg 100% 60% / 1100%);
+  --orange-70: hsl(22deg 100% 70% / 1100%);
+  --orange-80: hsl(22deg 100% 80% / 1100%);
+  --orange-90: hsl(22deg 100% 90% / 1100%);
+  --orange-100: hsl(22deg 100% 100% / 100%);
 
   /* blue */
-  --blue-10: hsla(198, 100%, 11%, 1);
-  --blue-20: hsla(198, 100%, 22%, 1);
-  --blue-30: hsla(198, 100%, 33%, 1);
-  --blue-40: hsla(198, 100%, 40%, 1);
-  --blue-50: hsla(198, 100%, 50%, 1);
-  --blue-60: hsla(198, 100%, 60%, 1);
-  --blue-70: hsla(198, 100%, 70%, 1);
-  --blue-80: hsla(198, 100%, 80%, 1);
-  --blue-90: hsla(198, 100%, 90%, 1);
-  --blue-100: hsla(198, 100%, 100%, 1);
+  --blue-10: hsl(198deg 100% 11% / 100%);
+  --blue-20: hsl(198deg 100% 22% / 100%);
+  --blue-30: hsl(198deg 100% 33% / 100%);
+  --blue-40: hsl(198deg 100% 40% / 100%);
+  --blue-50: hsl(198deg 100% 50% / 100%);
+  --blue-60: hsl(198deg 100% 60% / 100%);
+  --blue-70: hsl(198deg 100% 70% / 100%);
+  --blue-80: hsl(198deg 100% 80% / 100%);
+  --blue-90: hsl(198deg 100% 90% / 100%);
+  --blue-100: hsla(198deg 100% 100% 100%);
 
   /* pink */
-  --pink-0: hsla(313, 100%, 3%, 1);
-  --pink-10: hsla(313, 100%, 10%, 1);
-  --pink-20: hsla(313, 100%, 20%, 1);
-  --pink-30: hsla(313, 100%, 30%, 1);
-  --pink-40: hsla(313, 100%, 40%, 1);
-  --pink-50: hsla(303, 100%, 50%, 1);
-  --pink-60: hsla(303, 100%, 60%, 1);
-  --pink-70: hsla(303, 100%, 70%, 1);
-  --pink-80: hsla(303, 100%, 80%, 1);
-  --pink-90: hsla(303, 100%, 90%, 1);
-  --pink-100: hsla(303, 100%, 100%, 1);
+  --pink-0: hsl(313deg 100% 3% /100%);
+  --pink-10: hsl(313deg 100% 10% / 100%);
+  --pink-20: hsl(313deg 100% 20% / 100%);
+  --pink-30: hsl(313deg 100% 30% / 100%);
+  --pink-40: hsl(313deg 100% 40% / 100%);
+  --pink-50: hsl(303deg 100% 50% / 100%);
+  --pink-60: hsl(303deg 100% 60% / 100%);
+  --pink-70: hsl(303deg 100% 70% / 100%);
+  --pink-80: hsl(303deg 100% 80% / 100%);
+  --pink-90: hsl(303deg 100% 90% / 100%);
+  --pink-100: hsl(303deg 100% 100% / 100%);
+
   /* utilities  */
   --default-padding: 0.4rem;
 
@@ -104,14 +106,14 @@ body {
   --active-state-bar-height: 1.5rem;
 
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   background: var(--gray-10);
   color: var(--gray-80);
 }
+
 ::selection {
   background: var(--pink-30);
 }
@@ -119,18 +121,19 @@ body {
 .font-size--xs {
   font-size: var(--font-size-xs);
 }
+
 .font-size--s {
   font-size: var(--font-size-s);
 }
+
 .font-size--m {
   font-size: var(--font-size-m);
 }
+
 .font-size--l {
   font-size: var(--font-size-l);
 }
-.font-size--xl {
-  font-size: var(--font-size-xl);
-}
+
 .font-size--xl {
   font-size: var(--font-size-xxl);
 }
@@ -150,6 +153,7 @@ h6 {
   padding: 0;
   margin: 0;
 }
+
 form {
   height: 100%;
 }
@@ -163,8 +167,8 @@ form {
 li {
   list-style: none;
 }
+
 /* style the scrollbar. */
-/* width */
 ::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -196,20 +200,23 @@ li {
   background: var(--gray-90);
   transition: all 0.3s ease-in-out;
 }
+
 .btn:hover {
   cursor: pointer;
   background: var(--gray-80);
   border: 0.2rem solid var(--gray-40);
-  /* transform: scale(102%); */
 }
+
 .btn:active {
   background: var(--pink-40);
 }
+
 main {
   background: var(--gray-15);
   border-radius: var(--border-radius-m) 0 0 0;
 }
-/*------------   Utils  ----------------*/
+
+/* ------------   Utils  ---------------- */
 
 .flex {
   display: flex;
@@ -217,6 +224,7 @@ main {
   align-items: center;
   gap: 0.5rem;
 }
+
 .flex-end {
   display: flex;
   justify-content: flex-end;
@@ -243,21 +251,27 @@ main {
   background: var(--red-40);
   color: var(--gray-90);
 }
+
 .pl-0 {
   padding-left: 0.25rem;
 }
+
 .pl-1 {
   padding-left: 0.5rem;
 }
+
 .pl-2 {
   padding-left: 0.75rem;
 }
+
 .pr-0 {
   padding-right: 0.25rem;
 }
+
 .pr-1 {
   padding-right: 0.5rem;
 }
+
 .pr-2 {
   padding-right: 0.75rem;
 }
