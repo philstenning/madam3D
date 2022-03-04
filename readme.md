@@ -10,7 +10,7 @@
 
 ## Manage your 3D printer files from your browser.
 
-[👉 GIVE IT A TRY 👈](philstenning.github.io/madam3D)
+[👉 GIVE IT A TRY 👈](https://philstenning.github.io/madam3D/)
 
 </div>
 
