@@ -10,12 +10,12 @@
 
 ## Manage your 3D printer files from your browser.
 
-[👉 GIVE IT A TRY 👈](philstenning.github.io/madam3d/)
+[👉 GIVE IT A TRY 👈](philstenning.github.io/madam3D)
 
 </div>
 
 ![screenshot](packages/client/src/images/Screenshot1.png)
-MaDam3D is a project to view and manage/organize and share your .stl .3mf and .gcode files. 
+MaDam3D is a project to view, manage, organize and share your .stl .3mf and .gcode files. 
 
 The idea was inspired by [van_dam](https://github.com/Floppy/van_dam) but uses only
 the web browser and its capabilities to do everything. You can clone and build this repo yourself, but it is the same version that is the current main branch.
@@ -53,8 +53,6 @@ ____
 
 See the individual package readme.md files for how each package works. 
 
-This project uses pnpm workspaces packages and publishing them.
-
 Folder/App structure is as follows: 
 ```
 root/
@@ -64,7 +62,10 @@ root/
 ```
 
 ## Getting started
-You will need Nodejs installed on your machine(it is built and tested with ^16).  
+
+You will need Nodejs installed on your computer(it is built and 
+tested with ^16).  
+
 To run this project locally, you will need pnpm to manage the dependencies/workspaces.
 
 ```sh
