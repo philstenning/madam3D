@@ -7,7 +7,8 @@
     "serve": "vite preview",
     "test": "cypress run --config baseUrl=http://localhost:3000",
     "cy": "cypress open",
-    "cy:headless": "cypress run"
+    "cy:headless": "cypress run",
+    "postcss": "postcss src/styles/index.css -o dist/temp.css"
   },
   "dependencies": {
     "@iconify/json": "^2.0.31",
@@ -43,10 +44,17 @@
     "@types/uuid": "^8.3.4",
     "@types/wicg-file-system-access": "^2020.9.5",
     "@vitejs/plugin-react": "^1.0.7",
+    "cssnano": "^5.1.0",
     "postcss": "^8.4.7",
+    "postcss-cli": "^9.1.0",
+    "postcss-combine-duplicated-selectors": "^10.0.3",
+    "postcss-custom-media": "^8.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^14.0.2",
     "postcss-jit-props": "^1.0.4",
+    "postcss-nesting": "^10.1.2",
     "postcss-preset-env": "^7.4.2",
+    "postcss-sorting": "^7.0.1",
     "stylelint": "^14.5.3",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",

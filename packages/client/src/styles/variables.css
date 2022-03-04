@@ -1,0 +1,100 @@
+/* default colors */
+body {
+  --gray-0: hsl(0deg 0% 5% / 100%);
+  --gray-10: hsl(0deg 0% 10% / 100%);
+  --gray-15: hsl(0deg 0% 15% / 100%);
+  --gray-17: hsl(0deg 0% 17% / 100%);
+  --gray-20: hsl(0deg 0% 22% / 100%);
+  --gray-25: hsl(0deg 0% 27% / 100%);
+  --gray-30: hsl(0deg 0% 33% / 100%);
+  --gray-40: hsl(0deg 0% 44% / 100%);
+  --gray-50: hsl(0deg 0% 51% / 100%);
+  --gray-60: hsl(0deg 0% 62% / 100%);
+  --gray-70: hsl(0deg 0% 70% / 100%);
+  --gray-80: hsl(0deg 0% 80% / 100%);
+  --gray-90: hsl(0deg 0% 90% / 100%);
+  --gray-100: hsl(0deg 0% 100% / 100%);
+
+  /* green */
+  --green-0: hsl(174deg 100 1% / 100%);
+  --green-10: hsl(174deg 100% 11% / 100%);
+  --green-20: hsl(174deg 100% 22% / 100%);
+  --green-30: hsl(174deg 100% 33% / 100%);
+  --green-40: hsl(174deg 100% 43% / 100%);
+  --green-50: hsl(174deg 100% 53% / 100%);
+  --green-60: hsl(174deg 100% 63% / 100%);
+  --green-70: hsl(174deg 100% 72% / 100%);
+  --green-80: hsl(174deg 100% 81% / 100%);
+  --green-90: hsl(174deg 100% 90% / 100%);
+  --green-100: hsl(174deg 100% 100% / 100%);
+
+  /* red */
+  --red-10: hsl(352deg 82% 10% / 100%);
+  --red-20: hsl(352deg 82% 17% / 100%);
+  --red-30: hsl(352deg 82% 27% / 100%);
+  --red-40: hsl(352deg 82% 37% / 100%);
+  --red-50: hsl(352deg 82% 47% / 100%);
+  --red-60: hsl(352deg 82% 57% / 100%);
+  --red-70: hsl(352deg 82% 68% / 100%);
+  --red-80: hsl(352deg 82% 79% / 100%);
+  --red-90: hsl(352deg 82% 90% / 100%);
+  --red-100: hsl(352deg 82% 100 / 100%);
+
+  /* orange  */
+  --orange-10: hsl(22deg 100% 10% / 100%);
+  --orange-20: hsl(22deg 100% 20% / 100%);
+  --orange-30: hsl(22deg 100% 30% / 100%);
+  --orange-40: hsl(22deg 100% 40% / 100%);
+  --orange-50: hsl(22deg 100% 50% / 100%);
+  --orange-60: hsl(22deg 100% 60% / 100%);
+  --orange-70: hsl(22deg 100% 70% / 100%);
+  --orange-80: hsl(22deg 100% 80% / 100%);
+  --orange-90: hsl(22deg 100% 90% / 100%);
+  --orange-100: hsl(22deg 100% 100% / 100%);
+
+  /* blue */
+  --blue-10: hsl(198deg 100% 11% / 100%);
+  --blue-20: hsl(198deg 100% 22% / 100%);
+  --blue-30: hsl(198deg 100% 33% / 100%);
+  --blue-40: hsl(198deg 100% 40% / 100%);
+  --blue-50: hsl(198deg 100% 50% / 100%);
+  --blue-60: hsl(198deg 100% 60% / 100%);
+  --blue-70: hsl(198deg 100% 70% / 100%);
+  --blue-80: hsl(198deg 100% 80% / 100%);
+  --blue-90: hsl(198deg 100% 90% / 100%);
+  --blue-100: hsl(198deg 100% 100% / 100%);
+
+  /* pink */
+  --pink-0: hsl(313deg 100% 3% /100%);
+  --pink-10: hsl(313deg 100% 10% / 100%);
+  --pink-20: hsl(313deg 100% 20% / 100%);
+  --pink-30: hsl(313deg 100% 30% / 100%);
+  --pink-40: hsl(313deg 100% 40% / 100%);
+  --pink-50: hsl(303deg 100% 50% / 100%);
+  --pink-60: hsl(303deg 100% 60% / 100%);
+  --pink-70: hsl(303deg 100% 70% / 100%);
+  --pink-80: hsl(303deg 100% 80% / 100%);
+  --pink-90: hsl(303deg 100% 90% / 100%);
+  --pink-100: hsl(303deg 100% 100% / 100%);
+
+  /* utilities  */
+  --default-padding: 0.4rem;
+
+  --border-radius-xs: 3px;
+  --border-radius-s: 5px;
+  --border-radius-m: 10px;
+  --border-radius-l: 15px;
+
+  --red: var(var(--red-50));
+  --text-color: var(--green-10);
+
+  --font-size-xs: 0.6rem;
+  --font-size-s: 0.8rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.2rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 1.86rem;
+
+  --active-state-bar-width: 4px;
+  --active-state-bar-height: 1.5rem;
+}

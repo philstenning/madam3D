@@ -7,6 +7,9 @@ export default defineConfig(({ command, mode }) => {
     return {
       base: "/madam3D/",
       plugins: [react(), Icons({ compiler: "jsx", jsx: "react" })],
+      server: {
+        host: true,
+      },
     };
   }
   return {
