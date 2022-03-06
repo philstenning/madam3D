@@ -11,7 +11,7 @@ const customMedia = require("postcss-custom-media");
 module.exports = {
   plugins: [
     postcssImport(),
-    postcssJitProps(OpenProps),
+    // postcssJitProps(OpenProps),
     customMedia({
       importFrom: ["./node_modules/open-props/media.min.css"],
     }),

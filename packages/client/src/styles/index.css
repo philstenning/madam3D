@@ -1,4 +1,9 @@
+
+
+@import "../../node_modules/open-props/open-props.min.css";
+@import '../../node_modules/open-props/src/extra/theme.css';
 @import './variables.css';
 
+/* @import './app.css'; */
 @import './defaults.css';
 

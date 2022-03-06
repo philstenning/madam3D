@@ -22,6 +22,9 @@ const Temp = () => {
        <StlViewer  />
        <ThreeMFViewer/>
        <GcodeViewer/>
+       <div>
+         <button className="btn">Click me</button>
+       </div>
     </div>
   );
 };

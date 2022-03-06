@@ -3,8 +3,9 @@
   grid-template-columns: 15rem 1fr;
   grid-template-rows: 5rem 1fr;
   height: calc(100vh - 4.5rem);
-  border-radius: var(--border-radius-m);
+  border-radius: var(--radius-2);
 }
+
 .aside__header {
   padding: 1rem;
   grid-row: 1 / 2;
@@ -29,7 +30,7 @@
 .aside__details {
   margin: 0 1rem;
   padding: 1rem;
-  background: var(--gray-20);
+  background: var(--surface-3);
 }
 
 
