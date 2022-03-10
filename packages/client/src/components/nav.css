@@ -64,7 +64,7 @@
 
 
  .menu__item .active{
-    background: var(--gray-15);
+    background: var(--surface-2);
 }
  
 .menu__item .active::before{
@@ -73,13 +73,14 @@
     top:25%;
     width: var(--active-state-bar-width);
     height: var(--active-state-bar-height);
-    background: var(--pink-30);
+    background: var(--grape-7);
     border-radius: 5px;
     left: 0px;
 }
 
 .menu__svg{
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-4);
+
 }
 .menu__item:first-child {
   margin-top: 0;

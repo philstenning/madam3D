@@ -1,9 +1,9 @@
 .header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* justify-content: space-between; */
+
   padding: var(--default-padding);
-  /* height: 100%; */
+
 }
 
 .header__logo {

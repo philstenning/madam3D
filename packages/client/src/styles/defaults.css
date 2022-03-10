@@ -95,7 +95,7 @@ li {
 
 .btn {
   border: 0.2rem solid var(--surface-3);
-  border-radius: var(--border-radius-s);
+  border-radius: var(--radius-2);
   padding: 0.5rem;
   display: flex;
   align-items: center;
@@ -115,7 +115,7 @@ li {
 }
 
 main {
-  background: var(--gray-9);
+  background: var(--surface-2);
   border-radius: var(--radius-2) 0 0 0;
 }
 

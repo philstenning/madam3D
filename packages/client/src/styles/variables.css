@@ -84,23 +84,23 @@ body {
   /* utilities  */
   --default-padding: 0.4rem;
 
-  --border-radius-xs: 3px;
+  /* --border-radius-xs: 3px;
   --border-radius-s: 5px;
   --border-radius-m: 10px;
   --border-radius-l: 15px;
 
-  --red: var(var(--red-50));
+  --red: var(var(--red-50)); */
   
   /* --text-color: var(--green-10); */
 
-  --font-size-xs: 0.6rem;
+  /* --font-size-xs: 0.6rem;
   --font-size-s: 0.8rem;
   --font-size-m: 1rem;
   --font-size-l: 1.2rem;
   --font-size-xl: 1.5rem;
-  --font-size-xxl: 1.86rem;
+  --font-size-xxl: 1.86rem; */
 
-  --active-state-bar-width: 4px;
+  --active-state-bar-width: var(--size-1);
   --active-state-bar-height: 1.5rem;
 
 
