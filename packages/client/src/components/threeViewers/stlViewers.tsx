@@ -1,7 +1,7 @@
-import  { useRef, Suspense} from "react";
+import  { useRef, Suspense, useState, useEffect} from "react";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 import { Canvas, useLoader } from "@react-three/fiber";
-
+import {useDarkModeGridColors} from '../../hooks/darkMode'
 import {
   useProgress,
   Html,
@@ -62,14 +62,23 @@ function Loader() {
   return <Html center>{progress} % loaded</Html>;
 }
 
+
+
+
+
+
 const Basic = ({
   fileUrl = "http://localhost:3000/src/images/arm_joiner_double.stl",
 }: Props) => {
+     const {darkMode} = useDarkModeGridColors();
   return (
-    <Canvas style={{}}  camera={{ position: [1, 70, 100], fov: 50, near: 10, far: 400 }}>
+    <Canvas
+      style={{}}
+      camera={{ position: [1, 70, 100], fov: 50, near: 10, far: 400 }}
+    >
       <pointLight position={[100, 100, 100]} />
       <pointLight position={[-100, -100, -100]} />
-      <gridHelper args={[80, 12, "magenta", "cyan"]} />
+      <gridHelper args={[80, 12, darkMode[0], darkMode[1]]} />
       <Suspense fallback={<Loader />}>
         <STLViewer fileUrl={fileUrl} />
         <OrbitControls />

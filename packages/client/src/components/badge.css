@@ -7,28 +7,12 @@
   min-width: 2rem;
   text-align: center;
   font-size: var(--font-size-0);
-  font-weight:var(--font-weight-2);
+  font-weight:var(--font-weight-4);
 
 }
 
-/* .badge__text--small {
-  font-size: var(--font-size-00);
-}
-
-.badge.primary {
-  background: var(--pink-3);
-  color: var(--pink-90);
-}
-.badge.success {
-  background: var(--green-20);
-  color: var(--green-90);
-}
-.badge.warning {
-  background: var(--red-40);
-  color: var(--gray-90);
-} */
 
 .btn.badge{
     border: none;
-    outline:invert;
+  
 }

@@ -2,7 +2,7 @@ import React, { useRef, Suspense, useState } from "react";
 import { Vector3, LoadingManager, Euler } from "three";
 import { ThreeMFLoader } from "three/examples/jsm/loaders/3MFLoader.js";
 import { Canvas, useLoader, useThree } from "@react-three/fiber";
-
+import { useDarkModeGridColors } from "../../hooks/darkMode";
 import useMeasure from 'react-use-measure'
 import {
   useProgress,
@@ -60,6 +60,7 @@ function Loader() {
 const Basic = ({
   fileUrl = "http://localhost:3000/src/images/servo_motor.3mf",
 }: Props) => {
+   const { darkMode } = useDarkModeGridColors();
   return (
     <Canvas
       style={{}}
@@ -67,9 +68,9 @@ const Basic = ({
     >
       <pointLight position={[100, 100, 100]} />
       <pointLight position={[-100, -100, -100]} />
-      <gridHelper args={[80, 12, "magenta", "cyan"]} />
+      <gridHelper args={[80, 12, darkMode[0], darkMode[1]]} />
       <Suspense fallback={<Loader />}>
-        <ThreeMFViewer  fileUrl={fileUrl}/>
+        <ThreeMFViewer fileUrl={fileUrl} />
         <OrbitControls />
       </Suspense>
     </Canvas>

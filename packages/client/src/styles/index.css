@@ -1,8 +1,12 @@
 
-
+/* open-props defaults */
 @import "../../node_modules/open-props/open-props.min.css";
-@import '../../node_modules/open-props/src/extra/theme.css';
+
+/* app defaults */
+@import './theme.css';  
 @import './variables.css';
+
+/*  overwrite default theme */
 
 /* @import './app.css'; */
 @import './defaults.css';

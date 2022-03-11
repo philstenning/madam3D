@@ -16,10 +16,10 @@ const Header = () => {
 
       <div className="header__search">
         {/* { location.pathname!=='/' &&  <Search /> } */}
-        <Search /> 
+        <Search />
       </div>
       <div className="header__profile">
-        <IconPerson />
+        <IconPerson className="header__avatar" />
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { GCodeLoader } from "three/examples/jsm/loaders/GCodeLoader.js";
 import { Canvas, useLoader } from "@react-three/fiber";
-
+import { useDarkModeGridColors } from "../../hooks/darkMode";
 import {
   useProgress,
   Html,
@@ -33,14 +33,15 @@ function Loader() {
 const Basic = ({
   fileUrl = "http://localhost:3000/src/images/demo.gcode",
 }: Props) => {
+   const { darkMode } = useDarkModeGridColors();
   return (
     <Canvas
       style={{}}
-      camera={{ position: [1, 70, 100], fov: 110, near: 10, far: 400 }}
+      camera={{ position: [1, 70, 100], fov: 100, near: 10, far: 900 }}
     >
       <pointLight position={[100, 100, 100]} />
       <pointLight position={[-100, -100, -100]} />
-      <gridHelper args={[200, 12, "magenta", "cyan"]} />
+      <gridHelper args={[220, 12, darkMode[0], darkMode[1]]} />
       <Suspense fallback={<Loader />}>
         <ThreeMFViewer fileUrl={fileUrl} />
         <OrbitControls />

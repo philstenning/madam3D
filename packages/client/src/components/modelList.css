@@ -30,7 +30,7 @@
 .pagination__txt {
   padding: 0 1rem;
   margin: 0.7rem;
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-0);
 }
 
 @media screen and (min-width: 815px) {
@@ -43,6 +43,6 @@
   .pagination__txt {
     padding: 0 1rem;
     margin: 0.7rem;
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-2);
   }
 }

@@ -24,7 +24,7 @@ Project List
 .project-card:hover {
   /* color: var(--gray-20); */
   background: var(--surface-3);
-  border: solid 4px var(--grape-6);
+  border: solid 4px var(--brand);
   transform: translate(0, -1px);
 }
 

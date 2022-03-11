@@ -1,23 +1,21 @@
-*,
-:root {
-  box-sizing: border-box;
-  scrollbar-width: thin;
-  
-  /* scrollbar-color: var(--green-28) var(--gray-8); */
-}
 
-body {
+
+
+
+
+:where(body) {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu,
     Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--surface-2);
+  background: var(--surface-1);
   color: var(--text-2);
 }
 
 ::selection {
   background: var(--grape-9);
+  color: var(--text-inverse);
 }
 
 /* 
@@ -90,10 +88,11 @@ li {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--grape-8);
+  background: var(--brand);
 }
 
 .btn {
+  box-sizing: border-box;
   border: 0.2rem solid var(--surface-3);
   border-radius: var(--radius-2);
   padding: 0.5rem;
@@ -107,11 +106,11 @@ li {
 .btn:hover {
   cursor: pointer;
   background: var(--surface-3);
-  border: 0.2rem solid var(--surface-3);
+  border-color:  var(--surface-3);
 }
 
 .btn:active {
-  background: var(--grape-8);
+  background: var(--brand);
 }
 
 main {

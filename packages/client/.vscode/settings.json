@@ -1,7 +1,7 @@
 {
   "cssvar.files": [
     "./node_modules/open-props/open-props.min.css",
-    "./src/styles/app.css"
+    "./src/styles/theme.light.css"
     // "./src/styles/variables.css"
     // if you have an alternative path to where your styles are located
     // you can add it in this array of files
