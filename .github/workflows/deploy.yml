@@ -46,6 +46,9 @@ jobs:
           start: pnpm dev
           wait-on: 'http://localhost:3000'
       
+      - name: copy 404
+        run: pnpm copy404
+      
       - name: deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
