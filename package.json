@@ -16,7 +16,8 @@
     "build": "turbo run build ",
     "t-graph": "turbo run build --graph",
     "deploy": "gh-pages -d packages/client/dist ",
-    "serve": "pnpm  serve --filter=client"
+    "serve": "pnpm  serve --filter=client",
+    "copy404": "cp packages/client/dist/index.html packages/client/dist/404.html"
   },
   "author": "",
   "license": "ISC",
